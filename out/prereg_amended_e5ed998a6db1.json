@@ -1,0 +1,114 @@
+{
+  "amended_at": "2026-10-10T23:43:17",
+  "supersedes_sha256": "83960f2ed7a98c95c439fcbbba4edd37061ba9286cf1b0e644e53720de09f138",
+  "sha256": "e5ed998a6db1215d937fac62dc81c9b717f5401272ca314b0bc139650d9cced0",
+  "catalog": {
+    "entity_type": "urn:entity:movie",
+    "note": "Films chosen because country-level box-office splits are public, which makes the later backtest possible. Control titles are globally distributed tentpoles expected to rank similarly everywhere; the rest are titles with known regional skew. Fixed before any API call was made.",
+    "control": [
+      "Avatar",
+      "Titanic",
+      "The Dark Knight",
+      "Inception",
+      "Jurassic Park",
+      "The Avengers"
+    ],
+    "regional": [
+      "RRR",
+      "3 Idiots",
+      "Dangal",
+      "Parasite",
+      "Train to Busan",
+      "Your Name",
+      "Spirited Away",
+      "Shoplifters",
+      "Drive My Car",
+      "City of God",
+      "Elite Squad",
+      "Amelie",
+      "La Haine",
+      "Good Bye Lenin!",
+      "Das Boot",
+      "Pan's Labyrinth",
+      "Y Tu Mama Tambien",
+      "Roma",
+      "Crouching Tiger, Hidden Dragon"
+    ],
+    "markets": [
+      "New York, United States",
+      "Sao Paulo, Brazil",
+      "Tokyo, Japan",
+      "Berlin, Germany",
+      "Mumbai, India"
+    ],
+    "audience_seeds": [
+      null
+    ]
+  },
+  "prompts": {
+    "note": "30 prompts: 3 cities x 10 taste profiles. Cities are deliberately not the top-5 most-written-about metros, because an LLM's hallucination rate in Paris tells you nothing about its rate where the training data thins out.",
+    "cities": [
+      "Lisbon, Portugal",
+      "Osaka, Japan",
+      "Medellin, Colombia"
+    ],
+    "domain": "restaurants",
+    "tastes": [
+      "Wong Kar-wai films and Nils Frahm",
+      "brutalist architecture and free jazz",
+      "Studio Ghibli and specialty coffee",
+      "1970s krautrock and natural wine",
+      "Elena Ferrante novels and slow food",
+      "skateboarding culture and hip hop",
+      "Nordic noir and minimalist design",
+      "vintage menswear and vinyl records",
+      "Anthony Bourdain and street food",
+      "contemporary dance and experimental theatre"
+    ],
+    "model_config": {
+      "provider": "google",
+      "model": "gemini-2.5-flash",
+      "temperature": 0.0,
+      "arms": [
+        "ungrounded",
+        "grounded_with_google_search",
+        "qloo_control"
+      ],
+      "note": "Pinned and hashed. A re-run against a newer default model is a different experiment, not a replication."
+    }
+  },
+  "decision_rules": {
+    "location_signal_test": {
+      "pass_if": ">=2 non-US market pairs with Kendall tau-b < 0.70, each with overlap n >= 12, catalog-composition hi95 < 0.85, and control-set rank variance below the rest of the catalog",
+      "uncertainty_method": "jackknife SE of the observed tau, tested against the 0.70 threshold. The null SE (0.1427 at n=25) is reported as a different-from-random sanity line only: tau's variance shrinks toward 0 as tau approaches 1, so judging an observed tau near the top against a null-hypothesis spread mixes two distributions and overstates uncertainty.",
+      "overlap_floor": "Pairs sharing fewer than 12 titles are marked INSUFFICIENT_OVERLAP and cannot qualify. Surviving titles skew to the globally popular ones, which are least likely to reorder, so a thin overlap biases tau upward.",
+      "decides": "Catalog Passport is viable"
+    },
+    "groundwork_gap_test": {
+      "metric": "gap = (best shipped LLM configuration) - (Qloo), both verified by the same OpenStreetMap instrument",
+      "alive_if": "95% Newcombe lower bound on the gap above 0 AND point estimate >= 10 points",
+      "dead_if": "lower bound includes 0",
+      "arms": "ungrounded LLM, grounded LLM with search, Qloo control",
+      "script_coverage_amendment": {
+        "finding": "OpenStreetMap stores many Japanese venues only under Japanese script, so romanised names return no hit and are scored as hallucinations. Osaka returned 62% not-found in BOTH LLM arms, including famous real institutions (Kushikatsu Daruma, Jiyuken Curry).",
+        "decision": "The headline gap is computed over Latin-script markets only (Lisbon, Medellin). Osaka is reported separately and labelled as beyond this instrument.",
+        "why_this_is_not_cherry_picking": "The exclusion is a property of the verifier, not of any arm: the bias hits every arm equally, and both LLM arms failed Osaka at the same rate. Excluding it favours neither branch. The Qloo arm would be flattered or punished by the same effect depending on whether its place names are romanised, which is itself unknown until the key arrives."
+      },
+      "supersedes": "An earlier registration set >=25% / <=10% against the LLM's OWN failure rate. Adding the Qloo control changed what is being measured -- a rate became a difference -- so the threshold had to be re-derived rather than carried over. This is a LOOSENING of the bar and is recorded as such. No live call had been made when it was changed.",
+      "decides": "whether the Groundwork branch has a premise at all"
+    },
+    "normalisation_test": {
+      "per_query_if": "the same entity's affinity changes between two different candidate sets",
+      "consequence": "all cross-call ratio maths is abandoned in favour of within-query ranks"
+    },
+    "planned_backtest": {
+      "design": "predict relative country-level performance for the catalog from Qloo ranks alone, compare against public country box office splits",
+      "honesty_constraints": [
+        "titles and metric fixed here, before outcomes are looked up",
+        "Qloo's graph is built partly from real consumption signal, so this is less circular than scoring Qloo with Qloo, NOT independent of it",
+        "report N and the confidence interval, never a bare correlation"
+      ]
+    }
+  },
+  "warning": "Original pre-registration retained in prereg.json. Any threshold changed after data was seen must be disclosed when the numbers are quoted."
+}

@@ -97,14 +97,29 @@ def _load_cache():
     return {}
 
 
-def osm_lookup(name, city, cache):
-    """Does a place of this name exist, and is it in the stated city?"""
-    key = ("%s|%s" % (name, city)).lower()
+def _strip_accents(text):
+    import unicodedata
+    return "".join(ch for ch in unicodedata.normalize("NFKD", text)
+                   if not unicodedata.combining(ch)).lower()
+
+
+def _haversine_km(lat1, lon1, lat2, lon2):
+    import math
+    r = 6371.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp = math.radians(lat2 - lat1)
+    dl = math.radians(lon2 - lon1)
+    a = (math.sin(dp / 2) ** 2 +
+         math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2)
+    return 2 * r * math.asin(math.sqrt(a))
+
+
+def _nominatim(query, cache, limit=3):
+    key = "q:" + query.lower()
     if key in cache:
         return cache[key]
     params = urllib.parse.urlencode({
-        "q": "%s, %s" % (name, city), "format": "json", "limit": 3,
-        "addressdetails": 1})
+        "q": query, "format": "json", "limit": limit, "addressdetails": 1})
     req = urllib.request.Request(
         "https://nominatim.openstreetmap.org/search?" + params,
         headers={"User-Agent": UA})
@@ -114,18 +129,76 @@ def osm_lookup(name, city, cache):
     except (urllib.error.URLError, ValueError):
         hits = []
     time.sleep(1.1)  # Nominatim asks for <= 1 req/s. Respect it.
+    cache[key] = hits
+    return hits
 
-    result = {"exists": bool(hits), "geo_ok": False, "matched": None}
-    city_token = city.split(",")[0].strip().lower()
+
+CITY_RADIUS_KM = 30.0
+
+
+def city_anchor(city, cache):
+    """Geocode the city ONCE, to coordinates and a bounding box.
+
+    Verification is geometric, never by name. OpenStreetMap answers in the
+    endonym -- Lisboa for Lisbon, Medellin with an accent -- so matching the
+    city string marks correct results as wrong. An earlier version of this
+    harness did exactly that and reported a 100% failure rate for every arm,
+    which was a bug in the verifier rather than a finding about any model.
+    """
+    hits = _nominatim(city, cache, limit=1)
+    if not hits:
+        return None
+    h = hits[0]
+    bbox = h.get("boundingbox")
+    try:
+        anchor = {"lat": float(h["lat"]), "lon": float(h["lon"])}
+        if bbox and len(bbox) == 4:
+            anchor["bbox"] = [float(x) for x in bbox]
+    except (KeyError, TypeError, ValueError):
+        return None
+    return anchor
+
+
+def osm_lookup(name, city, cache, anchor=None):
+    """Does a place of this name exist, and does it sit inside the city?
+
+    geo_ok is true when the returned coordinates fall inside the city's
+    bounding box or within CITY_RADIUS_KM of its centre.
+    """
+    key = ("%s|%s" % (name, city)).lower()
+    if key in cache and isinstance(cache[key], dict) and "v2" in cache[key]:
+        return cache[key]
+
+    hits = _nominatim("%s, %s" % (name, city), cache)
+    result = {"v2": True, "exists": bool(hits), "geo_ok": False,
+              "matched": None, "distance_km": None}
+
     for hit in hits:
-        addr = hit.get("address", {})
-        blob = " ".join(str(v).lower() for v in addr.values())
-        if city_token in blob or city_token in hit.get("display_name", "").lower():
-            result["geo_ok"] = True
-            result["matched"] = hit.get("display_name")
+        try:
+            lat, lon = float(hit["lat"]), float(hit["lon"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        inside = False
+        dist = None
+        if anchor:
+            dist = _haversine_km(anchor["lat"], anchor["lon"], lat, lon)
+            bbox = anchor.get("bbox")
+            if bbox:
+                south, north, west, east = bbox
+                inside = (south <= lat <= north) and (west <= lon <= east)
+            inside = inside or dist <= CITY_RADIUS_KM
+        else:
+            # No anchor: fall back to accent-insensitive name containment.
+            blob = _strip_accents(hit.get("display_name", ""))
+            inside = _strip_accents(city.split(",")[0]) in blob
+        if inside:
+            result.update({"geo_ok": True, "matched": hit.get("display_name"),
+                           "distance_km": dist})
             break
-    if hits and not result["matched"]:
-        result["matched"] = hits[0].get("display_name")
+        if result["matched"] is None:
+            result["matched"] = hit.get("display_name")
+            result["distance_km"] = dist
+
     cache[key] = result
     return result
 
@@ -210,6 +283,7 @@ def _measure(rows):
 
 def _run_arm(prompts, cache, arm, client=None, grounded=False, verbose=True):
     rows = []
+    anchors = {}
     for idx, spec in enumerate(prompts, 1):
         if arm == "qloo":
             names, err = qloo_places(client, spec["city"],
@@ -227,9 +301,12 @@ def _run_arm(prompts, cache, arm, client=None, grounded=False, verbose=True):
                 continue
             items = parse_items(raw)
 
+        if spec["city"] not in anchors:
+            anchors[spec["city"]] = city_anchor(spec["city"], cache)
         checked = []
         for item in items:
-            res = osm_lookup(item["name"], spec["city"], cache)
+            res = osm_lookup(item["name"], spec["city"], cache,
+                             anchor=anchors[spec["city"]])
             checked.append({"name": item["name"], **res})
         rows.append({"prompt": spec, "returned": len(items), "items": checked})
         if verbose:

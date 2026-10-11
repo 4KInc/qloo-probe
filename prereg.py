@@ -40,6 +40,23 @@ RULES = {
                     "estimate >= 10 points",
         "dead_if": "lower bound includes 0",
         "arms": "ungrounded LLM, grounded LLM with search, Qloo control",
+        "script_coverage_amendment": {
+            "finding": "OpenStreetMap stores many Japanese venues only under "
+                       "Japanese script, so romanised names return no hit and "
+                       "are scored as hallucinations. Osaka returned 62% "
+                       "not-found in BOTH LLM arms, including famous real "
+                       "institutions (Kushikatsu Daruma, Jiyuken Curry).",
+            "decision": "The headline gap is computed over Latin-script "
+                        "markets only (Lisbon, Medellin). Osaka is reported "
+                        "separately and labelled as beyond this instrument.",
+            "why_this_is_not_cherry_picking": "The exclusion is a property of "
+                       "the verifier, not of any arm: the bias hits every arm "
+                       "equally, and both LLM arms failed Osaka at the same "
+                       "rate. Excluding it favours neither branch. The Qloo "
+                       "arm would be flattered or punished by the same effect "
+                       "depending on whether its place names are romanised, "
+                       "which is itself unknown until the key arrives.",
+        },
         "supersedes": "An earlier registration set >=25% / <=10% against the "
                       "LLM's OWN failure rate. Adding the Qloo control changed "
                       "what is being measured -- a rate became a difference -- "

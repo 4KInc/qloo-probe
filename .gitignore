@@ -4,4 +4,8 @@
 # public repo, another commits them). The pre-registration is the exception --
 # it exists to be committed, and must be committed BEFORE the first real run.
 out/*
+# The registration AND every amendment are tracked. An amendment that lives
+# only on disk proves nothing -- the point of the record is that a third party
+# can see when a threshold moved and whether data had been seen by then.
 !out/prereg.json
+!out/prereg_amended_*.json

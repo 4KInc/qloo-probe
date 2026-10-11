@@ -9,3 +9,8 @@ out/*
 # can see when a threshold moved and whether data had been seen by then.
 !out/prereg.json
 !out/prereg_amended_*.json
+# Outcome data is public Wikimedia aggregate, not Qloo response data, and it
+# is committed deliberately: collected before any Qloo call, it is only
+# evidence of that if its timestamp is in the history.
+!out/backtest_outcomes.json
+!out/backtest_target.json

@@ -1,0 +1,846 @@
+{
+  "window": [
+    "20251001",
+    "20260930"
+  ],
+  "market_wikis": {
+    "New York, United States": "en",
+    "Sao Paulo, Brazil": "pt",
+    "Tokyo, Japan": "ja",
+    "Berlin, Germany": "de",
+    "Mumbai, India": "hi"
+  },
+  "collected_before_any_qloo_call": true,
+  "titles": {
+    "Avatar": {
+      "article": "Avatar (2009 film)",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Avatar (2009 film)",
+          "views": 4268158
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Avatar (filme)",
+          "views": 101566
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30a2\u30d0\u30bf\u30fc (2009\u5e74\u306e\u6620\u753b)",
+          "views": 214618
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Avatar \u2013 Aufbruch nach Pandora",
+          "views": 328101
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0905\u0935\u0924\u093e\u0930 (2009 \u092b\u093c\u093f\u0932\u094d\u092e)",
+          "views": 8300
+        }
+      }
+    },
+    "Titanic": {
+      "article": "Titanic (1997 film)",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Titanic (1997 film)",
+          "views": 2368840
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Titanic (filme de 1997)",
+          "views": 63992
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30bf\u30a4\u30bf\u30cb\u30c3\u30af (1997\u5e74\u306e\u6620\u753b)",
+          "views": 582456
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Titanic (1997)",
+          "views": 274391
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u091f\u093e\u0907\u091f\u0948\u0928\u093f\u0915 (1997 \u092b\u093c\u093f\u0932\u094d\u092e)",
+          "views": 5591
+        }
+      }
+    },
+    "The Dark Knight": {
+      "article": "The Dark Knight",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "The Dark Knight",
+          "views": 2080456
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "The Dark Knight",
+          "views": 42259
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30c0\u30fc\u30af\u30ca\u30a4\u30c8",
+          "views": 157309
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "The Dark Knight",
+          "views": 160979
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0926 \u0921\u093e\u0930\u094d\u0915 \u0928\u093e\u0908\u091f (\u092b\u093c\u093f\u0932\u094d\u092e)",
+          "views": 975
+        }
+      }
+    },
+    "Inception": {
+      "article": "Inception",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Inception",
+          "views": 2043930
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "A Origem",
+          "views": 52121
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30a4\u30f3\u30bb\u30d7\u30b7\u30e7\u30f3",
+          "views": 182536
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Inception",
+          "views": 204231
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0907\u0928\u094d\u0938\u0947\u092a\u094d\u0936\u0928",
+          "views": 1198
+        }
+      }
+    },
+    "Jurassic Park": {
+      "article": "Jurassic Park",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Jurassic Park",
+          "views": 1769621
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Jurassic Park",
+          "views": 39407
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30b8\u30e5\u30e9\u30b7\u30c3\u30af\u30fb\u30d1\u30fc\u30af (\u6620\u753b)",
+          "views": 121019
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Jurassic Park",
+          "views": 255014
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u091c\u0941\u0930\u093e\u0938\u093f\u0915 \u092a\u093e\u0930\u094d\u0915 (\u092b\u093f\u0932\u094d\u092e)",
+          "views": 1895
+        }
+      }
+    },
+    "The Avengers": {
+      "article": "The Avengers (2012 film)",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "The Avengers (2012 film)",
+          "views": 1097424
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "The Avengers (2012)",
+          "views": 24435
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30a2\u30d9\u30f3\u30b8\u30e3\u30fc\u30ba (2012\u5e74\u306e\u6620\u753b)",
+          "views": 96260
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Marvel\u2019s The Avengers",
+          "views": 122828
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0926 \u0905\u0935\u0947\u0902\u091c\u0930\u094d\u0938",
+          "views": 1595
+        }
+      }
+    },
+    "RRR": {
+      "article": "RRR",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "RRR",
+          "views": 1125590
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "RRR (filme)",
+          "views": 9765
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "RRR (\u6620\u753b)",
+          "views": 93504
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "RRR (Film)",
+          "views": 17968
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0930\u094c\u0926\u094d\u0930\u092e\u094d \u0930\u0923\u092e\u094d \u0930\u0941\u0927\u093f\u0930\u092e\u094d",
+          "views": 7106
+        }
+      }
+    },
+    "3 Idiots": {
+      "article": "3 Idiots",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "3 Idiots",
+          "views": 689494
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "3 Idiots",
+          "views": 613
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u304d\u3063\u3068\u3001\u3046\u307e\u304f\u3044\u304f",
+          "views": 33804
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "3 Idiots",
+          "views": 3808
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0969 \u0908\u0921\u093f\u092f\u091f\u094d\u0938",
+          "views": 3763
+        }
+      }
+    },
+    "Dangal": {
+      "article": "Dangal (2016 film)",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Dangal (2016 film)",
+          "views": 1067206
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30c0\u30f3\u30ac\u30eb \u304d\u3063\u3068\u3001\u3064\u3088\u304f\u306a\u308b",
+          "views": 6068
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Dangal",
+          "views": 3435
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0926\u0902\u0917\u0932 (\u092b\u093c\u093f\u0932\u094d\u092e)",
+          "views": 25475
+        }
+      }
+    },
+    "Parasite": {
+      "article": "Parasite (2019 film)",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Parasite (2019 film)",
+          "views": 1390345
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Gisaengchung",
+          "views": 23451
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30d1\u30e9\u30b5\u30a4\u30c8 \u534a\u5730\u4e0b\u306e\u5bb6\u65cf",
+          "views": 115041
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Parasite (Film)",
+          "views": 136160
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u092a\u0948\u0930\u093e\u0938\u093e\u0907\u091f",
+          "views": 1034
+        }
+      }
+    },
+    "Train to Busan": {
+      "article": "Train to Busan",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Train to Busan",
+          "views": 669613
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Busanhaeng",
+          "views": 3671
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u65b0\u611f\u67d3 \u30d5\u30a1\u30a4\u30ca\u30eb\u30fb\u30a8\u30af\u30b9\u30d7\u30ec\u30b9",
+          "views": 90246
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Train to Busan",
+          "views": 12104
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u091f\u094d\u0930\u0947\u0928 \u091f\u0942 \u092c\u0941\u0938\u093e\u0928",
+          "views": 567
+        }
+      }
+    },
+    "Your Name": {
+      "article": "Your Name",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Your Name",
+          "views": 750856
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Kimi no Na wa",
+          "views": 8266
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u541b\u306e\u540d\u306f\u3002",
+          "views": 304965
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Your Name. \u2013 Gestern, heute und f\u00fcr immer",
+          "views": 42826
+        }
+      }
+    },
+    "Spirited Away": {
+      "article": "Spirited Away",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Spirited Away",
+          "views": 1135255
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "A Viagem de Chihiro",
+          "views": 32195
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u5343\u3068\u5343\u5c0b\u306e\u795e\u96a0\u3057",
+          "views": 560515
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Chihiros Reise ins Zauberland",
+          "views": 150293
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0938\u094d\u092a\u093f\u0930\u093f\u091f\u0947\u0921 \u0905\u0935\u0947",
+          "views": 150
+        }
+      }
+    },
+    "Shoplifters": {
+      "article": "Shoplifters (film)",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Shoplifters (film)",
+          "views": 174119
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Manbiki Kazoku",
+          "views": 2183
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u4e07\u5f15\u304d\u5bb6\u65cf",
+          "views": 145010
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Shoplifters \u2013 Familienbande",
+          "views": 20682
+        }
+      }
+    },
+    "Drive My Car": {
+      "article": "Drive My Car (film)",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Drive My Car (film)",
+          "views": 242931
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Doraibu mai k\u0101",
+          "views": 4863
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30c9\u30e9\u30a4\u30d6\u30fb\u30de\u30a4\u30fb\u30ab\u30fc (\u6620\u753b)",
+          "views": 104752
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Drive My Car (Film)",
+          "views": 10681
+        }
+      }
+    },
+    "City of God": {
+      "article": "City of God (2002 film)",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "City of God (2002 film)",
+          "views": 494852
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Cidade de Deus (filme)",
+          "views": 93862
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30b7\u30c6\u30a3\u30fb\u30aa\u30d6\u30fb\u30b4\u30c3\u30c9",
+          "views": 20402
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "City of God (Film)",
+          "views": 38481
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0938\u093f\u091f\u0940 \u0911\u092b\u093c \u0917\u0949\u0921 (\u0968\u0966\u0966\u0968 \u092b\u093c\u093f\u0932\u094d\u092e)",
+          "views": 92
+        }
+      }
+    },
+    "Elite Squad": {
+      "article": "Elite Squad",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Elite Squad",
+          "views": 95519
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Tropa de Elite (filme)",
+          "views": 72532
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30a8\u30ea\u30fc\u30c8\u30fb\u30b9\u30af\u30ef\u30c3\u30c9",
+          "views": 3430
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Tropa de Elite",
+          "views": 7711
+        }
+      }
+    },
+    "Amelie": {
+      "article": "Am\u00e9lie",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Am\u00e9lie",
+          "views": 567062
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Le fabuleux destin d'Am\u00e9lie Poulain",
+          "views": 42095
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30a2\u30e1\u30ea",
+          "views": 47414
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Die fabelhafte Welt der Am\u00e9lie",
+          "views": 144425
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u090f\u092e\u0940\u0932\u0940",
+          "views": 53
+        }
+      }
+    },
+    "La Haine": {
+      "article": "La Haine",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "La Haine",
+          "views": 331133
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "O \u00d3dio",
+          "views": 5871
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u618e\u3057\u307f",
+          "views": 10394
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Ha\u00df (1995)",
+          "views": 53349
+        }
+      }
+    },
+    "Good Bye Lenin!": {
+      "article": "Good Bye, Lenin!",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Good Bye, Lenin!",
+          "views": 153580
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Good Bye, Lenin!",
+          "views": 6125
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30b0\u30c3\u30d0\u30a4\u3001\u30ec\u30fc\u30cb\u30f3!",
+          "views": 12901
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Good Bye, Lenin!",
+          "views": 118228
+        }
+      }
+    },
+    "Das Boot": {
+      "article": "Das Boot",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Das Boot",
+          "views": 414519
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Das Boot",
+          "views": 2585
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "U\u30fb\u30dc\u30fc\u30c8 (\u6620\u753b)",
+          "views": 45712
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Das Boot (Film)",
+          "views": 512648
+        }
+      }
+    },
+    "Pan's Labyrinth": {
+      "article": "Pan's Labyrinth",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Pan's Labyrinth",
+          "views": 834456
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "O Labirinto do Fauno",
+          "views": 20899
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30d1\u30f3\u30ba\u30fb\u30e9\u30d3\u30ea\u30f3\u30b9",
+          "views": 32316
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Pans Labyrinth",
+          "views": 60235
+        }
+      }
+    },
+    "Y Tu Mama Tambien": {
+      "article": "Y tu mam\u00e1 tambi\u00e9n",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Y tu mam\u00e1 tambi\u00e9n",
+          "views": 412012
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Y tu mam\u00e1 tambi\u00e9n",
+          "views": 12925
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u5929\u56fd\u306e\u53e3\u3001\u7d42\u308a\u306e\u697d\u5712\u3002",
+          "views": 7021
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Y tu mam\u00e1 tambi\u00e9n \u2013 Lust for Life",
+          "views": 10479
+        }
+      }
+    },
+    "Roma": {
+      "article": "Roma (2018 film)",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Roma (2018 film)",
+          "views": 311347
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "Roma (filme de 2018)",
+          "views": 7411
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "ROMA/\u30ed\u30fc\u30de",
+          "views": 11817
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Roma (2018)",
+          "views": 13413
+        },
+        "Mumbai, India": {
+          "lang": "hi",
+          "article": "\u0930\u094b\u092e\u093e (2018 \u092b\u093c\u093f\u0932\u094d\u092e)",
+          "views": 245
+        }
+      }
+    },
+    "Crouching Tiger, Hidden Dragon": {
+      "article": "Crouching Tiger, Hidden Dragon",
+      "views": {
+        "New York, United States": {
+          "lang": "en",
+          "article": "Crouching Tiger, Hidden Dragon",
+          "views": 635784
+        },
+        "Sao Paulo, Brazil": {
+          "lang": "pt",
+          "article": "O Tigre e o Drag\u00e3o (filme)",
+          "views": 11261
+        },
+        "Tokyo, Japan": {
+          "lang": "ja",
+          "article": "\u30b0\u30ea\u30fc\u30f3\u30fb\u30c7\u30b9\u30c6\u30a3\u30cb\u30fc",
+          "views": 29864
+        },
+        "Berlin, Germany": {
+          "lang": "de",
+          "article": "Tiger and Dragon",
+          "views": 36409
+        }
+      }
+    }
+  },
+  "rank_percentiles": {
+    "New York, United States": {
+      "Elite Squad": 0.0,
+      "Good Bye Lenin!": 0.041666666666666664,
+      "Shoplifters": 0.08333333333333333,
+      "Drive My Car": 0.125,
+      "Roma": 0.16666666666666666,
+      "La Haine": 0.20833333333333334,
+      "Y Tu Mama Tambien": 0.25,
+      "Das Boot": 0.2916666666666667,
+      "City of God": 0.3333333333333333,
+      "Amelie": 0.375,
+      "Crouching Tiger, Hidden Dragon": 0.4166666666666667,
+      "Train to Busan": 0.4583333333333333,
+      "3 Idiots": 0.5,
+      "Your Name": 0.5416666666666666,
+      "Pan's Labyrinth": 0.5833333333333334,
+      "Dangal": 0.625,
+      "The Avengers": 0.6666666666666666,
+      "RRR": 0.7083333333333334,
+      "Spirited Away": 0.75,
+      "Parasite": 0.7916666666666666,
+      "Jurassic Park": 0.8333333333333334,
+      "Inception": 0.875,
+      "The Dark Knight": 0.9166666666666666,
+      "Titanic": 0.9583333333333334,
+      "Avatar": 1.0
+    },
+    "Sao Paulo, Brazil": {
+      "3 Idiots": 0.0,
+      "Shoplifters": 0.043478260869565216,
+      "Das Boot": 0.08695652173913043,
+      "Train to Busan": 0.13043478260869565,
+      "Drive My Car": 0.17391304347826086,
+      "La Haine": 0.21739130434782608,
+      "Good Bye Lenin!": 0.2608695652173913,
+      "Roma": 0.30434782608695654,
+      "Your Name": 0.34782608695652173,
+      "RRR": 0.391304347826087,
+      "Crouching Tiger, Hidden Dragon": 0.43478260869565216,
+      "Y Tu Mama Tambien": 0.4782608695652174,
+      "Pan's Labyrinth": 0.5217391304347826,
+      "Parasite": 0.5652173913043478,
+      "The Avengers": 0.6086956521739131,
+      "Spirited Away": 0.6521739130434783,
+      "Jurassic Park": 0.6956521739130435,
+      "Amelie": 0.7391304347826086,
+      "The Dark Knight": 0.782608695652174,
+      "Inception": 0.8260869565217391,
+      "Titanic": 0.8695652173913043,
+      "Elite Squad": 0.9130434782608695,
+      "City of God": 0.9565217391304348,
+      "Avatar": 1.0
+    },
+    "Tokyo, Japan": {
+      "Elite Squad": 0.0,
+      "Dangal": 0.041666666666666664,
+      "Y Tu Mama Tambien": 0.08333333333333333,
+      "La Haine": 0.125,
+      "Roma": 0.16666666666666666,
+      "Good Bye Lenin!": 0.20833333333333334,
+      "City of God": 0.25,
+      "Crouching Tiger, Hidden Dragon": 0.2916666666666667,
+      "Pan's Labyrinth": 0.3333333333333333,
+      "3 Idiots": 0.375,
+      "Das Boot": 0.4166666666666667,
+      "Amelie": 0.4583333333333333,
+      "Train to Busan": 0.5,
+      "RRR": 0.5416666666666666,
+      "The Avengers": 0.5833333333333334,
+      "Drive My Car": 0.625,
+      "Parasite": 0.6666666666666666,
+      "Jurassic Park": 0.7083333333333334,
+      "Shoplifters": 0.75,
+      "The Dark Knight": 0.7916666666666666,
+      "Inception": 0.8333333333333334,
+      "Avatar": 0.875,
+      "Your Name": 0.9166666666666666,
+      "Spirited Away": 0.9583333333333334,
+      "Titanic": 1.0
+    },
+    "Berlin, Germany": {
+      "Dangal": 0.0,
+      "3 Idiots": 0.041666666666666664,
+      "Elite Squad": 0.08333333333333333,
+      "Y Tu Mama Tambien": 0.125,
+      "Drive My Car": 0.16666666666666666,
+      "Train to Busan": 0.20833333333333334,
+      "Roma": 0.25,
+      "RRR": 0.2916666666666667,
+      "Shoplifters": 0.3333333333333333,
+      "Crouching Tiger, Hidden Dragon": 0.375,
+      "City of God": 0.4166666666666667,
+      "Your Name": 0.4583333333333333,
+      "La Haine": 0.5,
+      "Pan's Labyrinth": 0.5416666666666666,
+      "Good Bye Lenin!": 0.5833333333333334,
+      "The Avengers": 0.625,
+      "Parasite": 0.6666666666666666,
+      "Amelie": 0.7083333333333334,
+      "Spirited Away": 0.75,
+      "The Dark Knight": 0.7916666666666666,
+      "Inception": 0.8333333333333334,
+      "Jurassic Park": 0.875,
+      "Titanic": 0.9166666666666666,
+      "Avatar": 0.9583333333333334,
+      "Das Boot": 1.0
+    },
+    "Mumbai, India": {
+      "Amelie": 0.0,
+      "City of God": 0.07142857142857142,
+      "Spirited Away": 0.14285714285714285,
+      "Roma": 0.21428571428571427,
+      "Train to Busan": 0.2857142857142857,
+      "The Dark Knight": 0.35714285714285715,
+      "Parasite": 0.42857142857142855,
+      "Inception": 0.5,
+      "The Avengers": 0.5714285714285714,
+      "Jurassic Park": 0.6428571428571429,
+      "3 Idiots": 0.7142857142857143,
+      "Titanic": 0.7857142857142857,
+      "RRR": 0.8571428571428571,
+      "Avatar": 0.9285714285714286,
+      "Dangal": 1.0
+    }
+  },
+  "coverage": {
+    "New York, United States": 25,
+    "Sao Paulo, Brazil": 24,
+    "Tokyo, Japan": 25,
+    "Berlin, Germany": 25,
+    "Mumbai, India": 15
+  },
+  "unresolved": {},
+  "request_failures": {}
+}

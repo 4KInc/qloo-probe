@@ -1,0 +1,67 @@
+{
+  "purpose": "Ground truth for the backtest, collected BEFORE any Qloo call.",
+  "what_it_establishes": [
+    "Markets genuinely reorder the same catalog. Every cross-market tau sits between 0.03 and 0.52, far below the 0.70 kill threshold, so the premise that markets differ is now measured rather than assumed.",
+    "All eight regionally-skewed titles rank higher in their home market, several by enormous margins (Elite Squad 0.91 at home vs 0.03 elsewhere).",
+    "The control titles behave as designed: Avatar, Titanic and Inception sit near the top everywhere."
+  ],
+  "how_test_F_should_now_be_read": "Test F was going to ask only whether Qloo reorders. It can now ask the stronger question: does Qloo reorder the SAME WAY. If Qloo returns tau near 1 across markets while the outcome data shows 0.03 between Sao Paulo and Mumbai, Qloo is blind to variation that demonstrably exists. If Qloo's per-market ranks track these, that correlation is the proof panel.",
+  "caveats": [
+    "A language edition is not a country: pt spans Brazil and Portugal, en the anglosphere, hi only part of India. Mumbai pairs rest on n=14-15 with standard errors near 0.26, which is wide.",
+    "For a film in the market's own language, article readership partly reflects who speaks the language rather than who likes the film. The German article for Das Boot is read by German speakers almost by definition. The effect is real and inflates the home-market signal.",
+    "Attention is not preference. A title can be read about and disliked.",
+    "Qloo's graph is built partly on public cultural signal, so agreement is less circular than scoring Qloo with Qloo, not independent of it."
+  ],
+  "pairwise_target": {
+    "New York, United States vs Sao Paulo, Brazil": {
+      "outcome_tau_b": 0.427536231884058,
+      "jackknife_se": 0.16916323933143015,
+      "shared": 24
+    },
+    "New York, United States vs Tokyo, Japan": {
+      "outcome_tau_b": 0.5133333333333333,
+      "jackknife_se": 0.13608255769155903,
+      "shared": 25
+    },
+    "New York, United States vs Berlin, Germany": {
+      "outcome_tau_b": 0.4266666666666667,
+      "jackknife_se": 0.15630258409438075,
+      "shared": 25
+    },
+    "New York, United States vs Mumbai, India": {
+      "outcome_tau_b": 0.3523809523809524,
+      "jackknife_se": 0.19887917363759297,
+      "shared": 15
+    },
+    "Sao Paulo, Brazil vs Tokyo, Japan": {
+      "outcome_tau_b": 0.2028985507246377,
+      "jackknife_se": 0.1644055507942233,
+      "shared": 24
+    },
+    "Sao Paulo, Brazil vs Berlin, Germany": {
+      "outcome_tau_b": 0.4057971014492754,
+      "jackknife_se": 0.18850251348067898,
+      "shared": 24
+    },
+    "Sao Paulo, Brazil vs Mumbai, India": {
+      "outcome_tau_b": 0.03296703296703297,
+      "jackknife_se": 0.2624868656021484,
+      "shared": 14
+    },
+    "Tokyo, Japan vs Berlin, Germany": {
+      "outcome_tau_b": 0.46,
+      "jackknife_se": 0.11800483793869476,
+      "shared": 25
+    },
+    "Tokyo, Japan vs Mumbai, India": {
+      "outcome_tau_b": 0.10476190476190476,
+      "jackknife_se": 0.2573754726745376,
+      "shared": 15
+    },
+    "Berlin, Germany vs Mumbai, India": {
+      "outcome_tau_b": 0.06666666666666667,
+      "jackknife_se": 0.2733454972587019,
+      "shared": 15
+    }
+  }
+}

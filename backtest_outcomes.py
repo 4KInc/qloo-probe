@@ -54,50 +54,63 @@ MARKET_WIKIS = {
 WINDOW = ("20251001", "20260930")  # one full year, fixed before collection
 
 
-def _get(url, tries=3):
+PACE_S = 1.1   # Wikimedia asks anonymous clients to serialise. An earlier
+               # run at ~5 req/s was throttled, and the collector recorded the
+               # throttling as "no article exists" for 16 of 25 titles.
+
+
+def _get(url, tries=5):
+    """Returns (data, error). The distinction matters: a failed request is not
+    evidence that an article is missing, and conflating the two turns an
+    instrument problem into a finding about coverage."""
     req = urllib.request.Request(url, headers={"User-Agent": UA,
                                                "Accept": "application/json"})
     for attempt in range(tries):
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:
-                return json.loads(resp.read().decode())
+                data = json.loads(resp.read().decode())
+            time.sleep(PACE_S)
+            return data, None
         except urllib.error.HTTPError as exc:
             if exc.code == 404:
-                return None
+                time.sleep(PACE_S)
+                return None, None          # genuinely absent
+            wait = float(exc.headers.get("Retry-After") or (2 ** attempt))
             if attempt == tries - 1:
-                return None
-            time.sleep(2 ** attempt)
-        except (urllib.error.URLError, ValueError):
+                return None, "http_%s" % exc.code
+            time.sleep(max(wait, PACE_S))
+        except (urllib.error.URLError, ValueError) as exc:
             if attempt == tries - 1:
-                return None
-            time.sleep(2 ** attempt)
-    return None
+                return None, type(exc).__name__
+            time.sleep(max(2 ** attempt, PACE_S))
+    return None, "exhausted"
 
 
 def find_article(title):
+    """Returns (article_title, error)."""
     """Resolve a title to an English Wikipedia article, preferring the film."""
     for query in ("%s film" % title, title):
         url = ("https://en.wikipedia.org/w/api.php?action=query&list=search"
                "&srsearch=%s&srlimit=3&format=json"
                % urllib.parse.quote(query))
-        data = _get(url)
-        time.sleep(0.2)
+        data, err = _get(url)
+        if err:
+            return None, err
         if not data:
             continue
         hits = data.get("query", {}).get("search", [])
         if hits:
-            return hits[0]["title"]
-    return None
+            return hits[0]["title"], None
+    return None, "no_article"
 
 
 def langlinks(article):
     """Map language code -> article title in that edition."""
     url = ("https://en.wikipedia.org/w/api.php?action=query&prop=langlinks"
            "&titles=%s&lllimit=500&format=json" % urllib.parse.quote(article))
-    data = _get(url)
-    time.sleep(0.2)
+    data, err = _get(url)
     out = {}
-    if not data:
+    if err or not data:
         return out
     for page in data.get("query", {}).get("pages", {}).values():
         for link in page.get("langlinks", []):
@@ -111,9 +124,8 @@ def pageviews(lang, article):
            "%s.wikipedia/all-access/user/%s/daily/%s/%s"
            % (lang, urllib.parse.quote(article.replace(" ", "_"), safe=""),
               WINDOW[0], WINDOW[1]))
-    data = _get(url)
-    time.sleep(0.15)
-    if not data or "items" not in data:
+    data, err = _get(url)
+    if err or not data or "items" not in data:
         return None
     return sum(item.get("views", 0) for item in data["items"])
 
@@ -125,10 +137,13 @@ def main():
            "collected_before_any_qloo_call": True, "titles": {}}
 
     for i, title in enumerate(titles, 1):
-        article = find_article(title)
+        article, err = find_article(title)
         if not article:
-            out["titles"][title] = {"article": None, "views": {}}
-            print("  [%2d/%d] %-32s NOT RESOLVED" % (i, len(titles), title))
+            reason = err or "no_article"
+            out["titles"][title] = {"article": None, "views": {},
+                                    "failure": reason}
+            print("  [%2d/%d] %-32s UNRESOLVED (%s)" % (i, len(titles), title,
+                                                        reason))
             continue
         links = langlinks(article)
         views = {}
@@ -154,6 +169,10 @@ def main():
             per_market[market] = rank_percentiles(scores)
     out["rank_percentiles"] = per_market
     out["coverage"] = {m: len(r) for m, r in per_market.items()}
+    out["unresolved"] = {t: d["failure"] for t, d in out["titles"].items()
+                         if d.get("failure")}
+    out["request_failures"] = {t: r for t, r in out["unresolved"].items()
+                               if r != "no_article"}
 
     (HERE / "out").mkdir(exist_ok=True)
     (HERE / "out" / "backtest_outcomes.json").write_text(json.dumps(out, indent=2))
@@ -161,6 +180,10 @@ def main():
     print("\ncoverage per market:")
     for market, n in out["coverage"].items():
         print("  %-26s %d/%d titles" % (market, n, len(titles)))
+    if out["request_failures"]:
+        print("\n  !! %d titles failed on REQUEST errors, not absence: %s"
+              % (len(out["request_failures"]), out["request_failures"]))
+        print("     Coverage above is a floor, not a measurement. Re-run.")
     print("\nsaved to out/backtest_outcomes.json")
 
 

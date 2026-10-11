@@ -1,6 +1,6 @@
 {
-  "registered_at": "2026-10-10T21:48:02",
-  "sha256": "57bfc344ba58c5290d0dbe67472e62824f55adb8f79579649fd147a955bf4dbb",
+  "registered_at": "2026-10-10T22:28:27",
+  "sha256": "83960f2ed7a98c95c439fcbbba4edd37061ba9286cf1b0e644e53720de09f138",
   "catalog": {
     "entity_type": "urn:entity:movie",
     "note": "Films chosen because country-level box-office splits are public, which makes the later backtest possible. Control titles are globally distributed tentpoles expected to rank similarly everywhere; the rest are titles with known regional skew. Fixed before any API call was made.",
@@ -63,7 +63,18 @@
       "vintage menswear and vinyl records",
       "Anthony Bourdain and street food",
       "contemporary dance and experimental theatre"
-    ]
+    ],
+    "model_config": {
+      "provider": "google",
+      "model": "gemini-2.5-flash",
+      "temperature": 0.0,
+      "arms": [
+        "ungrounded",
+        "grounded_with_google_search",
+        "qloo_control"
+      ],
+      "note": "Pinned and hashed. A re-run against a newer default model is a different experiment, not a replication."
+    }
   },
   "decision_rules": {
     "location_signal_test": {

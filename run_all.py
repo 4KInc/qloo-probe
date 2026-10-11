@@ -158,10 +158,17 @@ def run_qloo(client, catalog_spec, stage="full"):
         f = results["F_location_signal"]
         print("  verdict:", f["verdict"])
         for pair, row in f["pairs"].items():
-            tau, z = row["tau_b"], row.get("z_below_1")
-            print("    %-38s tau_b = %-7s z = %s"
+            tau = row["tau_b"]
+            jack = row.get("jackknife_se")
+            flag = "  INSUFFICIENT_OVERLAP" if row.get("insufficient_overlap") else ""
+            print("    %-34s tau_b=%-6s se=%-6s n=%-3s%s"
                   % (pair, "n/a" if tau is None else round(tau, 3),
-                     "n/a" if z is None else round(z, 2)))
+                     "n/a" if jack is None else round(jack, 3),
+                     row.get("shared_entities"), flag))
+        for market, cov in (f.get("absence_per_market") or {}).items():
+            trunc = "  (possibly truncated)" if cov.get("possibly_truncated") else ""
+            print("    absent in %-26s %.0f%% of catalog%s"
+                  % (market, 100 * (cov.get("absence_rate") or 0), trunc))
         print("  ", f["interpretation"])
     except QlooError as exc:
         results["F_location_signal"] = {"verdict": "ERROR", "error": str(exc)[:300]}
@@ -207,6 +214,11 @@ def write_report(results, digest, calls, quota):
               % (_pct(g.get("ungrounded_failure_rate")),
                  _pct(g.get("grounded_failure_rate")),
                  _pct(g.get("qloo_failure_rate"))),
+              "| &nbsp;&nbsp;gap, 95%% CI | %s %s |"
+              % (_pct(g.get("gap_vs_best_llm_config")),
+                 "" if not g.get("gap_interval_newcombe95") else
+                 "[%s, %s]" % (_pct(g["gap_interval_newcombe95"]["lo"]),
+                               _pct(g["gap_interval_newcombe95"]["hi"]))),
               "| Affinity comparable across calls | %s |" % b.get("verdict", "NOT RUN"),
               "| filter.results.entities honoured | %s |" % c.get("verdict", "NOT RUN"),
               ""]
@@ -224,8 +236,16 @@ def write_report(results, digest, calls, quota):
                   "open-query mode; a pinned-mode tau near 1 would have been an "
                   "artefact, not a finding.", ""]
     if g.get("verdict") == "GROUNDWORK_WEAK":
-        lines += ["> Gap test landed between the thresholds: a real but unreliable "
-                  "effect. Not enough to carry a submission.", ""]
+        lines += ["> Gap is positive but under 10 points: real yet too small to "
+                  "carry a submission.", ""]
+    bad_overlap = (f.get("insufficient_overlap_pairs") or [])
+    if bad_overlap:
+        lines += ["> %d market pair(s) shared fewer than %s titles and could not "
+                  "qualify: %s. Thin overlap biases tau upward, because the "
+                  "surviving titles are the globally popular ones least likely "
+                  "to reorder."
+                  % (len(bad_overlap), f.get("min_overlap_required"),
+                     ", ".join(bad_overlap)), ""]
 
     lines += ["## Raw results", "", "```json",
               json.dumps(results, indent=2, default=str)[:60000], "```"]
@@ -298,7 +318,11 @@ def main():
             print("\n  ungrounded LLM : %s" % _pct(g.get("ungrounded_failure_rate")))
             print("  grounded LLM   : %s" % _pct(g.get("grounded_failure_rate")))
             print("  Qloo control   : %s" % _pct(g.get("qloo_failure_rate")))
-            print("  gap            : %s" % _pct(g.get("gap_vs_best_llm_config")))
+            iv = g.get("gap_interval_newcombe95")
+            print("  gap vs %-8s: %s%s"
+                  % (g.get("baseline_arm", "?"), _pct(g.get("gap_vs_best_llm_config")),
+                     "" if not iv else "  95%% CI [%s, %s]"
+                     % (_pct(iv["lo"]), _pct(iv["hi"]))))
             print("  verdict        : %s" % g["verdict"])
         except Exception as exc:
             results["gap"] = {"verdict": "ERROR", "error": str(exc)[:300]}

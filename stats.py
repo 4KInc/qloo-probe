@@ -143,3 +143,66 @@ def tau_z(tau, n):
     if se is None or tau is None:
         return None
     return (1.0 - tau) / se
+
+
+def jackknife_tau_se(a, b):
+    """Delete-one jackknife SE of the OBSERVED tau.
+
+    tau_null_se above is the spread under independence (tau = 0). The sampling
+    variance of tau shrinks as tau approaches 1, so using the null SE to judge
+    a tau near the top overstates uncertainty and can make a real reordering
+    look like noise. The jackknife estimates the spread of the tau we actually
+    measured, and it is also the only honest uncertainty available when the API
+    is deterministic -- there is no measurement noise to resample, only
+    sensitivity to which titles were chosen.
+    """
+    keys = [k for k in a if k in b]
+    n = len(keys)
+    if n < 5:
+        return None
+    full = kendall_tau_b(a, b)
+    if full is None:
+        return None
+    leave_one = []
+    for drop in keys:
+        sa = {k: a[k] for k in keys if k != drop}
+        sb = {k: b[k] for k in keys if k != drop}
+        t = kendall_tau_b(sa, sb)
+        if t is not None:
+            leave_one.append(t)
+    if len(leave_one) < 3:
+        return None
+    mean = sum(leave_one) / len(leave_one)
+    var = (n - 1.0) / n * sum((t - mean) ** 2 for t in leave_one)
+    return math.sqrt(var)
+
+
+def wilson(successes, total, z=1.96):
+    """Wilson score interval for a proportion. Correct at small n and near 0,
+    where the normal approximation is not."""
+    if total == 0:
+        return None
+    p = successes / float(total)
+    denom = 1 + z * z / total
+    centre = (p + z * z / (2 * total)) / denom
+    halfwidth = (z / denom) * math.sqrt(p * (1 - p) / total +
+                                        z * z / (4.0 * total * total))
+    return {"p": p, "lo": max(0.0, centre - halfwidth),
+            "hi": min(1.0, centre + halfwidth), "n": total}
+
+
+def newcombe_diff(k1, n1, k2, n2, z=1.96):
+    """Newcombe interval for the difference between two proportions, built from
+    each arm's Wilson interval.
+
+    A two-point gap and an eight-point gap can easily overlap at a few hundred
+    verifications per arm, so the decision has to rest on the interval rather
+    than the point estimate.
+    """
+    w1, w2 = wilson(k1, n1, z), wilson(k2, n2, z)
+    if w1 is None or w2 is None:
+        return None
+    diff = w1["p"] - w2["p"]
+    lo = diff - math.sqrt((w1["p"] - w1["lo"]) ** 2 + (w2["hi"] - w2["p"]) ** 2)
+    hi = diff + math.sqrt((w1["hi"] - w1["p"]) ** 2 + (w2["p"] - w2["lo"]) ** 2)
+    return {"diff": diff, "lo": lo, "hi": hi, "arm1": w1, "arm2": w2}

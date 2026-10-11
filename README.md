@@ -60,11 +60,26 @@ or staging hosts.
 0.70, the bootstrap upper bound stays under 0.85, and the control set moves
 less than the rest of the catalog.
 
-Tau's standard error under the null is about 0.14 at n=25, so a single pair
-at 0.68 is not distinguishable from one at 0.75. The report prints the z-score
-beside every tau, and the rule requires two qualifying pairs for that reason.
-Tau-b is used throughout because Qloo affinities tie at 2-3 decimals and tau-a
+Uncertainty on tau comes from a **delete-one jackknife of the observed tau**,
+tested against the 0.70 threshold. The null SE (0.1427 at n=25) is printed
+only as a different-from-random sanity line: tau's variance shrinks toward 0
+as tau approaches 1, so judging an observed tau near the top against a
+null-hypothesis spread mixes two distributions and overstates uncertainty.
+When the API is deterministic the jackknife is the only honest uncertainty
+available, which is the same composition-sensitivity framing used elsewhere.
+
+Tau-b throughout, because Qloo affinities tie at 2-3 decimals and tau-a
 mishandles ties.
+
+**Overlap floor.** In open mode tau is computed only over titles both markets
+returned. A pair sharing fewer than 12 titles is marked INSUFFICIENT_OVERLAP
+and cannot qualify: at n=7 tau carries no information, and the titles that
+survive a thin overlap are the globally popular ones least likely to reorder,
+which biases tau upward. `take` is set to 500 so that "absent" means Qloo did
+not surface the title rather than it fell past the first page, and responses
+that come back exactly `take` long are flagged as possibly truncated. Absence
+rate per market is reported as its own coverage metric -- a high rate is
+evidence for Catalog Passport's coverage-sparsity path, not merely noise.
 
 The control-set condition is the one that matters most. Ranks are zero-sum, so something
 always drops; only a reordering that spares the titles expected to be stable
@@ -78,8 +93,17 @@ prompts and all three are verified by the same instrument:
    recommendation agent would actually use,
 3. Qloo's own place results.
 
-The verdict uses `(best shipped LLM config) - (Qloo)`. Alive at 25 points or
-more, dead at 10 or less.
+The verdict uses `(best shipped LLM config) - (Qloo)`, with a 95% Newcombe
+interval built from each arm's Wilson interval. **Alive** needs a lower bound
+above 0 and a point estimate of at least 10 points; **dead** if the interval
+includes 0. A few hundred verifications per arm cannot separate a 2-point gap
+from an 8-point one, so the interval decides rather than the point estimate.
+
+This threshold supersedes an earlier one (25% / 10% against the LLM's own
+rate). Adding the Qloo control changed what is measured -- a rate became a
+difference -- so the number had to be re-derived rather than carried over. It
+is a loosening of the bar, it was made before any live call, and the amendment
+is recorded in `out/prereg_amended_*.json` rather than edited in silently.
 
 The LLM's own failure rate is not the test. OpenStreetMap coverage is uneven
 outside the US and EU and its name matching is fuzzy, so a real restaurant

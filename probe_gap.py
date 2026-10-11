@@ -188,6 +188,13 @@ def qloo_places(client, city, taste_terms, take=5):
     return [name_of(i) for i in entities_of(body) if name_of(i)], None
 
 
+def _counts(rows):
+    total = sum(len(r.get("items", [])) for r in rows)
+    fails = sum(1 for r in rows for c in r.get("items", [])
+                if not c["exists"] or not c["geo_ok"])
+    return fails, total
+
+
 def _measure(rows):
     total = sum(len(r.get("items", [])) for r in rows)
     missing = sum(1 for r in rows for c in r.get("items", []) if not c["exists"])
@@ -256,24 +263,42 @@ def run(prompts, client=None, verbose=True, arms=("ungrounded", "grounded", "qlo
     CACHE.parent.mkdir(exist_ok=True)
     CACHE.write_text(json.dumps(cache))
 
+    from stats import newcombe_diff, wilson
+
+    def arm_counts(name):
+        a = out["arms"].get(name) or {}
+        rows = a.get("rows") or []
+        return _counts(rows) if rows else (None, None)
+
+    for name in out["arms"]:
+        k, n = arm_counts(name)
+        if k is not None and n:
+            out["arms"][name]["wilson"] = wilson(k, n)
+
     def rate(name):
         a = out["arms"].get(name) or {}
         return a.get("failure_rate")
 
     ungrounded, grounded, qloo = rate("ungrounded"), rate("grounded"), rate("qloo")
-    # The honest baseline is the strongest configuration anyone would actually
-    # ship, which is the grounded one where it ran.
-    baseline = grounded if grounded is not None else ungrounded
-    gap = (baseline - qloo) if (baseline is not None and qloo is not None) else None
+    # The honest baseline is the strongest configuration anyone would ship.
+    baseline_name = "grounded" if grounded is not None else "ungrounded"
+    bk, bn = arm_counts(baseline_name)
+    qk, qn = arm_counts("qloo")
 
-    if gap is None:
+    interval = None
+    if None not in (bk, bn, qk, qn) and bn and qn:
+        interval = newcombe_diff(bk, bn, qk, qn)
+
+    if interval is None:
         verdict = "NO_CONTROL"
-    elif gap >= 0.25:
+    elif interval["lo"] > 0 and interval["diff"] >= 0.10:
         verdict = "GROUNDWORK_ALIVE"
-    elif gap <= 0.10:
+    elif interval["lo"] <= 0:
         verdict = "GROUNDWORK_DEAD"
     else:
         verdict = "GROUNDWORK_WEAK"
+
+    gap = interval["diff"] if interval else None
 
     out.update({
         "verdict": verdict,
@@ -281,9 +306,15 @@ def run(prompts, client=None, verbose=True, arms=("ungrounded", "grounded", "qlo
         "grounded_failure_rate": grounded,
         "qloo_failure_rate": qloo,
         "gap_vs_best_llm_config": gap,
+        "baseline_arm": baseline_name,
+        "gap_interval_newcombe95": interval,
         "rule": ("gap = (best shipped LLM config) - (Qloo), same verifier. "
-                 ">=0.25 alive, <=0.10 dead. The LLM's own rate is NOT the test: "
-                 "OSM's blind spots hit both arms, and only the gap cancels them."),
+                 "ALIVE needs a 95% lower bound above 0 AND a point estimate of "
+                 ">=10 points. DEAD if the lower bound includes 0. A few hundred "
+                 "verifications per arm cannot separate a 2-point gap from an "
+                 "8-point one, so the interval decides, not the point estimate. "
+                 "The LLM's own rate is NOT the test: OSM's blind spots hit every "
+                 "arm, and only the gap cancels them."),
         "caveats": [
             "Nominatim misses legitimate small venues, so every rate here is an "
             "upper bound on real failure. Hand-check a sample before quoting.",

@@ -16,14 +16,37 @@ HERE = Path(__file__).parent
 
 RULES = {
     "location_signal_test": {
-        "pass_if": ">=2 non-US market pairs with Kendall tau-b < 0.70, "
-                   "bootstrap hi95 < 0.85, and control-set rank variance "
-                   "below the rest of the catalog",
+        "pass_if": ">=2 non-US market pairs with Kendall tau-b < 0.70, each "
+                   "with overlap n >= 12, catalog-composition hi95 < 0.85, and "
+                   "control-set rank variance below the rest of the catalog",
+        "uncertainty_method": "jackknife SE of the observed tau, tested against "
+                              "the 0.70 threshold. The null SE (0.1427 at n=25) "
+                              "is reported as a different-from-random sanity "
+                              "line only: tau's variance shrinks toward 0 as tau "
+                              "approaches 1, so judging an observed tau near the "
+                              "top against a null-hypothesis spread mixes two "
+                              "distributions and overstates uncertainty.",
+        "overlap_floor": "Pairs sharing fewer than 12 titles are marked "
+                         "INSUFFICIENT_OVERLAP and cannot qualify. Surviving "
+                         "titles skew to the globally popular ones, which are "
+                         "least likely to reorder, so a thin overlap biases tau "
+                         "upward.",
         "decides": "Catalog Passport is viable",
     },
     "groundwork_gap_test": {
-        "alive_if": "combined existence+geo failure rate >= 25%",
-        "dead_if": "<= 10%",
+        "metric": "gap = (best shipped LLM configuration) - (Qloo), both "
+                  "verified by the same OpenStreetMap instrument",
+        "alive_if": "95% Newcombe lower bound on the gap above 0 AND point "
+                    "estimate >= 10 points",
+        "dead_if": "lower bound includes 0",
+        "arms": "ungrounded LLM, grounded LLM with search, Qloo control",
+        "supersedes": "An earlier registration set >=25% / <=10% against the "
+                      "LLM's OWN failure rate. Adding the Qloo control changed "
+                      "what is being measured -- a rate became a difference -- "
+                      "so the threshold had to be re-derived rather than "
+                      "carried over. This is a LOOSENING of the bar and is "
+                      "recorded as such. No live call had been made when it "
+                      "was changed.",
         "decides": "whether the Groundwork branch has a premise at all",
     },
     "normalisation_test": {

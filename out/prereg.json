@@ -1,0 +1,91 @@
+{
+  "registered_at": "2026-10-10T21:48:02",
+  "sha256": "57bfc344ba58c5290d0dbe67472e62824f55adb8f79579649fd147a955bf4dbb",
+  "catalog": {
+    "entity_type": "urn:entity:movie",
+    "note": "Films chosen because country-level box-office splits are public, which makes the later backtest possible. Control titles are globally distributed tentpoles expected to rank similarly everywhere; the rest are titles with known regional skew. Fixed before any API call was made.",
+    "control": [
+      "Avatar",
+      "Titanic",
+      "The Dark Knight",
+      "Inception",
+      "Jurassic Park",
+      "The Avengers"
+    ],
+    "regional": [
+      "RRR",
+      "3 Idiots",
+      "Dangal",
+      "Parasite",
+      "Train to Busan",
+      "Your Name",
+      "Spirited Away",
+      "Shoplifters",
+      "Drive My Car",
+      "City of God",
+      "Elite Squad",
+      "Amelie",
+      "La Haine",
+      "Good Bye Lenin!",
+      "Das Boot",
+      "Pan's Labyrinth",
+      "Y Tu Mama Tambien",
+      "Roma",
+      "Crouching Tiger, Hidden Dragon"
+    ],
+    "markets": [
+      "New York, United States",
+      "Sao Paulo, Brazil",
+      "Tokyo, Japan",
+      "Berlin, Germany",
+      "Mumbai, India"
+    ],
+    "audience_seeds": [
+      null
+    ]
+  },
+  "prompts": {
+    "note": "30 prompts: 3 cities x 10 taste profiles. Cities are deliberately not the top-5 most-written-about metros, because an LLM's hallucination rate in Paris tells you nothing about its rate where the training data thins out.",
+    "cities": [
+      "Lisbon, Portugal",
+      "Osaka, Japan",
+      "Medellin, Colombia"
+    ],
+    "domain": "restaurants",
+    "tastes": [
+      "Wong Kar-wai films and Nils Frahm",
+      "brutalist architecture and free jazz",
+      "Studio Ghibli and specialty coffee",
+      "1970s krautrock and natural wine",
+      "Elena Ferrante novels and slow food",
+      "skateboarding culture and hip hop",
+      "Nordic noir and minimalist design",
+      "vintage menswear and vinyl records",
+      "Anthony Bourdain and street food",
+      "contemporary dance and experimental theatre"
+    ]
+  },
+  "decision_rules": {
+    "location_signal_test": {
+      "pass_if": ">=2 non-US market pairs with Kendall tau-b < 0.70, bootstrap hi95 < 0.85, and control-set rank variance below the rest of the catalog",
+      "decides": "Catalog Passport is viable"
+    },
+    "groundwork_gap_test": {
+      "alive_if": "combined existence+geo failure rate >= 25%",
+      "dead_if": "<= 10%",
+      "decides": "whether the Groundwork branch has a premise at all"
+    },
+    "normalisation_test": {
+      "per_query_if": "the same entity's affinity changes between two different candidate sets",
+      "consequence": "all cross-call ratio maths is abandoned in favour of within-query ranks"
+    },
+    "planned_backtest": {
+      "design": "predict relative country-level performance for the catalog from Qloo ranks alone, compare against public country box office splits",
+      "honesty_constraints": [
+        "titles and metric fixed here, before outcomes are looked up",
+        "Qloo's graph is built partly from real consumption signal, so this is less circular than scoring Qloo with Qloo, NOT independent of it",
+        "report N and the confidence interval, never a bare correlation"
+      ]
+    }
+  }
+}

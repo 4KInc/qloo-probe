@@ -1,0 +1,7 @@
+.env
+# Everything the API produced stays out of git: the data-publishing rule is
+# unresolved (one entrant reports organisers disallow Qloo responses in a
+# public repo, another commits them). The pre-registration is the exception --
+# it exists to be committed, and must be committed BEFORE the first real run.
+out/*
+!out/prereg.json

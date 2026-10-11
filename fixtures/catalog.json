@@ -1,0 +1,26 @@
+{
+  "entity_type": "urn:entity:movie",
+  "note": "Films chosen because country-level box-office splits are public, which makes the later backtest possible. Control titles are globally distributed tentpoles expected to rank similarly everywhere; the rest are titles with known regional skew. Fixed before any API call was made.",
+  "control": [
+    "Avatar", "Titanic", "The Dark Knight", "Inception",
+    "Jurassic Park", "The Avengers"
+  ],
+  "regional": [
+    "RRR", "3 Idiots", "Dangal",
+    "Parasite", "Train to Busan",
+    "Your Name", "Spirited Away", "Shoplifters", "Drive My Car",
+    "City of God", "Elite Squad",
+    "Amelie", "La Haine",
+    "Good Bye Lenin!", "Das Boot",
+    "Pan's Labyrinth", "Y Tu Mama Tambien", "Roma",
+    "Crouching Tiger, Hidden Dragon"
+  ],
+  "markets": [
+    "New York, United States",
+    "Sao Paulo, Brazil",
+    "Tokyo, Japan",
+    "Berlin, Germany",
+    "Mumbai, India"
+  ],
+  "audience_seeds": [null]
+}

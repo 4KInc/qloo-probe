@@ -1,0 +1,32 @@
+{
+  "note": "30 prompts: 3 cities x 10 taste profiles. Cities are deliberately not the top-5 most-written-about metros, because an LLM's hallucination rate in Paris tells you nothing about its rate where the training data thins out.",
+  "cities": [
+    "Lisbon, Portugal",
+    "Osaka, Japan",
+    "Medellin, Colombia"
+  ],
+  "domain": "restaurants",
+  "tastes": [
+    "Wong Kar-wai films and Nils Frahm",
+    "brutalist architecture and free jazz",
+    "Studio Ghibli and specialty coffee",
+    "1970s krautrock and natural wine",
+    "Elena Ferrante novels and slow food",
+    "skateboarding culture and hip hop",
+    "Nordic noir and minimalist design",
+    "vintage menswear and vinyl records",
+    "Anthony Bourdain and street food",
+    "contemporary dance and experimental theatre"
+  ],
+  "model_config": {
+    "provider": "google",
+    "model": "gemini-2.5-flash",
+    "temperature": 0.0,
+    "arms": [
+      "ungrounded",
+      "grounded_with_google_search",
+      "qloo_control"
+    ],
+    "note": "Pinned and hashed. A re-run against a newer default model is a different experiment, not a replication."
+  }
+}

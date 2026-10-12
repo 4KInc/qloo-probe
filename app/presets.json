@@ -1,0 +1,27 @@
+{
+  "presets": [
+    {
+      "id": "films-br",
+      "label": "Film slate into Brazil",
+      "entity_type": "urn:entity:movie",
+      "source_market": "New York, United States",
+      "target_market": "Sao Paulo, Brazil",
+      "note": "The preset with checkable outcomes: every verdict can be compared against public per-market data."
+    },
+    {
+      "id": "films-jp",
+      "label": "Film slate into Japan",
+      "entity_type": "urn:entity:movie",
+      "source_market": "New York, United States",
+      "target_market": "Tokyo, Japan"
+    },
+    {
+      "id": "films-in",
+      "label": "Film slate into India",
+      "entity_type": "urn:entity:movie",
+      "source_market": "New York, United States",
+      "target_market": "Mumbai, India",
+      "note": "Deliberately the thinnest market in the catalog. Shows what abstention looks like."
+    }
+  ]
+}

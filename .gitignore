@@ -14,3 +14,6 @@ out/*
 # evidence of that if its timestamp is in the history.
 !out/backtest_outcomes.json
 !out/backtest_target.json
+# Recorded preset runs are regenerated, and once they hold real Qloo responses
+# the unresolved data-publishing rule applies to them too.
+app/cache/*.json

@@ -47,11 +47,14 @@ def run_translation(preset):
             "anchor_agreement": v["anchor_agreement"],
             "compared_on": v["compared_on"],
             "travels": [{"title": backend.label(r["entity"]),
+                         "image": backend.image(r["entity"]),
                          "shift": r["shift"]} for r in v["travels"]],
             "does_not_travel": [{"title": backend.label(r["entity"]),
+                                 "image": backend.image(r["entity"]),
                                  "shift": r["shift"]}
                                 for r in v["does_not_travel"]],
-            "uncertain": v["withheld_as_uncertain"],
+            "uncertain": [{"title": t, "image": backend.image_for_title(t)}
+                          for t in v["withheld_as_uncertain"]],
             "supported_by": v["supported_by"],
         })
 

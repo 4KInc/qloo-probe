@@ -2,23 +2,24 @@
   "presets": [
     {
       "id": "mumbai-out",
-      "label": "A Mumbai slate goes abroad",
+      "label": "Home market: Mumbai",
       "home_market": "Mumbai, India",
       "want": 3,
-      "note": "Mumbai's two independent anchor readings agree at 0.97, which makes it a dependable baseline."
+      "note": "Mumbai is the reference point, not the destination. Every score below is movement away from where the film sits at home. Its two independent readings agree at 0.97, which makes it a dependable baseline."
     },
     {
       "id": "saopaulo-out",
-      "label": "A Sao Paulo slate goes abroad",
+      "label": "Home market: Sao Paulo",
       "home_market": "Sao Paulo, Brazil",
-      "want": 3
+      "want": 3,
+      "note": "Sao Paulo as the reference point. Two readings agree at 0.75."
     },
     {
       "id": "newyork-refused",
-      "label": "A New York slate (this one is refused)",
+      "label": "Home market: New York",
       "home_market": "New York, United States",
       "want": 3,
-      "note": "Included deliberately. New York's own two anchor readings agree at only 0.13, so it cannot serve as a baseline, and the agent says so rather than producing a confident ranking built on an unstable reference."
+      "note": "Included deliberately. New York's two readings agree at only 0.13, so it cannot anchor a comparison, and the agent refuses rather than ranking against an unstable reference."
     }
   ]
 }

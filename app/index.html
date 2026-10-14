@@ -3,183 +3,182 @@
 <title>Travels Well</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  color-scheme:light;
-  --paper:#f7f5f1;            /* warm paper, not dashboard grey */
-  --ink:#16150f;
-  --ink-2:#55524a;
-  --ink-3:#8a867c;
-  --rule:#ddd9d0;
-  --rule-2:#c9c4b8;
-  --pos:#2a78d6;              /* validated diverging pair */
-  --neg:#d03b3b;
-  --accent:#8a3b12;
-  --display:"Instrument Serif",Georgia,"Times New Roman",serif;
-  --sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color-scheme:dark;
+  --screen:#0a0a0c;        /* the house lights are down */
+  --seat:#141419;
+  --seat-2:#1c1c23;
+  --ink:#f4f1ea;
+  --ink-2:#a9a49a;
+  --ink-3:#6f6b64;
+  --rule:#26262e;
+  --bulb:#e8b84b;          /* marquee amber */
+  --pos:#3987e5;           /* validated diverging pair, dark steps */
+  --neg:#e66767;
+  --display:"Bebas Neue",Impact,"Haettenschweiler",sans-serif;
+  --sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
-  color-scheme:dark;
-  --paper:#0f0f0e; --ink:#f0ece3; --ink-2:#b0ab9e; --ink-3:#7d786c; --rule:#2a2824; --rule-2:#403c35;
-  --pos:#3987e5; --neg:#e66767; --accent:#d9956a;
-}}
-:root[data-theme=dark]{
-  color-scheme:dark;
-  --paper:#0f0f0e; --ink:#f0ece3; --ink-2:#b0ab9e;
-  --ink-3:#7d786c; --rule:#2a2824; --rule-2:#403c35;
-  --pos:#3987e5; --neg:#e66767; --accent:#d9956a;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;overflow-x:hidden;background:var(--paper);color:var(--ink);
-  font:400 15px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-.wrap{width:100%;max-width:820px;margin:0 auto;
-  padding:clamp(28px,6vw,64px) clamp(18px,5vw,32px) 90px}
+body{margin:0;overflow-x:hidden;background:var(--screen);color:var(--ink);
+  font:400 15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(14px,3.5vw,32px) 90px}
 
-/* ---- masthead: a report header, not a hero ---- */
-.masthead{border-bottom:1.5px solid var(--ink);padding-bottom:14px;margin-bottom:26px}
-.kicker{font:500 10.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-3);margin:0 0 14px}
-h1{font:400 clamp(40px,8.5vw,68px)/0.94 var(--display);letter-spacing:-.015em;
-  margin:0 0 14px}
-h1 em{font-style:italic}
-.lede{font-size:clamp(15px,2.1vw,16.5px);line-height:1.55;color:var(--ink-2);
-  margin:0;max-width:56ch}
-.lede b{color:var(--ink);font-weight:500}
+/* ---------- marquee ---------- */
+.marquee{padding:clamp(26px,5vw,46px) 0 0;text-align:center}
+.bulbs{display:flex;justify-content:center;gap:9px;margin-bottom:16px}
+.bulbs i{width:5px;height:5px;border-radius:50%;background:var(--bulb);
+  box-shadow:0 0 7px var(--bulb);opacity:.85}
+h1{font:400 clamp(52px,12vw,112px)/0.86 var(--display);letter-spacing:.012em;
+  margin:0;color:var(--ink);text-transform:uppercase}
+h1 span{color:var(--bulb)}
+.tagline{font:400 12px/1.5 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-3);margin:14px 0 0}
+.strip{height:14px;margin:26px 0 0;border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  background:repeating-linear-gradient(90deg,transparent 0 9px,var(--rule) 9px 15px)}
 
-/* ---- controls: tabs on a rule, not pill buttons ---- */
-.controls{display:flex;gap:0;flex-wrap:wrap;margin:0 0 4px;
-  border-bottom:1px solid var(--rule)}
-button{font:500 13.5px/1 var(--sans);padding:12px 16px 11px;border:0;
-  background:none;color:var(--ink-3);cursor:pointer;position:relative;
-  border-bottom:2px solid transparent;margin-bottom:-1px}
-button:hover{color:var(--ink)}
-button[aria-pressed=true]{color:var(--ink);border-bottom-color:var(--ink)}
-button:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+/* ---------- picker ---------- */
+.pickrow{display:flex;align-items:center;justify-content:center;gap:10px;
+  flex-wrap:wrap;margin:24px 0 8px}
+.picklabel{font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3)}
+button{font:400 20px/1 var(--display);letter-spacing:.05em;padding:9px 17px 7px;
+  border:1px solid var(--rule);background:var(--seat);color:var(--ink-2);
+  cursor:pointer;border-radius:2px;transition:.14s}
+button:hover{color:var(--ink);border-color:var(--bulb)}
+button[aria-pressed=true]{background:var(--bulb);color:#140f02;border-color:var(--bulb)}
+button:focus-visible{outline:2px solid var(--bulb);outline-offset:3px}
 
-/* ---- sections: hairlines, no cards ---- */
-section{padding:22px 0;border-bottom:1px solid var(--rule)}
-section:last-of-type{border-bottom:0}
-.slug{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-3);margin:0 0 10px}
-h3{font:400 23px/1.15 var(--display);letter-spacing:-.01em;margin:0}
-.meta{font:400 12px/1.5 var(--mono);color:var(--ink-3);margin:6px 0 0;
-  display:flex;gap:14px;flex-wrap:wrap}
-.note{font-size:13.5px;color:var(--ink-2);margin:10px 0 0;max-width:62ch}
+.legendrow{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;
+  margin:14px 0 2px;font:400 11px/1 var(--mono);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3)}
+.legendrow .key{display:inline-flex;align-items:center;gap:7px}
+.sw{width:10px;height:10px;border-radius:1px;display:inline-block}
+.sw.up{background:var(--pos)} .sw.down{background:var(--neg)}
+.sw.muted{background:var(--ink-3)}
 
-/* run header */
-.runbar{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.badge{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
-  padding:5px 8px;border:1px solid currentColor;border-radius:2px}
+/* ---------- run bar ---------- */
+.runbar{display:flex;align-items:center;justify-content:center;gap:14px;
+  flex-wrap:wrap;font:400 11.5px/1 var(--mono);color:var(--ink-3);
+  letter-spacing:.08em;text-transform:uppercase;margin:16px 0 4px}
+.badge{padding:5px 9px;border:1px solid currentColor;border-radius:2px}
 .badge.LIVE{color:var(--pos)}
-.badge.CACHED{color:var(--accent)}
+.badge.CACHED{color:var(--bulb)}
 .badge.UNAVAILABLE{color:var(--ink-3)}
+.note{max-width:74ch;margin:14px auto 0;text-align:center;color:var(--ink-2);
+  font-size:14px;line-height:1.6}
 
-/* agreement meter */
-.meter{display:inline-flex;align-items:center;gap:7px;font:400 12px/1 var(--mono);
-  color:var(--ink-3)}
-.meter-track{width:46px;height:3px;background:var(--rule-2)}
-.meter-fill{height:100%;background:var(--ink-2)}
+/* ---------- market row ---------- */
+.row-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  margin:38px 0 4px}
+.row-head h2{font:400 clamp(28px,4.4vw,42px)/1 var(--display);letter-spacing:.02em;
+  margin:0;text-transform:uppercase}
+.row-meta{font:400 11px/1 var(--mono);color:var(--ink-3);letter-spacing:.08em;
+  text-transform:uppercase}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(124px,17vw,168px);
+  gap:clamp(10px,1.6vw,18px);overflow-x:auto;padding:16px 2px 8px;
+  scroll-snap-type:x proximity;scrollbar-width:thin}
+.rail::-webkit-scrollbar{height:6px}
+.rail::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+.card{scroll-snap-align:start;position:relative;text-decoration:none;color:inherit}
+.poster{position:relative;aspect-ratio:2/3;background:var(--seat-2);
+  border:1px solid var(--rule);border-radius:3px;overflow:hidden;
+  transition:transform .16s ease,border-color .16s ease}
+.card:hover .poster{transform:translateY(-4px) scale(1.022);border-color:var(--ink-3)}
+.poster img{width:100%;height:100%;object-fit:cover;display:block}
+.poster .fallback{position:absolute;inset:0;display:grid;place-items:center;
+  padding:10px;text-align:center;font:400 17px/1.05 var(--display);
+  letter-spacing:.03em;color:var(--ink-3);text-transform:uppercase}
+.verdict{position:absolute;top:7px;right:7px;padding:4px 7px;border-radius:2px;
+  font:500 12px/1 var(--mono);backdrop-filter:blur(3px);
+  background:rgba(5,5,7,.78);border:1px solid currentColor}
+.verdict.up{color:var(--pos)}
+.verdict.down{color:var(--neg)}
+.poster::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;
+  background:linear-gradient(to top,rgba(5,5,7,.8),transparent);pointer-events:none}
+.bar{position:absolute;left:0;bottom:0;height:4px;z-index:2}
+.bar.up{background:var(--pos)}
+.bar.down{background:var(--neg)}
+.cap{margin-top:8px;font-size:12.5px;line-height:1.3;color:var(--ink-2)}
+.card.muted .poster{filter:grayscale(1) brightness(.5)}
+.card.muted .cap{color:var(--ink-3);text-decoration:line-through;
+  text-decoration-color:var(--ink-3)}
+.ribbon{position:absolute;top:9px;left:-30px;transform:rotate(-45deg);
+  background:var(--ink-3);color:var(--screen);font:500 9px/1 var(--mono);
+  letter-spacing:.14em;padding:4px 34px;text-transform:uppercase}
 
-/* legend */
-.legend{display:flex;gap:18px;margin:16px 0 8px;font:400 12px/1 var(--mono);
-  color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em}
-.key{display:inline-flex;align-items:center;gap:6px}
-.swatch{width:10px;height:10px;border-radius:1px}
+/* ---------- refusal ---------- */
+.refusal{border:1px solid var(--bulb);border-radius:3px;padding:26px 28px;
+  margin:34px 0;background:linear-gradient(180deg,rgba(232,184,75,.07),transparent)}
+.refusal h2{font:400 clamp(30px,5vw,44px)/1 var(--display);letter-spacing:.02em;
+  margin:0 0 12px;color:var(--bulb);text-transform:uppercase}
+.refusal p{margin:0;color:var(--ink-2);font-size:15px;max-width:72ch;line-height:1.65}
 
-/* ---- diverging chart ---- */
-.rows{margin-top:4px}
-.row{display:grid;grid-template-columns:minmax(92px,1.1fr) minmax(130px,2.1fr) 52px;
-  align-items:center;gap:14px;padding:4px 0}
-.row>*{min-width:0}
-.row+.row{border-top:1px solid color-mix(in oklab,var(--rule) 55%,transparent)}
-.name{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.track{position:relative;height:16px}
-.track::before{content:"";position:absolute;left:50%;top:-4px;bottom:-4px;width:1px;
-  background:var(--rule-2)}
-.bar{position:absolute;top:4px;height:9px}
-.bar.pos{left:50%;background:var(--pos);border-radius:0 2px 2px 0}
-.bar.neg{right:50%;background:var(--neg);border-radius:2px 0 0 2px}
-.val{font:400 13px/1 var(--mono);text-align:right}
-.axis{display:grid;grid-template-columns:minmax(92px,1.1fr) minmax(130px,2.1fr) 52px;
-  gap:14px;font:400 10.5px/1 var(--mono);color:var(--ink-3);margin-top:9px;
-  letter-spacing:.06em}
-.axis>*{min-width:0}
-.axis-mid{display:flex;justify-content:space-between}
-
-/* withheld */
-.withheld{margin-top:18px;padding-top:14px;border-top:1px dashed var(--rule-2)}
-.withheld b{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-3);font-weight:500}
-.chips{display:flex;flex-wrap:wrap;gap:0 18px;margin-top:9px;font-size:13.5px;
-  color:var(--ink-3)}
-.chip{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  text-decoration:line-through;text-decoration-color:var(--rule-2)}
-
-/* refusal: an editorial callout */
-.refusal{border-left:2px solid var(--accent);padding-left:18px}
-.refusal h3{color:var(--accent)}
-.refusal p{margin:10px 0 0;color:var(--ink-2);font-size:14.5px;max-width:62ch}
-
-/* trace */
-ol.trace{list-style:none;margin:14px 0 0;padding:0;counter-reset:s}
-ol.trace li{display:grid;grid-template-columns:26px 1fr;gap:12px;padding-bottom:15px;
+/* ---------- back matter ---------- */
+.backmatter{margin-top:52px;border-top:1px solid var(--rule);padding-top:22px}
+details{margin-top:14px}
+summary{display:inline-block;cursor:pointer;font:400 11px/1 var(--mono);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+summary:hover{color:var(--bulb)}
+summary:focus-visible{outline:2px solid var(--bulb);outline-offset:3px}
+ol.trace{list-style:none;margin:16px 0 0;padding:0;counter-reset:s}
+ol.trace li{display:grid;grid-template-columns:30px 1fr;gap:14px;padding-bottom:14px;
   counter-increment:s}
 ol.trace li::before{content:counter(s,decimal-leading-zero);
-  font:400 11px/1.5 var(--mono);color:var(--ink-3)}
-.act{font:500 11px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase}
-.why{font-size:13.5px;color:var(--ink-2);margin-top:3px;max-width:62ch}
-.passed{font:400 12px/1.5 var(--mono);color:var(--ink-3);margin-top:4px}
-
-details{margin-top:16px}
-summary{display:inline-block;cursor:pointer;font:500 11px/1 var(--mono);
-  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-summary:hover{color:var(--ink)}
-summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  font:400 11px/1.6 var(--mono);color:var(--ink-3)}
+.act{font:400 15px/1.2 var(--display);letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink)}
+.why{font-size:13.5px;color:var(--ink-2);margin-top:3px;max-width:70ch}
+.passed{font:400 11.5px/1.5 var(--mono);color:var(--ink-3);margin-top:4px}
+table{width:100%;border-collapse:collapse;font:400 12px/1.5 var(--mono);margin-top:12px}
 details>table{display:block;overflow-x:auto}
-table{width:100%;border-collapse:collapse;font:400 12.5px/1.5 var(--mono);margin-top:12px}
-th{text-align:left;font-weight:500;color:var(--ink-3);font-size:10.5px;
-  letter-spacing:.1em;text-transform:uppercase;padding:7px 10px 7px 0;
-  border-bottom:1px solid var(--rule-2)}
-td{padding:7px 10px 7px 0;border-bottom:1px solid var(--rule);color:var(--ink-2)}
+th{text-align:left;font-weight:500;color:var(--ink-3);font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;padding:7px 12px 7px 0;
+  border-bottom:1px solid var(--rule)}
+td{padding:7px 12px 7px 0;border-bottom:1px solid var(--rule);color:var(--ink-2)}
 td.num,th.num{text-align:right;padding-right:0}
-
-.skel{height:11px;background:linear-gradient(90deg,var(--rule) 25%,
-  var(--paper) 37%,var(--rule) 63%);background-size:400% 100%;
-  animation:sh 1.3s ease infinite;margin:10px 0}
+.skel{aspect-ratio:2/3;background:linear-gradient(90deg,var(--seat) 25%,
+  var(--seat-2) 37%,var(--seat) 63%);background-size:400% 100%;
+  animation:sh 1.4s ease infinite;border-radius:3px}
 @keyframes sh{0%{background-position:100% 0}100%{background-position:0 0}}
-@media (prefers-reduced-motion:reduce){.skel{animation:none}}
-
-footer{margin-top:40px;padding-top:18px;border-top:1.5px solid var(--ink);
-  color:var(--ink-3);font-size:13px;line-height:1.65;max-width:68ch}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}
+  .card:hover .poster{transform:none}}
+footer{margin-top:40px;color:var(--ink-3);font-size:12.5px;line-height:1.7;
+  max-width:76ch}
 footer a{color:var(--ink-2)}
-@media (max-width:560px){
-  .row,.axis{grid-template-columns:minmax(74px,1fr) minmax(86px,1.5fr) 44px;gap:9px}
-  .name{font-size:13px}
-}
 </style>
 
 <div class="wrap">
-  <div class="masthead">
-  <p class="kicker">Qloo Agentic Hackathon &middot; cultural equivalence</p>
-  <h1>Travels <em>Well</em></h1>
-  <p class="lede">Which titles in a slate <b>travel</b> to another market, which
-  <b>do not</b>, and which the evidence <b>cannot settle</b>. Every market is read
-  twice through unrelated taste anchors; only what both readings agree on is
-  reported.</p>
+  <header class="marquee">
+    <div class="bulbs"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <h1>Travels <span>Well</span></h1>
+    <p class="tagline">Does this film play in that city?</p>
+    <div class="strip"></div>
+  </header>
+
+  <div class="pickrow">
+    <span class="picklabel">Where the slate already works</span>
+    <span id="controls"></span>
   </div>
 
-  <div class="controls" id="controls"></div>
-  <div id="out"><section><p class="meta">Pick a slate to run.</p></section></div>
+  <div class="legendrow" id="legend">
+    <span class="key"><i class="sw up"></i>travels — rises against home</span>
+    <span class="key"><i class="sw down"></i>stays home — falls</span>
+    <span class="key"><i class="sw muted"></i>withheld — readings disagree</span>
+  </div>
+  <div id="out"></div>
 
-  <footer>
-    Answers are labelled <b>LIVE</b> or <b>CACHED</b>; a cached answer is a recorded
-    run of this same pipeline, never a synthetic stand-in. Where two readings of a
-    market disagree about a title, it is withheld rather than ranked. Where a market
-    is too thinly covered, or a baseline too unstable to measure against, the agent
-    says so instead of guessing.
+  <footer class="backmatter">
+    Posters and affinities both come from Qloo. Answers are labelled LIVE or
+    CACHED; a cached answer is a recorded run of this same pipeline, never a
+    synthetic stand-in. Where two independent readings of a market disagree about
+    a film, it is withheld rather than ranked. Where a market is too thinly
+    covered, or a baseline too unstable to measure against, the agent says so
+    instead of guessing.
     <br><a href="https://github.com/4KInc/travels-well">Source and method</a>
   </footer>
 </div>
@@ -188,204 +187,173 @@ footer a{color:var(--ink-2)}
 const PRESETS = __PRESETS__;
 const controls = document.getElementById('controls');
 const out = document.getElementById('out');
-
-const el = (t, c, x) => { const e = document.createElement(t);
-  if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; };
-const fmt = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2);
+const el = (t,c,x) => { const e=document.createElement(t);
+  if(c) e.className=c; if(x!==undefined) e.textContent=x; return e; };
+const fmt = v => (v>=0?'+':'−') + Math.abs(v).toFixed(2);
 
 PRESETS.forEach(p => {
   const b = el('button', null, p.label);
-  b.setAttribute('aria-pressed', 'false');
-  b.dataset.id = p.id;
-  b.onclick = () => run(p, b);
+  b.setAttribute('aria-pressed','false'); b.dataset.id = p.id;
+  b.onclick = () => run(p,b);
   controls.appendChild(b);
 });
 
-function skeleton() {
-  const c = el('section');
-  c.appendChild(el('p', 'note', 'Reading each market twice…'));
-  for (let i = 0; i < 4; i++) {
-    const s = el('div', 'skel');
-    s.style.width = (92 - i * 13) + '%';
-    c.appendChild(s);
-  }
-  out.innerHTML = ''; out.appendChild(c);
+function skeleton(){
+  out.innerHTML = '';
+  const h = el('div','row-head'); h.appendChild(el('h2',null,'Reading each market twice'));
+  out.appendChild(h);
+  const rail = el('div','rail');
+  for(let i=0;i<7;i++) rail.appendChild(el('div','skel'));
+  out.appendChild(rail);
 }
 
-function run(p, btn) {
-  [...controls.children].forEach(c => c.setAttribute('aria-pressed', 'false'));
-  btn.setAttribute('aria-pressed', 'true');
+function run(p, btn){
+  [...controls.children].forEach(c=>c.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true');
   skeleton();
-  fetch('/api/run?preset=' + encodeURIComponent(p.id))
-    .then(r => r.json()).then(d => render(d, p))
-    .catch(e => { out.innerHTML = ''; out.appendChild(
-      el('section', null, 'Could not reach the server: ' + e)); });
+  fetch('/api/run?preset='+encodeURIComponent(p.id))
+    .then(r=>r.json()).then(d=>render(d,p))
+    .catch(e=>{ out.innerHTML=''; out.appendChild(el('p','note','Could not reach the server: '+e)); });
 }
 
-function meter(label, value) {
-  const m = el('div', 'meter');
-  m.appendChild(el('span', null, label));
-  const t = el('div', 'meter-track'), f = el('div', 'meter-fill');
-  f.style.width = Math.round(Math.max(0, Math.min(1, value)) * 100) + '%';
-  t.appendChild(f); m.appendChild(t);
-  m.appendChild(el('span', null, value.toFixed(2)));
-  return m;
-}
-
-function barRows(items) {
-  // Fixed domain [-1,1]: a rank shift is already normalised, so holding the
-  // scale constant keeps markets comparable instead of rescaling each card.
-  const box = el('div', 'rows');
-  items.forEach(i => {
-    const r = el('div', 'row');
-    r.appendChild(el('div', 'name', i.title));
-    const track = el('div', 'track');
-    const bar = el('div', 'bar ' + (i.shift >= 0 ? 'pos' : 'neg'));
-    bar.style.width = (Math.min(Math.abs(i.shift), 1) * 50) + '%';
-    bar.title = i.title + ': ' + fmt(i.shift) + ' rank shift against home';
-    track.appendChild(bar);
-    r.appendChild(track);
-    const v = el('div', 'val', fmt(i.shift));
-    v.style.color = i.shift >= 0 ? 'var(--pos)' : 'var(--neg)';
-    r.appendChild(v);
-    box.appendChild(r);
-  });
-  const ax = el('div', 'axis');
-  ax.appendChild(el('div'));
-  const mid = el('div', 'axis-mid');
-  mid.appendChild(el('span', null, '−1.0'));
-  mid.appendChild(el('span', null, 'no change'));
-  mid.appendChild(el('span', null, '+1.0'));
-  ax.appendChild(mid); ax.appendChild(el('div'));
-  box.appendChild(ax);
-  return box;
-}
-
-function legend() {
-  const l = el('div', 'legend');
-  [['Travels', 'var(--pos)'], ['Does not travel', 'var(--neg)']].forEach(([t, c]) => {
-    const k = el('span', 'key');
-    const s = el('span', 'swatch'); s.style.background = c;
-    k.appendChild(s); k.appendChild(el('span', null, t)); l.appendChild(k);
-  });
-  return l;
-}
-
-function marketCard(m) {
-  const c = el('section');
-  c.appendChild(el('h3', null, m.market));
-  const sub = el('p', 'meta');
-  sub.textContent = m.compared_on + ' titles compared against home';
-  c.appendChild(sub);
-  if (m.anchor_agreement != null) {
-    const mm = meter('two readings agree', m.anchor_agreement);
-    mm.style.marginTop = '8px'; c.appendChild(mm);
+function posterCard(item, kind){
+  // kind: 'up' | 'down' | 'muted'
+  const c = el('div','card' + (kind==='muted' ? ' muted' : ''));
+  const box = el('div','poster');
+  if(item.image){
+    const img = new Image();
+    img.src = item.image; img.alt = item.title; img.loading = 'lazy';
+    img.onerror = () => { img.remove(); box.appendChild(el('div','fallback',item.title)); };
+    box.appendChild(img);
+  } else {
+    box.appendChild(el('div','fallback',item.title));
   }
-  const items = [...(m.travels || []), ...(m.does_not_travel || [])]
-    .sort((a, b) => b.shift - a.shift);
-  if (items.length) { c.appendChild(legend()); c.appendChild(barRows(items)); }
-  if (m.uncertain && m.uncertain.length) {
-    const w = el('div', 'withheld');
-    w.appendChild(el('b', null, 'Evidence unstable — withheld (' + m.uncertain.length + ')'));
-    const chips = el('div', 'chips');
-    m.uncertain.forEach(t => chips.appendChild(el('span', 'chip', t)));
-    w.appendChild(chips); c.appendChild(w);
+  if(kind==='muted'){
+    box.appendChild(el('div','ribbon','withheld'));
+  } else {
+    box.appendChild(el('div','verdict '+kind, fmt(item.shift)));
+    // The chip carries the number only; the legend above says what the
+    // colours mean, so the poster does not repeat it twenty times.
+    const bar = el('div','bar '+kind);
+    bar.style.width = Math.round(Math.min(Math.abs(item.shift),1)*100)+'%';
+    box.appendChild(bar);
   }
-  // Table view: identity never rests on colour alone.
-  if (items.length) {
-    const d = el('details');
-    d.appendChild(el('summary', null, 'Table view'));
-    const tb = el('table');
-    tb.innerHTML = '<thead><tr><th>Title</th><th>Verdict</th>' +
-      '<th style="text-align:right">Rank shift</th></tr></thead>';
-    const body = el('tbody');
-    items.forEach(i => {
-      const tr = el('tr');
-      tr.appendChild(el('td', null, i.title));
-      tr.appendChild(el('td', null, i.shift >= 0 ? 'Travels' : 'Does not travel'));
-      tr.appendChild(el('td', 'num', fmt(i.shift)));
-      body.appendChild(tr);
-    });
-    tb.appendChild(body); d.appendChild(tb); c.appendChild(d);
-  }
+  c.appendChild(box);
+  c.appendChild(el('div','cap',item.title));
+  c.title = item.title + (kind==='muted' ? ' — two readings disagree, withheld'
+    : ' — ' + fmt(item.shift) + ' against home');
   return c;
 }
 
-function render(d, p) {
-  out.innerHTML = '';
-  const head = el('section');
-  const hr = el('div', 'runbar');
-  hr.appendChild(el('span', 'badge ' + (d.source || ''), d.source || '?'));
-  hr.appendChild(el('strong', null, p.label));
-  head.appendChild(hr);
-  const bits = [];
-  if (d.home_market) bits.push('home: ' + d.home_market);
-  const ev = d.evidence && d.evidence.summary;
-  if (ev) bits.push(ev.calls + ' Qloo calls');
-  if (bits.length) head.appendChild(el('p', 'note', bits.join('  ·  ')));
-  if (d.disclosure) head.appendChild(el('p', 'note', d.disclosure));
-  if (p.note) head.appendChild(el('p', 'note', p.note));
-  out.appendChild(head);
+function rail(items, kind){
+  const r = el('div','rail');
+  items.forEach(i => r.appendChild(posterCard(i, kind)));
+  return r;
+}
 
-  if (d.aborted) {
-    const c = el('section', 'refusal');
-    c.appendChild(el('h3', null, 'No verdict offered'));
-    c.appendChild(el('p', null, d.aborted));
-    out.appendChild(c);
+function marketBlock(m){
+  const frag = document.createDocumentFragment();
+  const head = el('div','row-head');
+  head.appendChild(el('h2',null,m.market.split(',')[0]));
+  head.appendChild(el('span','row-meta',
+    m.compared_on + ' films · readings agree ' +
+    (m.anchor_agreement==null?'n/a':m.anchor_agreement.toFixed(2))));
+  frag.appendChild(head);
+
+  const ranked = [...(m.travels||[]), ...(m.does_not_travel||[])]
+    .sort((a,b)=>b.shift-a.shift);
+  if(ranked.length){
+    const r = el('div','rail');
+    ranked.forEach(i => r.appendChild(posterCard(i, i.shift>=0?'up':'down')));
+    frag.appendChild(r);
   }
-  (d.markets || []).forEach(m => out.appendChild(marketCard(m)));
+  if(m.uncertain && m.uncertain.length){
+    const h = el('div','row-head');
+    h.appendChild(el('span','row-meta','Evidence unstable — withheld ('+m.uncertain.length+')'));
+    frag.appendChild(h);
+    frag.appendChild(rail(m.uncertain,'muted'));
+  }
+  if(ranked.length){
+    const d = el('details');
+    d.appendChild(el('summary',null,'Table view'));
+    const tb = el('table');
+    tb.innerHTML = '<thead><tr><th>Film</th><th>Verdict</th>'+
+      '<th class="num">Shift vs home</th></tr></thead>';
+    const body = el('tbody');
+    ranked.forEach(i=>{
+      const tr = el('tr');
+      tr.appendChild(el('td',null,i.title));
+      tr.appendChild(el('td',null,i.shift>=0?'Travels':'Stays home'));
+      tr.appendChild(el('td','num',fmt(i.shift)));
+      body.appendChild(tr);
+    });
+    tb.appendChild(body); d.appendChild(tb); frag.appendChild(d);
+  }
+  return frag;
+}
 
-  Object.entries(d.abstained || {}).forEach(([mk, why]) => {
-    const c = el('section', 'refusal');
-    c.appendChild(el('h3', null, mk + ' — abstained'));
-    c.appendChild(el('p', null, why));
-    out.appendChild(c);
+function render(d,p){
+  out.innerHTML='';
+  const bar = el('div','runbar');
+  bar.appendChild(el('span','badge '+(d.source||''), d.source||'?'));
+  if(d.home_market) bar.appendChild(el('span',null,'home · '+d.home_market));
+  const ev = d.evidence && d.evidence.summary;
+  if(ev) bar.appendChild(el('span',null, ev.calls+' qloo calls'));
+  out.appendChild(bar);
+  if(p.note) out.appendChild(el('p','note',p.note));
+  if(d.disclosure) out.appendChild(el('p','note',d.disclosure));
+
+  if(d.aborted){
+    const r = el('div','refusal');
+    r.appendChild(el('h2',null,'No verdict offered'));
+    r.appendChild(el('p',null,d.aborted));
+    out.appendChild(r);
+  }
+  (d.markets||[]).forEach(m => out.appendChild(marketBlock(m)));
+  Object.entries(d.abstained||{}).forEach(([mk,why])=>{
+    const r = el('div','refusal');
+    r.appendChild(el('h2',null,mk.split(',')[0]+' — abstained'));
+    r.appendChild(el('p',null,why));
+    out.appendChild(r);
   });
 
-  if (d.steps && d.steps.length) {
-    const c = el('section');
-    c.appendChild(el('h3', null, 'How it decided'));
-    const ol = el('ol', 'trace');
-    d.steps.forEach(s => {
-      const li = el('li');
-      // One wrapper, so the grid places the number in column 1 and the whole
-      // body in column 2 -- three bare children would spill back into the
-      // 26px number column.
-      const body = el('div');
-      body.appendChild(el('div', 'act', s.action.replace(/_/g, ' ')));
-      body.appendChild(el('div', 'why', s.reason));
-      if (s.rejected && s.rejected.length)
-        body.appendChild(el('div', 'passed', 'passed over: ' + s.rejected.join(', ')));
-      li.appendChild(body);
-      ol.appendChild(li);
+  if(d.steps && d.steps.length){
+    const back = el('div','backmatter');
+    const det = el('details');
+    det.appendChild(el('summary',null,'How it decided ('+d.steps.length+' steps)'));
+    const ol = el('ol','trace');
+    d.steps.forEach(s=>{
+      const li = el('li'); const b = el('div');
+      b.appendChild(el('div','act', s.action.replace(/_/g,' ')));
+      b.appendChild(el('div','why', s.reason));
+      if(s.rejected && s.rejected.length)
+        b.appendChild(el('div','passed','passed over: '+s.rejected.join(', ')));
+      li.appendChild(b); ol.appendChild(li);
     });
-    c.appendChild(ol);
-    if (d.evidence && d.evidence.calls) {
-      const det = el('details');
-      det.appendChild(el('summary', null,
-        'Evidence — every call behind these numbers (' + d.evidence.calls.length + ')'));
+    det.appendChild(ol); back.appendChild(det);
+    if(d.evidence && d.evidence.calls){
+      const ed = el('details');
+      ed.appendChild(el('summary',null,'Evidence — every call behind these numbers ('+d.evidence.calls.length+')'));
       const tb = el('table');
-      tb.innerHTML = '<thead><tr><th>#</th><th>Endpoint</th><th>Market</th>' +
-        '<th>Anchors</th><th style="text-align:right">Results</th></tr></thead>';
+      tb.innerHTML = '<thead><tr><th>#</th><th>Endpoint</th><th>Market</th>'+
+        '<th>Anchors</th><th class="num">Results</th></tr></thead>';
       const body = el('tbody');
-      d.evidence.calls.forEach(cl => {
+      d.evidence.calls.forEach(cl=>{
         const tr = el('tr');
-        tr.appendChild(el('td', null, cl.id));
-        tr.appendChild(el('td', null, cl.path));
-        tr.appendChild(el('td', null, (cl.params && cl.params._market) || '—'));
-        tr.appendChild(el('td', null, (cl.params && cl.params._anchor_set) || '—'));
-        tr.appendChild(el('td', 'num', cl.results));
+        tr.appendChild(el('td',null,cl.id));
+        tr.appendChild(el('td',null,cl.path));
+        tr.appendChild(el('td',null,(cl.params&&cl.params._market)||'—'));
+        tr.appendChild(el('td',null,(cl.params&&cl.params._anchor_set)||'—'));
+        tr.appendChild(el('td','num',cl.results));
         body.appendChild(tr);
       });
-      tb.appendChild(body); det.appendChild(tb); c.appendChild(det);
+      tb.appendChild(body); ed.appendChild(tb); back.appendChild(ed);
     }
-    out.appendChild(c);
+    out.appendChild(back);
   }
 }
 
 const want = new URLSearchParams(location.search).get('preset');
-if (want) {
-  const t = [...controls.children].find(c => c.dataset.id === want);
-  if (t) t.click();
-}
+const first = [...controls.children].find(c=>c.dataset.id===want) || controls.children[0];
+if(first) first.click();
 </script>

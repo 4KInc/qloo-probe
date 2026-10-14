@@ -55,6 +55,7 @@ class QlooBackend:
         self.tolerance = tolerance
         self._anchor_cache = {}
         self._name_by_id = {}
+        self._image_by_id = {}
         self.last_call_id = None
         self.uncertain = {}        # market -> [entity_id withheld]
         self.agreement = {}        # market -> tau between the two readings
@@ -73,7 +74,15 @@ class QlooBackend:
         hits = entities_of(body)
         self._record("/search", {"query": name, "types": entity_type}, 200,
                      len(hits))
-        return id_of(hits[0]) if hits else None
+        if not hits:
+            return None
+        eid = id_of(hits[0])
+        # Qloo serves artwork from its own CDN, so the poster comes from the
+        # same source as the affinity rather than a third-party image host.
+        image = ((hits[0].get("properties") or {}).get("image") or {}).get("url")
+        if eid and image:
+            self._image_by_id[eid] = image
+        return eid
 
     def _anchor_ids(self, market, which="primary"):
         key = (market, which)
@@ -169,3 +178,12 @@ class QlooBackend:
 
     def label(self, entity_id):
         return self._name_by_id.get(entity_id, entity_id)
+
+    def image(self, entity_id):
+        return self._image_by_id.get(entity_id)
+
+    def image_for_title(self, title):
+        for eid, name in self._name_by_id.items():
+            if name == title:
+                return self._image_by_id.get(eid)
+        return None

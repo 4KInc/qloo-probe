@@ -292,7 +292,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         route = urlparse(self.path)
-        if route.path == "/healthz":
+        # /healthz is intercepted by Google's frontend before it reaches the
+        # container, so the health endpoint lives at /status.
+        if route.path in ("/status", "/healthz"):
             return self._send(200, json.dumps(
                 {"ok": True, "key_present": has_key(), **BUDGET.snapshot()}))
         if route.path == "/api/presets":

@@ -17,3 +17,4 @@ out/*
 # Recorded preset runs are regenerated, and once they hold real Qloo responses
 # the unresolved data-publishing rule applies to them too.
 app/cache/*.json
+out/traces/

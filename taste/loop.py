@@ -58,6 +58,7 @@ class Agent:
         self.steps = []
         self.rankings = {}
         self.abstentions = {}
+        self.call_for_market = {}   # market -> the call its ranking came from
 
     def _step(self, action, reason, observation=None, rejected=None):
         s = Step(len(self.steps) + 1, action, reason, observation, rejected)
@@ -111,6 +112,9 @@ class Agent:
         home_scores = self.backend.score(goal.home_market, resolved)
         if home_scores:
             self.rankings[goal.home_market] = Ranking(goal.home_market, home_scores)
+            home_call = getattr(self.backend, "last_call_id", None)
+            if home_call:
+                self.call_for_market[goal.home_market] = home_call
             self._step("score_home",
                        "establish the home ordering, so later markets are read "
                        "as movement rather than as raw popularity",
@@ -174,6 +178,9 @@ class Agent:
                 continue
 
             self.rankings[market] = Ranking(market, scores)
+            call_id = getattr(self.backend, "last_call_id", None)
+            if call_id:
+                self.call_for_market[market] = call_id
             self._step("score_market",
                        "probed the market least like home first, since a market "
                        "that behaves like home teaches least about travel",
@@ -197,7 +204,20 @@ class Agent:
                 continue
             shifts = ranking.shift_against(home)
             ordered = sorted(shifts.items(), key=lambda kv: -kv[1])
+            # Every verdict cites the calls behind it. taste.evidence refuses
+            # a claim with no supporting call, so an unsupported verdict
+            # cannot reach the interface.
+            supporting = [c for c in (self.call_for_market.get(market),
+                                      self.call_for_market.get(goal.home_market))
+                          if c]
+            if self.trace and supporting:
+                self.trace.claim(
+                    "%s reorders the catalog against %s (tau %.2f over %d titles)"
+                    % (market, goal.home_market,
+                       ranking.agreement_with(home) or 0, shared),
+                    supporting, kind="ranking")
             verdicts[market] = {
+                "supported_by": supporting,
                 "agreement_with_home": ranking.agreement_with(home),
                 "travels": [{"entity": e, "shift": round(s, 3)}
                             for e, s in ordered[:5]],

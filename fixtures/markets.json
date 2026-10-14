@@ -1,0 +1,25 @@
+{
+  "note": "A market is modelled as a set of taste anchors, not as coordinates. Measured on 2026-10-13: filter.location.query is silently ignored for movies and signal.location.query collapses a pinned set, so location cannot rank a catalog. Anchors can. Each market carries a second anchor set used when the first returns ranks too flat to mean anything.",
+  "markets": {
+    "New York, United States": {
+      "primary": ["Bruce Springsteen", "Beyonce", "Taylor Swift"],
+      "alternate": ["Jay-Z", "Lou Reed", "Billy Joel"]
+    },
+    "Sao Paulo, Brazil": {
+      "primary": ["Anitta", "Caetano Veloso", "Racionais MC's"],
+      "alternate": ["Gilberto Gil", "Marisa Monte", "Criolo"]
+    },
+    "Tokyo, Japan": {
+      "primary": ["Hikaru Utada", "Ryuichi Sakamoto", "Yumi Matsutoya"],
+      "alternate": ["Southern All Stars", "Cornelius", "Ayumi Hamasaki"]
+    },
+    "Berlin, Germany": {
+      "primary": ["Kraftwerk", "Rammstein", "Nena"],
+      "alternate": ["Can", "Herbert Gronemeyer", "Paul Kalkbrenner"]
+    },
+    "Mumbai, India": {
+      "primary": ["A. R. Rahman", "Lata Mangeshkar", "Arijit Singh"],
+      "alternate": ["Kishore Kumar", "Shreya Ghoshal", "Asha Bhosle"]
+    }
+  }
+}

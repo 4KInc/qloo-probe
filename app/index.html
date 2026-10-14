@@ -1,0 +1,373 @@
+<!doctype html><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Travels Well</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f6f6f7; --surface:#ffffff; --surface-2:#fafafb;
+  --ink:#101114; --ink-2:#4a4d55; --ink-3:#787c86;
+  --line:#e6e7ea; --line-2:#d3d5da;
+  --pos:#2a78d6;          /* diverging: travels */
+  --neg:#d03b3b;          /* diverging: does not travel */
+  --mid:#f0efec;          /* neutral midpoint */
+  --accent:#1d4ed8;
+  --r:12px;
+  --shadow:0 1px 2px rgba(16,17,20,.04), 0 8px 24px -12px rgba(16,17,20,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  color-scheme:dark;
+  --bg:#0e1014; --surface:#16181d; --surface-2:#1b1e24;
+  --ink:#f2f3f5; --ink-2:#b3b8c2; --ink-3:#848a95;
+  --line:#262a31; --line-2:#333841;
+  --pos:#3987e5; --neg:#e66767; --mid:#383835;
+  --accent:#8ab0ff;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.6);
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);
+  font:400 15px/1.55 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums}
+.wrap{width:100%;max-width:940px;margin:0 auto;padding:clamp(24px,5vw,56px) clamp(16px,4vw,28px) 80px}
+
+/* masthead */
+.eyebrow{font-size:11px;font-weight:650;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 10px}
+h1{font-size:clamp(30px,6vw,44px);line-height:1.04;letter-spacing:-.03em;
+  font-weight:680;margin:0 0 12px}
+.lede{font-size:clamp(15px,2.2vw,17px);line-height:1.5;color:var(--ink-2);
+  margin:0 0 28px;max-width:60ch}
+.lede b{color:var(--ink);font-weight:600}
+
+/* controls */
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+button{font:inherit;font-weight:500;padding:10px 15px;border:1px solid var(--line-2);
+  background:var(--surface);color:var(--ink);border-radius:10px;cursor:pointer;
+  transition:border-color .12s,background .12s,transform .06s}
+button:hover{border-color:var(--accent)}
+button:active{transform:translateY(1px)}
+button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow)}
+.card h3{margin:0;font-size:17px;font-weight:620;letter-spacing:-.012em}
+.sub{color:var(--ink-3);font-size:12.5px;margin:4px 0 0}
+
+/* run header */
+.runhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.badge{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;border:1px solid transparent}
+.badge.LIVE{background:color-mix(in oklab,var(--pos) 14%,transparent);color:var(--pos);
+  border-color:color-mix(in oklab,var(--pos) 30%,transparent)}
+.badge.CACHED{background:color-mix(in oklab,#b45309 14%,transparent);color:#b45309;
+  border-color:color-mix(in oklab,#b45309 30%,transparent)}
+.badge.UNAVAILABLE{background:var(--surface-2);color:var(--ink-3);border-color:var(--line)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .badge.CACHED{color:#fbbf24}}
+
+/* meter */
+.meter{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-3)}
+.meter-track{width:54px;height:5px;border-radius:999px;background:var(--line);overflow:hidden}
+.meter-fill{height:100%;border-radius:999px;background:var(--ink-3)}
+
+/* legend */
+.legend{display:flex;gap:16px;align-items:center;margin:14px 0 10px;font-size:12px;
+  color:var(--ink-2)}
+.key{display:inline-flex;align-items:center;gap:6px}
+.swatch{width:11px;height:11px;border-radius:3px}
+
+/* diverging bars */
+.rows{margin-top:2px}
+.row{display:grid;grid-template-columns:minmax(96px,1.15fr) minmax(130px,2fr) 54px;
+  align-items:center;gap:12px;padding:3px 0;border-radius:6px}
+.row:hover{background:var(--surface-2)}
+/* Grid items default to min-width:auto, so a nowrap title sets a min-content
+   floor and pushes the whole page wider than the screen. */
+.row>*,.axis>*{min-width:0}
+.name{font-size:13.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.track{position:relative;height:17px}
+.track::before{content:"";position:absolute;left:50%;top:-1px;bottom:-1px;width:1px;
+  background:var(--line-2)}
+.bar{position:absolute;top:3px;height:11px;border-radius:2px}
+.bar.pos{left:50%;background:var(--pos);border-radius:2px 4px 4px 2px}
+.bar.neg{right:50%;background:var(--neg);border-radius:4px 2px 2px 4px}
+.val{font-size:12.5px;text-align:right;color:var(--ink-2)}
+.axis{display:grid;grid-template-columns:minmax(96px,1.15fr) minmax(130px,2fr) 54px;
+  gap:12px;font-size:10.5px;color:var(--ink-3);margin-top:7px}
+.axis-mid{display:flex;justify-content:space-between}
+
+/* withheld */
+.withheld{margin-top:14px;padding-top:13px;border-top:1px dashed var(--line-2)}
+.withheld b{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:650}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;padding:3px 9px;border-radius:999px;background:var(--surface-2);
+  border:1px solid var(--line);color:var(--ink-3)}
+
+/* refusal */
+.refusal{border-left:3px solid #b45309;background:var(--surface)}
+.refusal h3{color:#b45309}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .refusal h3{color:#fbbf24}}
+.refusal p{margin:8px 0 0;color:var(--ink-2);font-size:14px;max-width:70ch}
+
+/* trace */
+ol.trace{list-style:none;margin:10px 0 0;padding:0;counter-reset:s}
+ol.trace li{position:relative;padding:0 0 14px 28px;counter-increment:s}
+ol.trace li::before{content:counter(s);position:absolute;left:0;top:0;width:19px;height:19px;
+  border-radius:50%;background:var(--surface-2);border:1px solid var(--line-2);
+  font-size:10.5px;font-weight:650;color:var(--ink-3);display:grid;place-items:center}
+ol.trace li:not(:last-child)::after{content:"";position:absolute;left:9px;top:21px;bottom:2px;
+  width:1px;background:var(--line)}
+.act{font-size:12.5px;font-weight:600;letter-spacing:.01em}
+.why{font-size:13px;color:var(--ink-2);margin-top:2px}
+.passed{font-size:12px;color:var(--ink-3);margin-top:3px}
+
+details{margin-top:14px}
+summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:500}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+details>table{display:block;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th{text-align:left;font-weight:600;color:var(--ink-3);font-size:11px;letter-spacing:.05em;
+  text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--line-2)}
+td{padding:6px 8px;border-bottom:1px solid var(--line);color:var(--ink-2)}
+td.num{text-align:right}
+
+/* skeleton */
+.skel{height:13px;border-radius:5px;background:linear-gradient(90deg,
+  var(--line) 25%,var(--surface-2) 37%,var(--line) 63%);
+  background-size:400% 100%;animation:sh 1.3s ease infinite;margin:9px 0}
+@keyframes sh{0%{background-position:100% 0}100%{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}}
+
+footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);
+  color:var(--ink-3);font-size:12.5px;line-height:1.6;max-width:72ch}
+footer a{color:var(--accent)}
+@media (max-width:560px){
+  .row,.axis{grid-template-columns:minmax(78px,1fr) minmax(90px,1.4fr) 46px;gap:8px}
+  .name{font-size:12.5px}
+}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Qloo Agentic Hackathon</p>
+  <h1>Travels&nbsp;Well</h1>
+  <p class="lede">Which titles in a slate <b>travel</b> to another market, which
+  <b>do not</b>, and which the evidence <b>cannot settle</b>. Every market is read
+  twice through unrelated taste anchors; only what both readings agree on is
+  reported.</p>
+
+  <div class="controls" id="controls"></div>
+  <div id="out"><div class="card"><p class="sub" style="margin:0">Pick a slate to run.</p></div></div>
+
+  <footer>
+    Answers are labelled <b>LIVE</b> or <b>CACHED</b>; a cached answer is a recorded
+    run of this same pipeline, never a synthetic stand-in. Where two readings of a
+    market disagree about a title, it is withheld rather than ranked. Where a market
+    is too thinly covered, or a baseline too unstable to measure against, the agent
+    says so instead of guessing.
+    <br><a href="https://github.com/4KInc/travels-well">Source and method</a>
+  </footer>
+</div>
+
+<script>
+const PRESETS = __PRESETS__;
+const controls = document.getElementById('controls');
+const out = document.getElementById('out');
+
+const el = (t, c, x) => { const e = document.createElement(t);
+  if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; };
+const fmt = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2);
+
+PRESETS.forEach(p => {
+  const b = el('button', null, p.label);
+  b.setAttribute('aria-pressed', 'false');
+  b.dataset.id = p.id;
+  b.onclick = () => run(p, b);
+  controls.appendChild(b);
+});
+
+function skeleton() {
+  const c = el('div', 'card');
+  c.appendChild(el('p', 'sub', 'Reading each market twice…'));
+  for (let i = 0; i < 4; i++) {
+    const s = el('div', 'skel');
+    s.style.width = (92 - i * 13) + '%';
+    c.appendChild(s);
+  }
+  out.innerHTML = ''; out.appendChild(c);
+}
+
+function run(p, btn) {
+  [...controls.children].forEach(c => c.setAttribute('aria-pressed', 'false'));
+  btn.setAttribute('aria-pressed', 'true');
+  skeleton();
+  fetch('/api/run?preset=' + encodeURIComponent(p.id))
+    .then(r => r.json()).then(d => render(d, p))
+    .catch(e => { out.innerHTML = ''; out.appendChild(
+      el('div', 'card', 'Could not reach the server: ' + e)); });
+}
+
+function meter(label, value) {
+  const m = el('div', 'meter');
+  m.appendChild(el('span', null, label));
+  const t = el('div', 'meter-track'), f = el('div', 'meter-fill');
+  f.style.width = Math.round(Math.max(0, Math.min(1, value)) * 100) + '%';
+  t.appendChild(f); m.appendChild(t);
+  m.appendChild(el('span', null, value.toFixed(2)));
+  return m;
+}
+
+function barRows(items) {
+  // Fixed domain [-1,1]: a rank shift is already normalised, so holding the
+  // scale constant keeps markets comparable instead of rescaling each card.
+  const box = el('div', 'rows');
+  items.forEach(i => {
+    const r = el('div', 'row');
+    r.appendChild(el('div', 'name', i.title));
+    const track = el('div', 'track');
+    const bar = el('div', 'bar ' + (i.shift >= 0 ? 'pos' : 'neg'));
+    bar.style.width = (Math.min(Math.abs(i.shift), 1) * 50) + '%';
+    bar.title = i.title + ': ' + fmt(i.shift) + ' rank shift against home';
+    track.appendChild(bar);
+    r.appendChild(track);
+    const v = el('div', 'val', fmt(i.shift));
+    v.style.color = i.shift >= 0 ? 'var(--pos)' : 'var(--neg)';
+    r.appendChild(v);
+    box.appendChild(r);
+  });
+  const ax = el('div', 'axis');
+  ax.appendChild(el('div'));
+  const mid = el('div', 'axis-mid');
+  mid.appendChild(el('span', null, '−1.0'));
+  mid.appendChild(el('span', null, 'no change'));
+  mid.appendChild(el('span', null, '+1.0'));
+  ax.appendChild(mid); ax.appendChild(el('div'));
+  box.appendChild(ax);
+  return box;
+}
+
+function legend() {
+  const l = el('div', 'legend');
+  [['Travels', 'var(--pos)'], ['Does not travel', 'var(--neg)']].forEach(([t, c]) => {
+    const k = el('span', 'key');
+    const s = el('span', 'swatch'); s.style.background = c;
+    k.appendChild(s); k.appendChild(el('span', null, t)); l.appendChild(k);
+  });
+  return l;
+}
+
+function marketCard(m) {
+  const c = el('div', 'card');
+  c.appendChild(el('h3', null, m.market));
+  const sub = el('p', 'sub');
+  sub.textContent = m.compared_on + ' titles compared against home';
+  c.appendChild(sub);
+  if (m.anchor_agreement != null) {
+    const mm = meter('two readings agree', m.anchor_agreement);
+    mm.style.marginTop = '8px'; c.appendChild(mm);
+  }
+  const items = [...(m.travels || []), ...(m.does_not_travel || [])]
+    .sort((a, b) => b.shift - a.shift);
+  if (items.length) { c.appendChild(legend()); c.appendChild(barRows(items)); }
+  if (m.uncertain && m.uncertain.length) {
+    const w = el('div', 'withheld');
+    w.appendChild(el('b', null, 'Evidence unstable — withheld (' + m.uncertain.length + ')'));
+    const chips = el('div', 'chips');
+    m.uncertain.forEach(t => chips.appendChild(el('span', 'chip', t)));
+    w.appendChild(chips); c.appendChild(w);
+  }
+  // Table view: identity never rests on colour alone.
+  if (items.length) {
+    const d = el('details');
+    d.appendChild(el('summary', null, 'Table view'));
+    const tb = el('table');
+    tb.innerHTML = '<thead><tr><th>Title</th><th>Verdict</th>' +
+      '<th style="text-align:right">Rank shift</th></tr></thead>';
+    const body = el('tbody');
+    items.forEach(i => {
+      const tr = el('tr');
+      tr.appendChild(el('td', null, i.title));
+      tr.appendChild(el('td', null, i.shift >= 0 ? 'Travels' : 'Does not travel'));
+      tr.appendChild(el('td', 'num', fmt(i.shift)));
+      body.appendChild(tr);
+    });
+    tb.appendChild(body); d.appendChild(tb); c.appendChild(d);
+  }
+  return c;
+}
+
+function render(d, p) {
+  out.innerHTML = '';
+  const head = el('div', 'card');
+  const hr = el('div', 'runhead');
+  hr.appendChild(el('span', 'badge ' + (d.source || ''), d.source || '?'));
+  hr.appendChild(el('strong', null, p.label));
+  head.appendChild(hr);
+  const bits = [];
+  if (d.home_market) bits.push('home: ' + d.home_market);
+  const ev = d.evidence && d.evidence.summary;
+  if (ev) bits.push(ev.calls + ' Qloo calls');
+  if (bits.length) head.appendChild(el('p', 'sub', bits.join('  ·  ')));
+  if (d.disclosure) head.appendChild(el('p', 'sub', d.disclosure));
+  if (p.note) head.appendChild(el('p', 'sub', p.note));
+  out.appendChild(head);
+
+  if (d.aborted) {
+    const c = el('div', 'card refusal');
+    c.appendChild(el('h3', null, 'No verdict offered'));
+    c.appendChild(el('p', null, d.aborted));
+    out.appendChild(c);
+  }
+  (d.markets || []).forEach(m => out.appendChild(marketCard(m)));
+
+  Object.entries(d.abstained || {}).forEach(([mk, why]) => {
+    const c = el('div', 'card refusal');
+    c.appendChild(el('h3', null, mk + ' — abstained'));
+    c.appendChild(el('p', null, why));
+    out.appendChild(c);
+  });
+
+  if (d.steps && d.steps.length) {
+    const c = el('div', 'card');
+    c.appendChild(el('h3', null, 'How it decided'));
+    const ol = el('ol', 'trace');
+    d.steps.forEach(s => {
+      const li = el('li');
+      li.appendChild(el('div', 'act', s.action.replace(/_/g, ' ')));
+      li.appendChild(el('div', 'why', s.reason));
+      if (s.rejected && s.rejected.length)
+        li.appendChild(el('div', 'passed', 'passed over: ' + s.rejected.join(', ')));
+      ol.appendChild(li);
+    });
+    c.appendChild(ol);
+    if (d.evidence && d.evidence.calls) {
+      const det = el('details');
+      det.appendChild(el('summary', null,
+        'Evidence — every call behind these numbers (' + d.evidence.calls.length + ')'));
+      const tb = el('table');
+      tb.innerHTML = '<thead><tr><th>#</th><th>Endpoint</th><th>Market</th>' +
+        '<th>Anchors</th><th style="text-align:right">Results</th></tr></thead>';
+      const body = el('tbody');
+      d.evidence.calls.forEach(cl => {
+        const tr = el('tr');
+        tr.appendChild(el('td', null, cl.id));
+        tr.appendChild(el('td', null, cl.path));
+        tr.appendChild(el('td', null, (cl.params && cl.params._market) || '—'));
+        tr.appendChild(el('td', null, (cl.params && cl.params._anchor_set) || '—'));
+        tr.appendChild(el('td', 'num', cl.results));
+        body.appendChild(tr);
+      });
+      tb.appendChild(body); det.appendChild(tb); c.appendChild(det);
+    }
+    out.appendChild(c);
+  }
+}
+
+const want = new URLSearchParams(location.search).get('preset');
+if (want) {
+  const t = [...controls.children].find(c => c.dataset.id === want);
+  if (t) t.click();
+}
+</script>

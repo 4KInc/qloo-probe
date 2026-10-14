@@ -110,167 +110,10 @@ def answer(preset_id, ip):
     }, 503
 
 
-PAGE = """<!doctype html><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Travels Well</title>
-<style>
-:root{--ink:#16181d;--mute:#6b7280;--line:#e4e6ea;--card:#fff;--bg:#fbfbfc;
- --up:#0f766e;--down:#b91c1c;--warn:#b45309;--accent:#1d4ed8;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
- --ink:#e8eaee;--mute:#99a0ac;--line:#2a2e36;--card:#171a1f;--bg:#101216;
- --up:#34d399;--down:#f87171;--warn:#fbbf24;--accent:#7da2ff}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
- font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:900px;margin:0 auto;padding:30px 18px 70px}
-h1{font-size:31px;letter-spacing:-.022em;margin:0 0 5px}
-.sub{color:var(--mute);margin:0 0 20px;max-width:62ch}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-button{font:inherit;padding:9px 14px;border:1px solid var(--line);
- background:var(--card);color:var(--ink);border-radius:8px;cursor:pointer}
-button:hover{border-color:var(--accent)}
-button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;
- padding:3px 8px;border-radius:10px;text-transform:uppercase;vertical-align:2px}
-.badge.LIVE{background:#d6f3ec;color:#0f766e}
-.badge.CACHED{background:#fdf0dc;color:#b45309}
-.badge.UNAVAILABLE{background:#eceef2;color:#6b7280}
-.card{border:1px solid var(--line);border-radius:10px;padding:15px 17px;
- background:var(--card);margin-bottom:12px}
-.card h3{margin:0 0 3px;font-size:16px}
-.meta{color:var(--mute);font-size:12.5px;margin:0 0 11px}
-.lane{margin:9px 0}
-.lane b{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute)}
-.item{display:flex;justify-content:space-between;gap:12px;padding:3px 0;
- border-bottom:1px dotted var(--line)}
-.item:last-child{border-bottom:0}
-.up{color:var(--up);font-variant-numeric:tabular-nums}
-.down{color:var(--down);font-variant-numeric:tabular-nums}
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
-.chip{font-size:12px;padding:2px 8px;border-radius:9px;background:var(--bg);
- border:1px solid var(--line);color:var(--mute)}
-.notice{border-left:3px solid var(--warn);background:var(--card);
- padding:11px 13px;border-radius:0 7px 7px 0;margin-bottom:12px}
-details{margin-top:10px}
-summary{cursor:pointer;color:var(--accent);font-size:13.5px}
-pre{overflow:auto;font-size:11.5px;background:#16181d;color:#e8eaee;
- padding:12px;border-radius:7px;margin-top:8px}
-ol.steps{margin:8px 0 0;padding-left:20px;font-size:13.5px;color:var(--mute)}
-ol.steps li{margin-bottom:5px}
-footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);
- color:var(--mute);font-size:12.5px}
-</style>
-<div class=wrap>
-<h1>Travels Well</h1>
-<p class=sub>Which titles in a slate travel to another market, which do not,
-and which the evidence cannot settle. Every market is read twice through
-unrelated taste anchors, and only what both readings agree on is reported.</p>
-<div class=row id=presets></div>
-<div id=out><div class=card>Pick a slate above.</div></div>
-<footer>Answers are labelled LIVE or CACHED; cached ones are recorded runs of
-this same pipeline, never synthetic. Where two readings of a market disagree,
-the title is withheld rather than ranked. Where a market is too thinly
-covered, or a baseline too unstable to measure against, the agent says so
-instead of guessing.</footer>
-</div>
-<script>
-const P = __PRESETS__;
-const row = document.getElementById('presets'), out = document.getElementById('out');
-P.forEach(p => {
-  const b = document.createElement('button');
-  b.textContent = p.label; b.setAttribute('aria-pressed','false');
-  b.onclick = () => {
-    [...row.children].forEach(c => c.setAttribute('aria-pressed','false'));
-    b.setAttribute('aria-pressed','true');
-    out.innerHTML = '<div class=card>Running\u2026</div>';
-    fetch('/api/run?preset=' + encodeURIComponent(p.id))
-      .then(r => r.json()).then(d => render(d, p))
-      .catch(e => { out.innerHTML = '<div class=card>' + e + '</div>'; });
-  };
-  b.dataset.id = p.id;
-  row.appendChild(b);
-});
-// Deep link: /?preset=<id> runs that slate on load, so a result can be shared
-// as a URL rather than as instructions to click the second button.
-const want = new URLSearchParams(location.search).get('preset');
-if (want) {
-  const target = [...row.children].find(c => c.dataset.id === want);
-  if (target) target.click();
-}
-function el(tag, cls, text){const e=document.createElement(tag);
-  if(cls)e.className=cls; if(text!==undefined)e.textContent=text; return e;}
-function lane(title, items, cls){
-  if(!items || !items.length) return null;
-  const d = el('div','lane'); d.appendChild(el('b',null,title));
-  items.forEach(i => {
-    const r = el('div','item');
-    r.appendChild(el('span',null,i.title));
-    r.appendChild(el('span',cls,(i.shift>=0?'+':'')+i.shift.toFixed(2)));
-    d.appendChild(r);
-  });
-  return d;
-}
-function render(d, p){
-  out.innerHTML = '';
-  const head = el('div','card');
-  const h = el('div'); h.innerHTML = '<span class="badge '+(d.source||'')+'">'+
-    (d.source||'?')+'</span> <strong>'+(p.label)+'</strong>';
-  head.appendChild(h);
-  if(d.disclosure) head.appendChild(el('p','meta', d.disclosure));
-  if(d.message) head.appendChild(el('p','meta', d.message));
-  if(p.note) head.appendChild(el('p','meta', p.note));
-  out.appendChild(head);
-
-  if(d.aborted){
-    const n = el('div','notice'); n.appendChild(el('strong',null,'No verdict. '));
-    n.appendChild(document.createTextNode(d.aborted));
-    out.appendChild(n);
-  }
-  (d.markets||[]).forEach(m => {
-    const c = el('div','card');
-    c.appendChild(el('h3',null,m.market));
-    c.appendChild(el('p','meta',
-      'compared on '+m.compared_on+' titles \u00b7 anchor agreement '+
-      (m.anchor_agreement==null?'n/a':m.anchor_agreement.toFixed(2))+
-      ' \u00b7 agreement with home '+
-      (m.agreement_with_home==null?'n/a':m.agreement_with_home.toFixed(2))));
-    const a = lane('Travels', m.travels, 'up'); if(a) c.appendChild(a);
-    const b2 = lane('Does not travel', m.does_not_travel, 'down'); if(b2) c.appendChild(b2);
-    if(m.uncertain && m.uncertain.length){
-      const u = el('div','lane');
-      u.appendChild(el('b',null,'Evidence unstable \u2014 withheld ('+m.uncertain.length+')'));
-      const chips = el('div','chips');
-      m.uncertain.forEach(t => chips.appendChild(el('span','chip',t)));
-      u.appendChild(chips); c.appendChild(u);
-    }
-    out.appendChild(c);
-  });
-  Object.entries(d.abstained||{}).forEach(([mk,why]) => {
-    const n = el('div','notice');
-    n.appendChild(el('strong',null, mk+': ')); n.appendChild(document.createTextNode(why));
-    out.appendChild(n);
-  });
-  if(d.steps && d.steps.length){
-    const c = el('div','card'); c.appendChild(el('h3',null,'How it decided'));
-    const ol = el('ol','steps');
-    d.steps.forEach(s => {
-      const li = el('li', null, s.action+' \u2014 '+s.reason);
-      if(s.rejected && s.rejected.length)
-        li.appendChild(el('div','meta','passed over: '+s.rejected.join(', ')));
-      ol.appendChild(li);
-    });
-    c.appendChild(ol);
-    if(d.evidence){
-      const det = el('details');
-      det.appendChild(el('summary',null,'Evidence \u2014 every call behind these numbers'));
-      const pre = el('pre', null, JSON.stringify(d.evidence, null, 2));
-      det.appendChild(pre); c.appendChild(det);
-    }
-    out.appendChild(c);
-  }
-}
-</script>
-"""
+def page_html():
+    """The page lives in app/index.html so it can be edited as HTML rather than
+    as a Python string."""
+    return (HERE / "index.html").read_text()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -305,7 +148,7 @@ class Handler(BaseHTTPRequestHandler):
             body, status = answer(preset_id, self.client_ip())
             return self._send(status, json.dumps(body, default=str))
         if route.path in ("/", "/index.html"):
-            page = PAGE.replace("__PRESETS__", json.dumps(PRESETS))
+            page = page_html().replace("__PRESETS__", json.dumps(PRESETS))
             return self._send(200, page, "text/html; charset=utf-8")
         return self._send(404, json.dumps({"error": "not found"}))
 

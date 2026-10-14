@@ -123,7 +123,7 @@ class Agent:
                     "%s cannot serve as the baseline: its own two anchor "
                     "readings agree at only %.2f, so every shift measured "
                     "against it would inherit that instability. This is a "
-                    "property of the market, not of the catalog -- a large "
+                    "property of the market, not of the catalog. A large "
                     "heterogeneous market is several audiences under one "
                     "name. Pick a market with a coherent taste profile, or "
                     "supply the home profile directly."

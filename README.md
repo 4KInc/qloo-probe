@@ -1,157 +1,114 @@
-# Qloo day-one probe
+# Travels Well
 
-One run decides what to build for the Qloo Agentic Hackathon, and produces
-numbers quotable in the submission either way.
+**Which titles in a slate travel to another market, which do not, and which
+the evidence cannot settle.**
 
-## Why this exists
+A studio with twenty-five films that work at home, selling into Brazil, has to
+guess which ones will land. The instinct is to pick whatever is famous there,
+but fame and fit are different variables, and confusing them is the expensive
+mistake. Travels Well answers the question from measured taste affinity
+instead, and refuses to answer where the evidence will not support one.
 
-Three concepts were on the table and two of them rest on an unverified
-premise. Rather than discover on day twelve that the premise is false, both
-premises are tested first, against the live API, with thresholds fixed in
-advance.
+Built for the Qloo Agentic Hackathon. MIT licensed.
 
-Every API claim this probe checks comes from entrant repositories rather than
-from Qloo's documentation, which does not describe normalisation, locality
-granularity or coverage. Treat all of it as unconfirmed until this harness
-says otherwise.
+---
 
-## Run it, in this order
+## What it does
 
-    python3 run_all.py --dry-run              # harness self-check, no key
-    cp .env.example .env                      # QLOO_API_KEY + GEMINI_API_KEY
-    git add out/prereg.json && git commit     # BEFORE any real run
-    python3 run_all.py --stage cheap          # resolve, A, A2, B, C, D, E, F0
-    python3 run_all.py --skip-gap             # adds F, only if F0 cleared
-    python3 run_all.py --only gap             # G last: three arms, slowest
+Give it a slate and a home market. For each target market it returns:
 
-Stage one is cheap and decides everything downstream: if F0 finds no location
-spelling that works, test F cannot mean anything and the cross-market premise
-is already dead. Test G runs last because it is rate-limited by Nominatim at
-one request per second, which makes a 3-arm, 30-prompt run the slowest part by
-a wide margin.
+- **Travels** — titles that rise against the home ordering, with the size of the shift.
+- **Does not travel** — titles that fall. This is the output no recommender gives, and usually the more costly mistake.
+- **Evidence unstable** — titles withheld because two independent readings of the market disagree about them.
 
-The pre-registration is committed before the first real run on purpose. A hash
-sitting in a local file cannot prove it came first.
+Every market is read **twice**, through unrelated sets of taste anchors, and
+only what both readings agree on is reported.
 
-Stdlib only. No install step, no virtualenv.
+## Why it needs Qloo
 
-Get a hackathon key from the form linked in Qloo's developer guide
-(docs.qloo.com). Keys are hackathon-scoped and do not work against production
-or staging hosts.
+The question is which entities a particular audience actually prefers, and by
+how much relative to another audience. That quantity lives in a taste graph
+and nowhere else. A language model asked the same question answers fluently
+from how much a title is *written about*, which is popularity wearing a
+different hat — the exact error the product exists to catch.
 
-## What each test decides
+## Endpoints used, and what each one does here
 
-| Test | Question | Consequence |
-|---|---|---|
-| Resolve | How much of the catalog does the graph know? | Under 8 of 25 resolving stops the run |
-| A | Which endpoints answer on a hackathon key | Scopes everything downstream |
-| B | Is affinity comparable across calls? | If normalised per query, all ratio-of-scores maths is abandoned for within-query ranks |
-| C | Does `filter.results.entities` score my own list? | This is the fix that makes rank comparison valid |
-| D | Are invalid parameters silently ignored? | Includes a positive control, so "ignored" is not just our own blindness |
-| E | Does `feature.explainability` return drivers? | Decides whether the evidence drawer is possible |
-| A2 | Is the API deterministic? | Decides what the bootstrap can mean |
-| F0 | Which location spelling bites, **and does it bite with pinned entities?** | Four spellings x two modes; no winner means the cross-market premise is dead |
-| **F** | **Does the catalog reorder across markets?** | **Kill gate for Catalog Passport** |
-| **G** | **Do ungrounded LLM recommendations fail?** | **Kill gate for Groundwork** |
+| Qloo surface | Where it appears |
+|---|---|
+| `/search` | Resolves every slate title and every market anchor to a real entity. An unresolvable name is reported, never guessed. |
+| `/v2/insights` with `filter.results.entities` | Scores the pinned slate inside **one** query, so rank positions are comparable by construction. |
+| `/v2/insights` with `signal.interests.entities` | Carries the market: each market is modelled as the taste anchors native to it. |
+| `/v2/insights` affinity vs `popularity` | Ranking uses `query.affinity` only. There is deliberately no fallback to `popularity`. |
+| `/v2/tags`, `/v2/analysis/compare` | Used by the verification harness to characterise the graph. |
+| `feature.explainability` | Available per result for the evidence drawer. |
 
-## Decision rules, fixed in advance
+## What we measured about the API
 
-**F passes** when at least two non-US market pairs show Kendall tau-b below
-0.70, the bootstrap upper bound stays under 0.85, and the control set moves
-less than the rest of the catalog.
+Several widely-repeated claims about this API are wrong, and one of them would
+have killed this project. The full record is in **[FINDINGS.md](FINDINGS.md)**;
+the short version:
 
-Uncertainty on tau comes from a **delete-one jackknife of the observed tau**,
-tested against the 0.70 threshold. The null SE (0.1427 at n=25) is printed
-only as a different-from-random sanity line: tau's variance shrinks toward 0
-as tau approaches 1, so judging an observed tau near the top against a
-null-hypothesis spread mixes two distributions and overstates uncertainty.
-When the API is deterministic the jackknife is the only honest uncertainty
-available, which is the same composition-sensitivity framing used elsewhere.
+- **`filter.location.query` is silently ignored for movies.** Affinities come
+  back identical to four decimals across five markets. An entry that pins a
+  candidate set and varies location is reading a parameter the API never
+  applied.
+- **`signal.location.query` on a pinned set is a filter, not a signal** — it
+  collapses eight titles to one.
+- **Affinity is not normalised per candidate set.** The same entity scored
+  inside two different pinned sets with the same signal returns an identical
+  value. It varies with the *signal*, not the set.
+- **A market modelled as taste anchors works.** Eleven of eleven
+  regionally-skewed titles rank highest in their home market, p = 0.0005, and
+  ten of eleven survive swapping every anchor for a different artist.
 
-Tau-b throughout, because Qloo affinities tie at 2-3 decimals and tau-a
-mishandles ties.
+## Where it refuses
 
-**Overlap floor.** In open mode tau is computed only over titles both markets
-returned. A pair sharing fewer than 12 titles is marked INSUFFICIENT_OVERLAP
-and cannot qualify: at n=7 tau carries no information, and the titles that
-survive a thin overlap are the globally popular ones least likely to reorder,
-which biases tau upward. `take` is set to 500 so that "absent" means Qloo did
-not surface the title rather than it fell past the first page, and responses
-that come back exactly `take` long are flagged as possibly truncated. Absence
-rate per market is reported as its own coverage metric -- a high rate is
-evidence for Catalog Passport's coverage-sparsity path, not merely noise.
+Refusing well is most of the product.
 
-The control-set condition is the one that matters most. Ranks are zero-sum, so something
-always drops; only a reordering that spares the titles expected to be stable
-everywhere is evidence of a location signal rather than noise.
+- A market whose two readings disagree about a title **withholds that title**.
+- A market too thinly covered to rank **abstains**, naming the gap.
+- A **home market whose own two readings disagree cannot be a baseline**. New
+  York's agree at 0.13 — three audiences under one city's name — so the agent
+  aborts and says why, rather than measuring everything against an unstable
+  reference. Mumbai's agree at 0.97 and work fine. One preset demonstrates the
+  refusal deliberately.
+- A claim with no supporting API call **raises rather than rendering**.
 
-**G** is measured as a GAP, not as a rate. Three arms answer the same 30
-prompts and all three are verified by the same instrument:
+## Run it
 
-1. ungrounded LLM,
-2. grounded LLM with search -- the configuration anyone shipping a
-   recommendation agent would actually use,
-3. Qloo's own place results.
+```bash
+cp .env.example .env          # add QLOO_API_KEY
+python3 app/server.py         # http://localhost:8080
+```
 
-The verdict uses `(best shipped LLM config) - (Qloo)`, with a 95% Newcombe
-interval built from each arm's Wilson interval. **Alive** needs a lower bound
-above 0 and a point estimate of at least 10 points; **dead** if the interval
-includes 0. A few hundred verifications per arm cannot separate a 2-point gap
-from an 8-point one, so the interval decides rather than the point estimate.
+Stdlib only: no dependencies, no build step. Also:
 
-This threshold supersedes an earlier one (25% / 10% against the LLM's own
-rate). Adding the Qloo control changed what is measured -- a rate became a
-difference -- so the number had to be re-derived rather than carried over. It
-is a loosening of the bar, it was made before any live call, and the amendment
-is recorded in `out/prereg_amended_*.json` rather than edited in silently.
+```bash
+python3 run_agent.py --home "Mumbai, India"   # the agent, in the terminal
+python3 warm_cache.py                         # record presets for offline demo
+python3 test_taste.py && python3 test_loop.py # 27 tests
+```
 
-The LLM's own failure rate is not the test. OpenStreetMap coverage is uneven
-outside the US and EU and its name matching is fuzzy, so a real restaurant
-absent from OSM counts as a hallucination. That bias hits every arm equally,
-and only the gap cancels it. An ungrounded-only comparison would also have
-been a straw man: if the grounded arm passes, Groundwork's premise fails no
-matter how badly the ungrounded one does.
+## How it is built
 
-Then:
+```
+taste/loop.py           the agent: chooses, retries, abstains, records why
+taste/qloo_backend.py   consensus scoring over two anchor sets per market
+taste/rank.py           within-query ranks only; nothing divides across calls
+taste/abstain.py        the refusal thresholds
+taste/evidence.py       a claim with no supporting call cannot be rendered
+engine.py               what the server calls
+app/server.py           public demo, stdlib HTTP, LIVE/CACHED labelled
+run_all.py              the verification harness (see docs/HARNESS.md)
+```
 
-| F | G | Build |
-|---|---|---|
-| PASS | dead | Catalog Passport, with the agent loop and the backtest |
-| FAIL | alive | Groundwork |
-| PASS | alive | Catalog Passport plus a grounded-vs-ungrounded panel |
-| FAIL | weak/dead | Preflight, single-query form |
+## Honest limits
 
-## Pre-registration
-
-`prereg.py` freezes the fixtures and the thresholds and hashes the content
-(not the timestamp, so the digest is stable). Re-running with the same
-fixtures leaves the original record untouched. Change a threshold afterwards
-and the original is kept while the amendment is written to a separate file
-with a warning. A threshold moved after seeing data is worthless, so the edit
-is made visible rather than silent.
-
-## Honesty constraints carried into the backtest
-
-The planned backtest predicts relative country-level performance for the film
-catalog from Qloo ranks alone and compares against public country box-office
-splits. Two things must be said whenever that number is quoted:
-
-- Qloo's graph is built partly from real consumption signal, so this is *less*
-  circular than scoring Qloo with Qloo, not independent of it.
-- Report N and the interval, never a bare correlation.
-
-The Nominatim failure rate in test G is an upper bound: it misses legitimate
-small venues. Spot-check a sample by hand before the number goes anywhere near
-a submission.
-
-## Output
-
-    out/report.md      decision, gate table, raw results
-    out/results.json   everything, machine readable
-    out/calls.jsonl    every request and response status, for traceability
-    out/prereg.json    the frozen rules and their hash (the one tracked file)
-    out/cache/         response cache (gitignored -- do not commit Qloo data)
-
-Caching is local and gitignored on purpose: one entrant reports organisers
-disallow Qloo response data in a public repository, while another commits it.
-Until that is settled in the Devpost discussions, keep it out of git.
+- Qloo knows brands, not products: this works for films, artists, places,
+  brands, books, shows, podcasts and games — not arbitrary retail SKUs.
+- Market anchors are hand-picked. They are shown to be swappable
+  without changing the verdict, but deriving them from the graph would be better.
+- The external backtest against Wikipedia pageview ranks agrees in Mumbai
+  (tau 0.39) and Berlin (0.20) and not elsewhere. Reported either way;
+  see FINDINGS.md for why the two measure different things.

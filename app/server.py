@@ -30,6 +30,11 @@ ROOT = HERE.parent
 sys.path.insert(0, str(ROOT))
 
 from app.budget import Budget  # noqa: E402
+from qloo_client import load_dotenv  # noqa: E402
+
+# In the container the key arrives as an env var; locally it lives in .env.
+# Without this the server silently runs cache-only, which looks like working.
+load_dotenv()
 
 BUDGET = Budget()
 PRESETS = json.loads((HERE / "presets.json").read_text())["presets"]
@@ -109,45 +114,64 @@ PAGE = """<!doctype html><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Travels Well</title>
 <style>
-:root{--ink:#16181d;--mute:#6b7280;--line:#e3e5ea;--live:#0f766e;--cache:#b45309;
- color-scheme:light}
+:root{--ink:#16181d;--mute:#6b7280;--line:#e4e6ea;--card:#fff;--bg:#fbfbfc;
+ --up:#0f766e;--down:#b91c1c;--warn:#b45309;--accent:#1d4ed8;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+ --ink:#e8eaee;--mute:#99a0ac;--line:#2a2e36;--card:#171a1f;--bg:#101216;
+ --up:#34d399;--down:#f87171;--warn:#fbbf24;--accent:#7da2ff}}
 *{box-sizing:border-box}
-body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
- color:var(--ink);background:#fcfcfd}
-.wrap{max-width:860px;margin:0 auto;padding:28px 18px 64px}
-h1{font-size:30px;letter-spacing:-.02em;margin:0 0 4px}
-.sub{color:var(--mute);margin:0 0 22px}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
-button{font:inherit;padding:9px 14px;border:1px solid var(--line);background:#fff;
- border-radius:7px;cursor:pointer}
-button:hover{border-color:#aab}
-button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.07em;
- padding:3px 8px;border-radius:10px;text-transform:uppercase}
-.badge.LIVE{background:#d6f3ec;color:var(--live)}
-.badge.CACHED{background:#fdf0dc;color:var(--cache)}
-.badge.UNAVAILABLE{background:#f1f2f5;color:var(--mute)}
-.panel{border:1px solid var(--line);border-radius:9px;padding:16px;background:#fff}
-.note{color:var(--mute);font-size:13px;margin-top:10px}
-pre{overflow:auto;font-size:12px;background:#16181d;color:#e8eaee;padding:14px;
- border-radius:7px}
-footer{margin-top:30px;color:var(--mute);font-size:12px;border-top:1px solid var(--line);
- padding-top:12px}
-@media (prefers-color-scheme:dark){
- :root:not([data-theme=light]){--ink:#e8eaee;--mute:#9aa1ad;--line:#2a2e36}
- :root:not([data-theme=light]) body{background:#101216}
- :root:not([data-theme=light]) .panel,:root:not([data-theme=light]) button{background:#171a1f}
-}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:30px 18px 70px}
+h1{font-size:31px;letter-spacing:-.022em;margin:0 0 5px}
+.sub{color:var(--mute);margin:0 0 20px;max-width:62ch}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+button{font:inherit;padding:9px 14px;border:1px solid var(--line);
+ background:var(--card);color:var(--ink);border-radius:8px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;
+ padding:3px 8px;border-radius:10px;text-transform:uppercase;vertical-align:2px}
+.badge.LIVE{background:#d6f3ec;color:#0f766e}
+.badge.CACHED{background:#fdf0dc;color:#b45309}
+.badge.UNAVAILABLE{background:#eceef2;color:#6b7280}
+.card{border:1px solid var(--line);border-radius:10px;padding:15px 17px;
+ background:var(--card);margin-bottom:12px}
+.card h3{margin:0 0 3px;font-size:16px}
+.meta{color:var(--mute);font-size:12.5px;margin:0 0 11px}
+.lane{margin:9px 0}
+.lane b{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute)}
+.item{display:flex;justify-content:space-between;gap:12px;padding:3px 0;
+ border-bottom:1px dotted var(--line)}
+.item:last-child{border-bottom:0}
+.up{color:var(--up);font-variant-numeric:tabular-nums}
+.down{color:var(--down);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.chip{font-size:12px;padding:2px 8px;border-radius:9px;background:var(--bg);
+ border:1px solid var(--line);color:var(--mute)}
+.notice{border-left:3px solid var(--warn);background:var(--card);
+ padding:11px 13px;border-radius:0 7px 7px 0;margin-bottom:12px}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--accent);font-size:13.5px}
+pre{overflow:auto;font-size:11.5px;background:#16181d;color:#e8eaee;
+ padding:12px;border-radius:7px;margin-top:8px}
+ol.steps{margin:8px 0 0;padding-left:20px;font-size:13.5px;color:var(--mute)}
+ol.steps li{margin-bottom:5px}
+footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);
+ color:var(--mute);font-size:12.5px}
 </style>
 <div class=wrap>
 <h1>Travels Well</h1>
-<p class=sub>Which titles travel to a new market, which local names carry the
-same signal, and which do not translate at all.</p>
+<p class=sub>Which titles in a slate travel to another market, which do not,
+and which the evidence cannot settle. Every market is read twice through
+unrelated taste anchors, and only what both readings agree on is reported.</p>
 <div class=row id=presets></div>
-<div class=panel id=out>Pick a market above.</div>
-<footer>Every answer is labelled LIVE or CACHED. Cached answers are recorded
-runs of the same pipeline, never synthetic stand-ins. Where coverage is too
-thin to rank, this says so instead of guessing.</footer>
+<div id=out><div class=card>Pick a slate above.</div></div>
+<footer>Answers are labelled LIVE or CACHED; cached ones are recorded runs of
+this same pipeline, never synthetic. Where two readings of a market disagree,
+the title is withheld rather than ranked. Where a market is too thinly
+covered, or a baseline too unstable to measure against, the agent says so
+instead of guessing.</footer>
 </div>
 <script>
 const P = __PRESETS__;
@@ -158,26 +182,92 @@ P.forEach(p => {
   b.onclick = () => {
     [...row.children].forEach(c => c.setAttribute('aria-pressed','false'));
     b.setAttribute('aria-pressed','true');
-    out.textContent = 'Running…';
+    out.innerHTML = '<div class=card>Running\u2026</div>';
     fetch('/api/run?preset=' + encodeURIComponent(p.id))
-      .then(r => r.json()).then(render).catch(e => { out.textContent = String(e); });
+      .then(r => r.json()).then(d => render(d, p))
+      .catch(e => { out.innerHTML = '<div class=card>' + e + '</div>'; });
   };
+  b.dataset.id = p.id;
   row.appendChild(b);
 });
-function render(d){
+// Deep link: /?preset=<id> runs that slate on load, so a result can be shared
+// as a URL rather than as instructions to click the second button.
+const want = new URLSearchParams(location.search).get('preset');
+if (want) {
+  const target = [...row.children].find(c => c.dataset.id === want);
+  if (target) target.click();
+}
+function el(tag, cls, text){const e=document.createElement(tag);
+  if(cls)e.className=cls; if(text!==undefined)e.textContent=text; return e;}
+function lane(title, items, cls){
+  if(!items || !items.length) return null;
+  const d = el('div','lane'); d.appendChild(el('b',null,title));
+  items.forEach(i => {
+    const r = el('div','item');
+    r.appendChild(el('span',null,i.title));
+    r.appendChild(el('span',cls,(i.shift>=0?'+':'')+i.shift.toFixed(2)));
+    d.appendChild(r);
+  });
+  return d;
+}
+function render(d, p){
   out.innerHTML = '';
-  const head = document.createElement('div');
-  head.innerHTML = '<span class="badge ' + (d.source||'') + '">' + (d.source||'?') +
-    '</span> <strong>' + (d.preset ? d.preset.label : '') + '</strong>';
+  const head = el('div','card');
+  const h = el('div'); h.innerHTML = '<span class="badge '+(d.source||'')+'">'+
+    (d.source||'?')+'</span> <strong>'+(p.label)+'</strong>';
+  head.appendChild(h);
+  if(d.disclosure) head.appendChild(el('p','meta', d.disclosure));
+  if(d.message) head.appendChild(el('p','meta', d.message));
+  if(p.note) head.appendChild(el('p','meta', p.note));
   out.appendChild(head);
-  if (d.message || d.disclosure) {
-    const n = document.createElement('p'); n.className = 'note';
-    n.textContent = d.message || d.disclosure;
+
+  if(d.aborted){
+    const n = el('div','notice'); n.appendChild(el('strong',null,'No verdict. '));
+    n.appendChild(document.createTextNode(d.aborted));
     out.appendChild(n);
   }
-  const pre = document.createElement('pre');
-  pre.textContent = JSON.stringify(d, null, 2);
-  out.appendChild(pre);
+  (d.markets||[]).forEach(m => {
+    const c = el('div','card');
+    c.appendChild(el('h3',null,m.market));
+    c.appendChild(el('p','meta',
+      'compared on '+m.compared_on+' titles \u00b7 anchor agreement '+
+      (m.anchor_agreement==null?'n/a':m.anchor_agreement.toFixed(2))+
+      ' \u00b7 agreement with home '+
+      (m.agreement_with_home==null?'n/a':m.agreement_with_home.toFixed(2))));
+    const a = lane('Travels', m.travels, 'up'); if(a) c.appendChild(a);
+    const b2 = lane('Does not travel', m.does_not_travel, 'down'); if(b2) c.appendChild(b2);
+    if(m.uncertain && m.uncertain.length){
+      const u = el('div','lane');
+      u.appendChild(el('b',null,'Evidence unstable \u2014 withheld ('+m.uncertain.length+')'));
+      const chips = el('div','chips');
+      m.uncertain.forEach(t => chips.appendChild(el('span','chip',t)));
+      u.appendChild(chips); c.appendChild(u);
+    }
+    out.appendChild(c);
+  });
+  Object.entries(d.abstained||{}).forEach(([mk,why]) => {
+    const n = el('div','notice');
+    n.appendChild(el('strong',null, mk+': ')); n.appendChild(document.createTextNode(why));
+    out.appendChild(n);
+  });
+  if(d.steps && d.steps.length){
+    const c = el('div','card'); c.appendChild(el('h3',null,'How it decided'));
+    const ol = el('ol','steps');
+    d.steps.forEach(s => {
+      const li = el('li', null, s.action+' \u2014 '+s.reason);
+      if(s.rejected && s.rejected.length)
+        li.appendChild(el('div','meta','passed over: '+s.rejected.join(', ')));
+      ol.appendChild(li);
+    });
+    c.appendChild(ol);
+    if(d.evidence){
+      const det = el('details');
+      det.appendChild(el('summary',null,'Evidence \u2014 every call behind these numbers'));
+      const pre = el('pre', null, JSON.stringify(d.evidence, null, 2));
+      det.appendChild(pre); c.appendChild(det);
+    }
+    out.appendChild(c);
+  }
 }
 </script>
 """

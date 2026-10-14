@@ -39,4 +39,4 @@ echo
 echo "live at: $URL"
 echo "checking it answers cold..."
 curl -fsS "$URL/status" && echo
-curl -fsS "$URL/api/run?preset=films-br" >/dev/null && echo "preset path OK"
+curl -fsS "$URL/api/run?preset=mumbai-out" >/dev/null && echo "preset path OK"

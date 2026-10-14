@@ -2,24 +2,31 @@
   "presets": [
     {
       "id": "mumbai-out",
-      "label": "Home market: Mumbai",
-      "home_market": "Mumbai, India",
+      "label": "Mumbai · Bollywood",
+      "home_market": "Mumbai · Bollywood playback",
       "want": 3,
-      "note": "Mumbai is the reference point, not the destination. Every score below is movement away from where the film sits at home. Its two independent readings agree at 0.97, which makes it a dependable baseline."
+      "note": "The audience this slate already plays to. Every score is movement away from where the film sits with them. Its two independent readings agree at 0.97."
     },
     {
-      "id": "saopaulo-out",
-      "label": "Home market: Sao Paulo",
-      "home_market": "Sao Paulo, Brazil",
+      "id": "ny-downtown",
+      "label": "New York · downtown",
+      "home_market": "New York · downtown",
       "want": 3,
-      "note": "Sao Paulo as the reference point. Two readings agree at 0.75."
+      "note": "Anchored on Lou Reed, Talking Heads and Patti Smith. A scene, not a city: its two readings agree at 0.91."
+    },
+    {
+      "id": "ny-hiphop",
+      "label": "New York · hip-hop",
+      "home_market": "New York · hip-hop",
+      "want": 3,
+      "note": "The same city, a different audience. Compare this against New York downtown: the slate does not travel the same way for both."
     },
     {
       "id": "newyork-refused",
-      "label": "Home market: New York",
-      "home_market": "New York, United States",
+      "label": "New York · whoever is famous",
+      "home_market": "New York · whoever is famous",
       "want": 3,
-      "note": "Included deliberately. New York's two readings agree at only 0.13, so it cannot anchor a comparison, and the agent refuses rather than ranking against an unstable reference."
+      "note": "Included deliberately. Springsteen, Beyonce and Taylor Swift are all from New York but point at three different audiences, so the two readings agree at only 0.13 and the agent refuses rather than ranking against an unstable reference."
     }
   ]
 }

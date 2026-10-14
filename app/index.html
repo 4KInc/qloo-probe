@@ -156,12 +156,12 @@ footer a{color:var(--ink-2)}
   <header class="marquee">
     <div class="bulbs"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <h1>Travels <span>Well</span></h1>
-    <p class="tagline">Does this film play in that city?</p>
+    <p class="tagline">Does this film play to that audience?</p>
     <div class="strip"></div>
   </header>
 
   <div class="pickrow">
-    <span class="picklabel">Where the slate already works</span>
+    <span class="picklabel">The audience this slate already plays to</span>
     <span id="controls"></span>
   </div>
 
@@ -254,7 +254,7 @@ function rail(items, kind){
 function marketBlock(m){
   const frag = document.createDocumentFragment();
   const head = el('div','row-head');
-  head.appendChild(el('h2',null,m.market.split(',')[0]));
+  head.appendChild(el('h2',null,m.market));
   head.appendChild(el('span','row-meta',
     m.compared_on + ' films · readings agree ' +
     (m.anchor_agreement==null?'n/a':m.anchor_agreement.toFixed(2))));

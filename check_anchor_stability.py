@@ -30,12 +30,18 @@ load_dotenv()
 from stats import jackknife_tau_se, kendall_tau_b, rank_percentiles  # noqa: E402
 from taste.qloo_backend import QlooBackend  # noqa: E402
 
+# Home is now an AUDIENCE rather than a city. The test is unchanged in spirit:
+# does a film rank higher with the audience from its own country than with the
+# others? The mapping is looser than before -- Berlin techno is not "German
+# cinema's audience" -- so a weaker result here would be expected, not alarming.
 HOME = {
-    "RRR": "Mumbai, India", "3 Idiots": "Mumbai, India", "Dangal": "Mumbai, India",
-    "Your Name": "Tokyo, Japan", "Spirited Away": "Tokyo, Japan",
-    "Shoplifters": "Tokyo, Japan", "Drive My Car": "Tokyo, Japan",
-    "City of God": "Sao Paulo, Brazil", "Elite Squad": "Sao Paulo, Brazil",
-    "Das Boot": "Berlin, Germany", "Good Bye Lenin!": "Berlin, Germany",
+    "RRR": "Mumbai \u00b7 Bollywood playback",
+    "3 Idiots": "Mumbai \u00b7 Bollywood playback",
+    "Dangal": "Mumbai \u00b7 Bollywood playback",
+    "Your Name": "Tokyo \u00b7 city pop", "Spirited Away": "Tokyo \u00b7 city pop",
+    "Shoplifters": "Tokyo \u00b7 city pop", "Drive My Car": "Tokyo \u00b7 city pop",
+    "City of God": "Sao Paulo \u00b7 MPB", "Elite Squad": "Sao Paulo \u00b7 MPB",
+    "Das Boot": "Berlin \u00b7 techno", "Good Bye Lenin!": "Berlin \u00b7 techno",
 }
 
 
@@ -46,7 +52,10 @@ def binomial_p(wins, total):
 def main():
     spec = json.loads((HERE / "fixtures" / "catalog.json").read_text())
     titles = spec["control"] + spec["regional"]
-    backend = QlooBackend(entity_type=spec["entity_type"])
+    # consensus=False is essential here: in consensus mode score() merges both
+    # readings, so comparing "primary" against "alternate" would compare a
+    # result with itself and report perfect agreement for every market.
+    backend = QlooBackend(entity_type=spec["entity_type"], consensus=False)
     ids, missing = backend.resolve(titles)
     print("catalog resolved %d/%d%s" % (len(ids), len(titles),
                                         (" missing %s" % missing) if missing else ""))
@@ -55,7 +64,7 @@ def main():
     for which in ("primary", "alternate"):
         by_set[which] = {}
         for market in backend.markets:
-            scores = backend.score(market, ids, seed=None if which == "primary" else which)
+            scores = backend._score_once(market, ids, which)
             if scores:
                 by_set[which][market] = rank_percentiles(scores)
 
@@ -69,7 +78,11 @@ def main():
             continue
         tau = kendall_tau_b(a, b)
         se = jackknife_tau_se(a, b)
-        agreements.append(tau)
+        # The deliberately incoherent definition carries a note; counting it
+        # would make the summary report the method as unstable when it is in
+        # fact correctly detecting a bad market description.
+        if not (backend.markets.get(market) or {}).get("note"):
+            agreements.append(tau)
         print("  %-26s tau=%-6s se=%-6s" % (market, round(tau, 3), round(se, 3)))
 
     print("\n2. overlap of what a user actually reads (top 5 / bottom 5)")

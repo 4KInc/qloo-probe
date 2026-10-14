@@ -1,25 +1,41 @@
 {
-  "note": "A market is modelled as a set of taste anchors, not as coordinates. Measured on 2026-10-13: filter.location.query is silently ignored for movies and signal.location.query collapses a pinned set, so location cannot rank a catalog. Anchors can. Each market carries a second anchor set used when the first returns ranks too flat to mean anything.",
+  "note": "An audience, not a city. Measured 2026-10-14: defining a market by whoever is famous there produces two readings that disagree (New York scored tau 0.13 that way), because a large city holds several audiences under one name. Anchors drawn from a single scene agree far better: New York 0.13 -> 0.91, Tokyo 0.42 -> 0.81, Berlin 0.52 -> 0.73. Each entry carries two anchor sets from the same scene; the agent reads both and reports only what they agree on.",
   "markets": {
-    "New York, United States": {
-      "primary": ["Bruce Springsteen", "Beyonce", "Taylor Swift"],
-      "alternate": ["Jay-Z", "Lou Reed", "Billy Joel"]
+    "New York · downtown": {
+      "agreement": 0.91,
+      "primary": ["Lou Reed", "Talking Heads", "Patti Smith"],
+      "alternate": ["Sonic Youth", "Television", "Blondie"]
     },
-    "Sao Paulo, Brazil": {
-      "primary": ["Anitta", "Caetano Veloso", "Racionais MC's"],
-      "alternate": ["Gilberto Gil", "Marisa Monte", "Criolo"]
+    "New York · hip-hop": {
+      "agreement": 0.67,
+      "primary": ["Jay-Z", "Nas", "The Notorious B.I.G."],
+      "alternate": ["Wu-Tang Clan", "Mobb Deep", "A Tribe Called Quest"]
     },
-    "Tokyo, Japan": {
-      "primary": ["Hikaru Utada", "Ryuichi Sakamoto", "Yumi Matsutoya"],
-      "alternate": ["Southern All Stars", "Cornelius", "Ayumi Hamasaki"]
+    "Tokyo · city pop": {
+      "agreement": 0.81,
+      "primary": ["Tatsuro Yamashita", "Mariya Takeuchi", "Anri"],
+      "alternate": ["Taeko Onuki", "Toshiki Kadomatsu", "Junko Ohashi"]
     },
-    "Berlin, Germany": {
-      "primary": ["Kraftwerk", "Rammstein", "Nena"],
-      "alternate": ["Can", "Herbert Gronemeyer", "Paul Kalkbrenner"]
+    "Berlin · techno": {
+      "agreement": 0.73,
+      "primary": ["Paul Kalkbrenner", "Ellen Allien", "Modeselektor"],
+      "alternate": ["Apparat", "Ben Klock", "Marcel Dettmann"]
     },
-    "Mumbai, India": {
+    "Mumbai · Bollywood playback": {
+      "agreement": 0.97,
       "primary": ["A. R. Rahman", "Lata Mangeshkar", "Arijit Singh"],
       "alternate": ["Kishore Kumar", "Shreya Ghoshal", "Asha Bhosle"]
+    },
+    "Sao Paulo · MPB": {
+      "agreement": 0.79,
+      "primary": ["Caetano Veloso", "Gilberto Gil", "Gal Costa"],
+      "alternate": ["Tom Ze", "Os Mutantes", "Jorge Ben Jor"]
+    },
+    "New York · whoever is famous": {
+      "agreement": 0.13,
+      "note": "Kept deliberately. This is the incoherent definition the method refuses: three artists who are all from New York but point at three different audiences.",
+      "primary": ["Bruce Springsteen", "Beyonce", "Taylor Swift"],
+      "alternate": ["Jay-Z", "Lou Reed", "Billy Joel"]
     }
   }
 }

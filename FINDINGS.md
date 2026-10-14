@@ -134,3 +134,35 @@ Elite Squad into Sao Paulo; 3 Idiots is the clearest non-traveller into Berlin.
 This is the strongest honesty feature in the build: a verdict that says these
 travel, these do not, and on these the evidence is unstable, is worth more
 than a confident ranking of all 25.
+
+
+## A market is an audience, not a city
+
+The consensus check kept refusing New York, and the reason turned out to be
+the market definition rather than the city. Anchors chosen as "whoever is
+famous there" point at several audiences at once; anchors drawn from one scene
+point at one.
+
+| Definition | two readings agree |
+|---|---|
+| New York, whoever is famous (Springsteen, Beyonce, Taylor Swift) | 0.13 |
+| New York, downtown (Lou Reed, Talking Heads, Patti Smith) | **0.91** |
+| New York, hip-hop (Jay-Z, Nas, Notorious B.I.G.) | 0.67 |
+| Tokyo, mixed era | 0.42 |
+| Tokyo, city pop (Tatsuro Yamashita, Mariya Takeuchi, Anri) | **0.81** |
+| Berlin, mixed era | 0.52 |
+| Berlin, techno (Kalkbrenner, Ellen Allien, Modeselektor) | **0.73** |
+
+Every market improves. And the scenes disagree with each other in a way that
+is clearly not noise: the hip-hop audience's top films are Elite Squad, City
+of God and La Haine, while the downtown audience's are Y Tu Mama Tambien,
+Good Bye Lenin! and Amelie. Urban crime against European arthouse, same city.
+
+So the product now models an audience rather than a city, which is also the
+unit a distributor actually sells to. The incoherent New York definition is
+kept as a preset, because a tool that detects a bad market description and
+says so is worth more than one that always answers.
+
+The home-market result survives the change: 11 of 11 regional titles still
+rank highest with their own audience (p = 0.0005), 10 of 11 under the
+alternate anchors (p = 0.0059).

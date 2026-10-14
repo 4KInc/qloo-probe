@@ -1,0 +1,14 @@
+.env
+out/
+docs/
+test_*.py
+run_all.py
+run_agent.py
+run_llm_arms.py
+backtest_outcomes.py
+check_anchor_stability.py
+warm_cache.py
+probe_*.py
+prereg.py
+Dockerfile
+deploy.sh

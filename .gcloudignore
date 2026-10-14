@@ -1,0 +1,20 @@
+# Explicit, because the default behaviour here is worth not relying on: a
+# build upload must never carry the API key.
+.env
+.git/
+.gitignore
+
+# Harness, outputs and recorded runs are not part of the served app.
+out/
+docs/
+*.md
+!README.md
+test_*.py
+run_all.py
+run_agent.py
+run_llm_arms.py
+backtest_outcomes.py
+check_anchor_stability.py
+warm_cache.py
+probe_*.py
+prereg.py

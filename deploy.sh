@@ -31,10 +31,12 @@ gcloud run deploy "$SERVICE" \
   --timeout 120 \
   --set-env-vars "QLOO_API_KEY=${QLOO_API_KEY},QLOO_BASE=${QLOO_BASE:-https://hackathon.api.qloo.com}"
 
-URL="$(gcloud run services describe "$SERVICE" --project "$GOOGLE_CLOUD_PROJECT" \
-       --region "$REGION" --format 'value(status.url)')"
+# Cloud Run reports two hostnames for a service; the project-number form is
+# the one that resolves, so prefer it and fall back to the described URL.
+URL="https://${SERVICE}-$(gcloud projects describe "$GOOGLE_CLOUD_PROJECT" \
+      --format='value(projectNumber)').${REGION}.run.app"
 echo
 echo "live at: $URL"
 echo "checking it answers cold..."
-curl -fsS "$URL/healthz" && echo
+curl -fsS "$URL/status" && echo
 curl -fsS "$URL/api/run?preset=films-br" >/dev/null && echo "preset path OK"

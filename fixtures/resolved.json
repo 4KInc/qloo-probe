@@ -1,0 +1,332 @@
+{
+  "movies": {
+    "Avatar": {
+      "id": "68BA87EE-E30D-427E-BBF6-621C7DF4543C",
+      "image": "https://images.qloo.com/i/68BA87EE-E30D-427E-BBF6-621C7DF4543C-420x-auto.jpg",
+      "resolved_name": "Avatar"
+    },
+    "Titanic": {
+      "id": "E96915EB-E311-475E-91C8-C7C27A581FCF",
+      "image": "https://images.qloo.com/i/E96915EB-E311-475E-91C8-C7C27A581FCF-420x-auto.jpg",
+      "resolved_name": "Titanic"
+    },
+    "The Dark Knight": {
+      "id": "3432C364-C883-4A0D-A76B-99A57E5361E5",
+      "image": "https://images.qloo.com/i/3432C364-C883-4A0D-A76B-99A57E5361E5-420x-auto.jpg",
+      "resolved_name": "The Dark Knight"
+    },
+    "Inception": {
+      "id": "18B098FD-3D84-4609-BFF3-ADF9A0B00E40",
+      "image": "https://images.qloo.com/i/18B098FD-3D84-4609-BFF3-ADF9A0B00E40-420x-auto.jpg",
+      "resolved_name": "Inception"
+    },
+    "Jurassic Park": {
+      "id": "D3529AD8-9349-481E-8FCB-D107EFB75E68",
+      "image": "https://images.qloo.com/i/D3529AD8-9349-481E-8FCB-D107EFB75E68-420x-auto.jpg",
+      "resolved_name": "Jurassic Park"
+    },
+    "The Avengers": {
+      "id": "EDA2A941-4746-40FF-A48D-66FA4EFE2D17",
+      "image": "https://images.qloo.com/i/EDA2A941-4746-40FF-A48D-66FA4EFE2D17-420x-auto.jpg",
+      "resolved_name": "The Avengers"
+    },
+    "RRR": {
+      "id": "6D0B28D4-12FB-4113-BFAC-910271EF2D69",
+      "image": "https://images.qloo.com/i/6D0B28D4-12FB-4113-BFAC-910271EF2D69-420x-auto.jpg",
+      "resolved_name": "RRR"
+    },
+    "3 Idiots": {
+      "id": "CE300FA0-0752-4DD3-B28F-FC4CFD2D8915",
+      "image": "https://images.qloo.com/i/CE300FA0-0752-4DD3-B28F-FC4CFD2D8915-420x-auto.jpg",
+      "resolved_name": "3 Idiots"
+    },
+    "Dangal": {
+      "id": "51413AE6-596D-4648-B0EF-A6BD3EE22590",
+      "image": "https://images.qloo.com/i/51413AE6-596D-4648-B0EF-A6BD3EE22590-420x-auto.jpg",
+      "resolved_name": "Dangal"
+    },
+    "Parasite": {
+      "id": "A499EC25-7FF6-46DE-9DA5-3E78E99B9E26",
+      "image": "https://images.qloo.com/i/A499EC25-7FF6-46DE-9DA5-3E78E99B9E26-420x-auto.jpg",
+      "resolved_name": "Parasite"
+    },
+    "Train to Busan": {
+      "id": "B43CB3EC-05F6-4543-84A2-DB9BDB5E71E3",
+      "image": "https://images.qloo.com/i/B43CB3EC-05F6-4543-84A2-DB9BDB5E71E3-420x-auto.jpg",
+      "resolved_name": "Train to Busan"
+    },
+    "Your Name": {
+      "id": "68CD7C41-78BE-4765-B184-1F1988036C89",
+      "image": "https://images.qloo.com/i/68CD7C41-78BE-4765-B184-1F1988036C89-420x-auto.jpg",
+      "resolved_name": "Your Name."
+    },
+    "Spirited Away": {
+      "id": "9B33A620-68CA-49B3-BFCF-F09CCF8AD595",
+      "image": "https://images.qloo.com/i/9B33A620-68CA-49B3-BFCF-F09CCF8AD595-420x-auto.jpg",
+      "resolved_name": "Spirited Away"
+    },
+    "Shoplifters": {
+      "id": "9AABDCA0-BBC1-4A14-8071-FBF31EA488D6",
+      "image": "https://images.qloo.com/i/9AABDCA0-BBC1-4A14-8071-FBF31EA488D6-420x-auto.jpg",
+      "resolved_name": "Shoplifters"
+    },
+    "Drive My Car": {
+      "id": "B062F1C0-FBCF-4AF2-B4D3-66FC093382AF",
+      "image": "https://images.qloo.com/i/B062F1C0-FBCF-4AF2-B4D3-66FC093382AF-420x-auto.jpg",
+      "resolved_name": "Drive My Car"
+    },
+    "City of God": {
+      "id": "29A40BDB-5957-477F-B929-371A6A57B5B3",
+      "image": "https://images.qloo.com/i/29A40BDB-5957-477F-B929-371A6A57B5B3-420x-auto.jpg",
+      "resolved_name": "City of God"
+    },
+    "Elite Squad": {
+      "id": "E1167AE0-0A32-4095-B94D-F4B322CFCE5D",
+      "image": "https://images.qloo.com/i/E1167AE0-0A32-4095-B94D-F4B322CFCE5D-420x-auto.jpg",
+      "resolved_name": "Elite Squad"
+    },
+    "Amelie": {
+      "id": "B7A0731F-EC92-496A-9C40-47D9770489B6",
+      "image": "https://images.qloo.com/i/B7A0731F-EC92-496A-9C40-47D9770489B6-420x-auto.jpg",
+      "resolved_name": "Am\u00e9lie"
+    },
+    "La Haine": {
+      "id": "BCA23199-6D1D-471C-A777-6D4A582D97B9",
+      "image": "https://images.qloo.com/i/BCA23199-6D1D-471C-A777-6D4A582D97B9-420x-auto.jpg",
+      "resolved_name": "La haine"
+    },
+    "Good Bye Lenin!": {
+      "id": "45D74714-6B4A-413F-8402-5DB729063CAF",
+      "image": "https://images.qloo.com/i/45D74714-6B4A-413F-8402-5DB729063CAF-420x-auto.jpg",
+      "resolved_name": "Good Bye Lenin!"
+    },
+    "Das Boot": {
+      "id": "89B0C1DC-8439-4723-B533-E6730D8C79ED",
+      "image": "https://images.qloo.com/i/89B0C1DC-8439-4723-B533-E6730D8C79ED-420x-auto.jpg",
+      "resolved_name": "Das Boot"
+    },
+    "Pan's Labyrinth": {
+      "id": "878B26C8-9C94-4A6B-B65A-5AAD2CC67D97",
+      "image": "https://images.qloo.com/i/878B26C8-9C94-4A6B-B65A-5AAD2CC67D97-420x-auto.jpg",
+      "resolved_name": "Pan's Labyrinth"
+    },
+    "Y Tu Mama Tambien": {
+      "id": "D7DC69EE-925B-4B0E-AF53-56524E075523",
+      "image": "https://images.qloo.com/i/D7DC69EE-925B-4B0E-AF53-56524E075523-420x-auto.jpg",
+      "resolved_name": "Y tu mam\u00e1 tambi\u00e9n"
+    },
+    "Roma": {
+      "id": "FB052F84-01CF-48BB-A30A-51C45F183777",
+      "image": "https://images.qloo.com/i/FB052F84-01CF-48BB-A30A-51C45F183777-420x-auto.jpg",
+      "resolved_name": "Roma"
+    },
+    "Crouching Tiger, Hidden Dragon": {
+      "id": "6B5D49F5-2031-4E07-9D1A-634A030E4947",
+      "image": "https://images.qloo.com/i/6B5D49F5-2031-4E07-9D1A-634A030E4947-420x-auto.jpg",
+      "resolved_name": "Crouching Tiger, Hidden Dragon"
+    }
+  },
+  "artists": {
+    "A Tribe Called Quest": {
+      "id": "DF0BFEC5-8BA1-43E8-B15B-9070DD452F76",
+      "image": "https://images.qloo.com/i/DF0BFEC5-8BA1-43E8-B15B-9070DD452F76-420x-auto.jpg",
+      "resolved_name": "A Tribe Called Quest"
+    },
+    "A. R. Rahman": {
+      "id": "9986F595-C20E-4EBB-828F-55E7DEEBE448",
+      "image": "https://images.qloo.com/i/9986F595-C20E-4EBB-828F-55E7DEEBE448-420x-auto.jpg",
+      "resolved_name": "A.R. Rahman"
+    },
+    "Anri": {
+      "id": "FECE689A-0388-491B-9804-726DC880EA3E",
+      "image": "https://images.qloo.com/i/FECE689A-0388-491B-9804-726DC880EA3E-420x-auto.jpg",
+      "resolved_name": "Anri"
+    },
+    "Apparat": {
+      "id": "DB342083-22F9-4B2D-B6F4-414AAF35F217",
+      "image": "https://images.qloo.com/i/DB342083-22F9-4B2D-B6F4-414AAF35F217-420x-auto.jpg",
+      "resolved_name": "Apparat"
+    },
+    "Arijit Singh": {
+      "id": "924C8504-4BD8-4615-AB2D-1C16880A8A62",
+      "image": "https://images.qloo.com/i/924C8504-4BD8-4615-AB2D-1C16880A8A62-420x-auto.jpg",
+      "resolved_name": "Arijit Singh"
+    },
+    "Asha Bhosle": {
+      "id": "659A7218-EABE-4231-9E11-2E2BBC3B685C",
+      "image": "https://images.qloo.com/i/659A7218-EABE-4231-9E11-2E2BBC3B685C-420x-auto.jpg",
+      "resolved_name": "Asha Bhosle"
+    },
+    "Ben Klock": {
+      "id": "252312E8-92E5-4D1A-8F1A-908053CA4797",
+      "image": "https://images.qloo.com/i/252312E8-92E5-4D1A-8F1A-908053CA4797-420x-auto.jpg",
+      "resolved_name": "Ben Klock"
+    },
+    "Beyonce": {
+      "id": "F6754C46-B3E7-457F-8B7E-06C613597320",
+      "image": "https://images.qloo.com/i/F6754C46-B3E7-457F-8B7E-06C613597320-420x-auto.jpg",
+      "resolved_name": "Beyonc\u00e9"
+    },
+    "Billy Joel": {
+      "id": "0DC6AE64-E9C1-486D-B239-5E77458C0B2E",
+      "image": "https://images.qloo.com/i/0DC6AE64-E9C1-486D-B239-5E77458C0B2E-420x-auto.jpg",
+      "resolved_name": "Billy Joel"
+    },
+    "Blondie": {
+      "id": "24254EAF-BE8E-48CC-9741-3B3D72F83FA9",
+      "image": "https://images.qloo.com/i/24254EAF-BE8E-48CC-9741-3B3D72F83FA9-420x-auto.jpg",
+      "resolved_name": "Blondie"
+    },
+    "Bruce Springsteen": {
+      "id": "120E288E-858F-4AC1-A825-736D5A16D65F",
+      "image": "https://images.qloo.com/i/120E288E-858F-4AC1-A825-736D5A16D65F-420x-auto.jpg",
+      "resolved_name": "Bruce Springsteen"
+    },
+    "Caetano Veloso": {
+      "id": "A17A213E-E45A-408F-9876-F22DD5FAAE6D",
+      "image": "https://images.qloo.com/i/A17A213E-E45A-408F-9876-F22DD5FAAE6D-420x-auto.jpg",
+      "resolved_name": "Caetano Veloso"
+    },
+    "Ellen Allien": {
+      "id": "62BDA78A-2B6C-41CA-8187-319BBA9BF3A5",
+      "image": "https://images.qloo.com/i/62BDA78A-2B6C-41CA-8187-319BBA9BF3A5-420x-auto.jpg",
+      "resolved_name": "Ellen Allien"
+    },
+    "Gal Costa": {
+      "id": "55839704-B3B2-4BCF-9EF2-6E263D47A210",
+      "image": "https://images.qloo.com/i/55839704-B3B2-4BCF-9EF2-6E263D47A210-420x-auto.jpg",
+      "resolved_name": "Gal Costa"
+    },
+    "Gilberto Gil": {
+      "id": "6ECA11B1-14F5-455F-A3C8-FEA459577950",
+      "image": "https://images.qloo.com/i/6ECA11B1-14F5-455F-A3C8-FEA459577950-420x-auto.jpg",
+      "resolved_name": "Gilberto Gil"
+    },
+    "Jay-Z": {
+      "id": "1894930C-9D08-485C-8F0F-0E0AC4DFB447",
+      "image": "https://images.qloo.com/i/1894930C-9D08-485C-8F0F-0E0AC4DFB447-420x-auto.jpg",
+      "resolved_name": "Jay-Z"
+    },
+    "Jorge Ben Jor": {
+      "id": "314285BF-FEEE-41F8-9A86-A53E1A597FE3",
+      "image": "https://images.qloo.com/i/314285BF-FEEE-41F8-9A86-A53E1A597FE3-420x-auto.jpg",
+      "resolved_name": "Jorge Ben Jor"
+    },
+    "Junko Ohashi": {
+      "id": "4050BDE4-2064-4030-80E9-F462F8E439C8",
+      "image": "https://images.qloo.com/i/4050BDE4-2064-4030-80E9-F462F8E439C8-420x-auto.jpg",
+      "resolved_name": "Junko Ohashi (\u5927\u6a4b\u7d14\u5b50)"
+    },
+    "Kishore Kumar": {
+      "id": "7108DD12-F15C-41BA-9740-EF8229995B6F",
+      "image": "https://images.qloo.com/i/7108DD12-F15C-41BA-9740-EF8229995B6F-420x-auto.jpg",
+      "resolved_name": "Kishore Kumar"
+    },
+    "Lata Mangeshkar": {
+      "id": "D32E8668-E3B1-4919-BFA5-6870900EAC80",
+      "image": "https://images.qloo.com/i/D32E8668-E3B1-4919-BFA5-6870900EAC80-420x-auto.jpg",
+      "resolved_name": "Lata Mangeshkar"
+    },
+    "Lou Reed": {
+      "id": "968F572A-76A8-48C9-B347-217D6CBD4D59",
+      "image": "https://images.qloo.com/i/968F572A-76A8-48C9-B347-217D6CBD4D59-420x-auto.jpg",
+      "resolved_name": "Lou Reed"
+    },
+    "Marcel Dettmann": {
+      "id": "72F568B1-D4FB-44BC-8310-A999818E2C43",
+      "image": "https://images.qloo.com/i/72F568B1-D4FB-44BC-8310-A999818E2C43-420x-auto.jpg",
+      "resolved_name": "Marcel Dettmann"
+    },
+    "Mariya Takeuchi": {
+      "id": "665FB9F9-B0A4-49C3-BD60-93F00D191A5B",
+      "image": "https://images.qloo.com/i/665FB9F9-B0A4-49C3-BD60-93F00D191A5B-420x-auto.jpg",
+      "resolved_name": "Marika Takeuchi"
+    },
+    "Mobb Deep": {
+      "id": "52E255E3-F853-4A1D-8C2F-6F014AA40A42",
+      "image": "https://images.qloo.com/i/52E255E3-F853-4A1D-8C2F-6F014AA40A42-420x-auto.jpg",
+      "resolved_name": "Mobb Deep"
+    },
+    "Modeselektor": {
+      "id": "2E869AD9-26C3-42BC-BEDF-8C20FA178765",
+      "image": "https://images.qloo.com/i/2E869AD9-26C3-42BC-BEDF-8C20FA178765-420x-auto.jpg",
+      "resolved_name": "Modeselektor"
+    },
+    "Nas": {
+      "id": "3C52F3B1-9D28-42C1-AC77-8FD2B5045A2D",
+      "image": "https://images.qloo.com/i/3C52F3B1-9D28-42C1-AC77-8FD2B5045A2D-420x-auto.jpg",
+      "resolved_name": "Nas"
+    },
+    "Os Mutantes": {
+      "id": "270524D3-3E3F-4050-8C6B-4DC476BE64B4",
+      "image": "https://images.qloo.com/i/270524D3-3E3F-4050-8C6B-4DC476BE64B4-420x-auto.jpg",
+      "resolved_name": "Os Mutantes"
+    },
+    "Patti Smith": {
+      "id": "4E299E35-67AC-46ED-B586-F6E8DE9BD08A",
+      "image": "https://images.qloo.com/i/4E299E35-67AC-46ED-B586-F6E8DE9BD08A-420x-auto.jpg",
+      "resolved_name": "Patti Smith"
+    },
+    "Paul Kalkbrenner": {
+      "id": "F828C02D-770B-445E-BDCC-D4DB85E7F531",
+      "image": "https://images.qloo.com/i/F828C02D-770B-445E-BDCC-D4DB85E7F531-420x-auto.jpg",
+      "resolved_name": "Paul Kalkbrenner"
+    },
+    "Shreya Ghoshal": {
+      "id": "1B70567C-63F3-482C-9E6F-141FDD2B5746",
+      "image": "https://images.qloo.com/i/1B70567C-63F3-482C-9E6F-141FDD2B5746-420x-auto.jpg",
+      "resolved_name": "Shreya Ghoshal"
+    },
+    "Sonic Youth": {
+      "id": "CE859B17-DDB5-41B4-AEDC-B8DDA2F7CC1B",
+      "image": "https://images.qloo.com/i/CE859B17-DDB5-41B4-AEDC-B8DDA2F7CC1B-420x-auto.jpg",
+      "resolved_name": "Sonic Youth"
+    },
+    "Taeko Onuki": {
+      "id": "AF62EF18-61ED-4006-A15D-D9B8D7F874F8",
+      "image": "https://images.qloo.com/i/AF62EF18-61ED-4006-A15D-D9B8D7F874F8-420x-auto.jpg",
+      "resolved_name": "Taeko Onuki & Ryuichi Sakamoto"
+    },
+    "Talking Heads": {
+      "id": "1A758B66-ED5E-4DB7-A8FF-FE4EFA06001B",
+      "image": "https://images.qloo.com/i/1A758B66-ED5E-4DB7-A8FF-FE4EFA06001B-420x-auto.jpg",
+      "resolved_name": "Talking Heads"
+    },
+    "Tatsuro Yamashita": {
+      "id": "54FAF9DF-CD23-42E9-80B9-3712709DE3E0",
+      "image": "https://images.qloo.com/i/54FAF9DF-CD23-42E9-80B9-3712709DE3E0-420x-auto.jpg",
+      "resolved_name": "Tatsuro Yamashita (\u5c71\u4e0b\u9054\u90ce)"
+    },
+    "Taylor Swift": {
+      "id": "4BBEF799-A0C4-4110-AB01-39216993C312",
+      "image": "https://images.qloo.com/i/4BBEF799-A0C4-4110-AB01-39216993C312-420x-auto.jpg",
+      "resolved_name": "Taylor Swift"
+    },
+    "Television": {
+      "id": "C82327A0-304C-4E89-A38C-99A39D2CFF5A",
+      "image": "https://images.qloo.com/i/C82327A0-304C-4E89-A38C-99A39D2CFF5A-420x-auto.jpg",
+      "resolved_name": "Television"
+    },
+    "The Notorious B.I.G.": {
+      "id": "09217CCE-4358-4CB0-BFF4-03BEA938A3EB",
+      "image": "https://images.qloo.com/i/09217CCE-4358-4CB0-BFF4-03BEA938A3EB-420x-auto.jpg",
+      "resolved_name": "The Notorious B.I.G."
+    },
+    "Tom Ze": {
+      "id": "5D2568C5-3A8B-4137-9DDC-9661CE008504",
+      "image": "https://images.qloo.com/i/5D2568C5-3A8B-4137-9DDC-9661CE008504-420x-auto.jpg",
+      "resolved_name": "Tom Z\u00e9"
+    },
+    "Toshiki Kadomatsu": {
+      "id": "4383A5F8-E164-44F9-82FF-6D35B2A0319A",
+      "image": "https://images.qloo.com/i/4383A5F8-E164-44F9-82FF-6D35B2A0319A-420x-auto.jpg",
+      "resolved_name": "Toshiki Kadomatsu"
+    },
+    "Wu-Tang Clan": {
+      "id": "6EB22B1C-3F33-4EEC-AF26-FDCEE31EF176",
+      "image": "https://images.qloo.com/i/6EB22B1C-3F33-4EEC-AF26-FDCEE31EF176-420x-auto.jpg",
+      "resolved_name": "Wu-Tang Clan"
+    }
+  },
+  "note": "Frozen entity resolution. Rebuild with build_resolution_cache.py whenever the catalog or an anchor set changes."
+}

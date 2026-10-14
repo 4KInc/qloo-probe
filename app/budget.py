@@ -13,8 +13,11 @@ from __future__ import annotations
 import threading
 import time
 
-LIVE_CALLS_PER_IP_PER_HOUR = 12
-LIVE_CALLS_GLOBAL_PER_HOUR = 120
+# Raised once a run cost 10 Qloo calls instead of 65. The quota floor below is
+# the real protection: when the month runs low every answer serves from a
+# recorded run, so the demo degrades rather than dying.
+LIVE_CALLS_PER_IP_PER_HOUR = 20
+LIVE_CALLS_GLOBAL_PER_HOUR = 200
 QUOTA_FLOOR = 500          # stop live calls entirely below this many remaining
 
 

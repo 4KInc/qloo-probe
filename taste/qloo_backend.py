@@ -21,6 +21,14 @@ from stats import kendall_tau_b, rank_percentiles
 HERE = Path(__file__).resolve().parent.parent
 MARKETS = json.loads((HERE / "fixtures" / "markets.json").read_text())["markets"]
 
+# Entity resolution is frozen in a committed fixture: the catalog and the
+# anchor sets never change, so re-resolving them on every run spent 46 of 65
+# calls re-answering the same questions. Rebuild with
+# build_resolution_cache.py when either changes.
+_RESOLVED_PATH = HERE / "fixtures" / "resolved.json"
+RESOLVED = (json.loads(_RESOLVED_PATH.read_text())
+            if _RESOLVED_PATH.exists() else {"movies": {}, "artists": {}})
+
 
 # A title is reported only when two independent anchor sets place it within
 # this much of each other, measured in rank percentile. At 25 titles one
@@ -67,6 +75,12 @@ class QlooBackend:
         return self.last_call_id
 
     def _resolve_one(self, name, entity_type):
+        bucket = ("artists" if entity_type == "urn:entity:artist" else "movies")
+        frozen = (RESOLVED.get(bucket) or {}).get(name)
+        if frozen and frozen.get("id"):
+            if frozen.get("image"):
+                self._image_by_id[frozen["id"]] = frozen["image"]
+            return frozen["id"]
         try:
             body = self.client.search(name, types=entity_type)
         except QlooError:

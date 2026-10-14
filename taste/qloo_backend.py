@@ -16,21 +16,48 @@ import json
 from pathlib import Path
 
 from qloo_client import QlooClient, QlooError, affinity_of, entities_of, id_of
+from stats import kendall_tau_b, rank_percentiles
 
 HERE = Path(__file__).resolve().parent.parent
 MARKETS = json.loads((HERE / "fixtures" / "markets.json").read_text())["markets"]
 
 
+# A title is reported only when two independent anchor sets place it within
+# this much of each other, measured in rank percentile. At 25 titles one
+# position is about 0.04, so 0.25 is roughly six positions: wide enough that
+# ordinary jitter does not suppress a result, narrow enough that a title the
+# two sets genuinely disagree about is withheld rather than ranked.
+DISAGREEMENT_TOLERANCE = 0.25
+MIN_AGREED = 8            # fewer agreed titles than this is not a ranking
+
+
 class QlooBackend:
+    """Scores a catalog per market.
+
+    In consensus mode every market is read twice, through two unrelated anchor
+    sets, and only titles the two readings agree about are returned. The rest
+    are withheld as uncertain rather than ranked.
+
+    This exists because the stability check showed the fine ranking depends on
+    which anchors were picked: Mumbai's two readings agree at tau 0.97, New
+    York's at 0.13. Averaging the two would hide that. Reporting only the
+    agreement, and naming what was withheld, does not.
+    """
+
     def __init__(self, entity_type="urn:entity:movie", client=None, trace=None,
-                 markets=None):
+                 markets=None, consensus=True,
+                 tolerance=DISAGREEMENT_TOLERANCE):
         self.client = client or QlooClient()
         self.entity_type = entity_type
         self.trace = trace
         self.markets = markets or MARKETS
+        self.consensus = consensus
+        self.tolerance = tolerance
         self._anchor_cache = {}
         self._name_by_id = {}
         self.last_call_id = None
+        self.uncertain = {}        # market -> [entity_id withheld]
+        self.agreement = {}        # market -> tau between the two readings
 
     # ----- helpers --------------------------------------------------------
     def _record(self, path, params, status, n):
@@ -70,13 +97,7 @@ class QlooBackend:
                 missing.append(name)
         return resolved, missing
 
-    def score(self, market, ids, seed=None):
-        """Score the pinned catalog against this market's anchors.
-
-        `seed` selects which anchor set to use, which is how the loop's
-        widen-seed retry reaches a different reading of the same market.
-        """
-        which = seed or "primary"
+    def _score_once(self, market, ids, which):
         anchors = self._anchor_ids(market, which)
         if not anchors:
             return {}
@@ -101,6 +122,45 @@ class QlooBackend:
             if eid and aff is not None:
                 out[eid] = aff
         return out
+
+    def score(self, market, ids, seed=None):
+        """Score the pinned catalog against this market's anchors.
+
+        With consensus off, `seed` selects the anchor set, which is how the
+        loop's widen-seed retry reaches a different reading. With consensus
+        on, both sets are read and only their agreement is returned.
+        """
+        if not self.consensus:
+            return self._score_once(market, ids, seed or "primary")
+
+        primary = self._score_once(market, ids, "primary")
+        alternate = self._score_once(market, ids, "alternate")
+        if not primary:
+            return {}
+        if not alternate:
+            # Nothing to cross-check against. Report the single reading rather
+            # than nothing, but say so.
+            self.uncertain[market] = []
+            self.agreement[market] = None
+            return primary
+
+        pr, ar = rank_percentiles(primary), rank_percentiles(alternate)
+        self.agreement[market] = kendall_tau_b(pr, ar)
+
+        agreed, withheld = {}, []
+        for eid in pr:
+            if eid not in ar:
+                withheld.append(eid)
+                continue
+            if abs(pr[eid] - ar[eid]) <= self.tolerance:
+                # Mean of the two rank positions, not of the raw affinities:
+                # the two readings answer different questions, and only their
+                # ORDERING is being combined.
+                agreed[eid] = (pr[eid] + ar[eid]) / 2.0
+            else:
+                withheld.append(eid)
+        self.uncertain[market] = withheld
+        return agreed if len(agreed) >= MIN_AGREED else {}
 
     def seeds(self, market):
         """Alternate readings available to the retry path."""

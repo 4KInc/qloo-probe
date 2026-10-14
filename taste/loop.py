@@ -22,6 +22,7 @@ from taste.abstain import Verdict, check_input, check_market, check_pair
 MAX_STEPS = 24
 AMBIGUOUS_SPREAD = 0.15     # ranks this flat tell us nothing; try another seed
 MAX_SEEDS_PER_MARKET = 3
+MIN_HOME_AGREEMENT = 0.40   # below this the home reading is not a baseline
 
 
 class Step:
@@ -115,6 +116,26 @@ class Agent:
             home_call = getattr(self.backend, "last_call_id", None)
             if home_call:
                 self.call_for_market[goal.home_market] = home_call
+            home_agreement = (getattr(self.backend, "agreement", {})
+                              or {}).get(goal.home_market)
+            if home_agreement is not None and home_agreement < MIN_HOME_AGREEMENT:
+                message = (
+                    "%s cannot serve as the baseline: its own two anchor "
+                    "readings agree at only %.2f, so every shift measured "
+                    "against it would inherit that instability. This is a "
+                    "property of the market, not of the catalog -- a large "
+                    "heterogeneous market is several audiences under one "
+                    "name. Pick a market with a coherent taste profile, or "
+                    "supply the home profile directly."
+                    % (goal.home_market, home_agreement))
+                self._step("abort_baseline",
+                           "refusing to measure against an unstable baseline",
+                           {"market": goal.home_market,
+                            "anchor_agreement": home_agreement,
+                            "required": MIN_HOME_AGREEMENT})
+                if self.trace:
+                    self.trace.abstention("abstain_unstable_baseline", message)
+                return self._result(goal, aborted=message)
             self._step("score_home",
                        "establish the home ordering, so later markets are read "
                        "as movement rather than as raw popularity",
@@ -181,10 +202,14 @@ class Agent:
             call_id = getattr(self.backend, "last_call_id", None)
             if call_id:
                 self.call_for_market[market] = call_id
+            withheld = (getattr(self.backend, "uncertain", {}) or {}).get(market) or []
+            agreement = (getattr(self.backend, "agreement", {}) or {}).get(market)
             self._step("score_market",
                        "probed the market least like home first, since a market "
                        "that behaves like home teaches least about travel",
                        {"market": market, "ranked": len(scores),
+                        "withheld_as_uncertain": len(withheld),
+                        "anchor_agreement": agreement,
                         "seed": used_seed, "attempts": tried},
                        rejected=[{"market": m, "why": "lower expected divergence"}
                                  for m in passed_over[:3]])
@@ -216,8 +241,13 @@ class Agent:
                     % (market, goal.home_market,
                        ranking.agreement_with(home) or 0, shared),
                     supporting, kind="ranking")
+            withheld = (getattr(self.backend, "uncertain", {}) or {}).get(market) or []
             verdicts[market] = {
                 "supported_by": supporting,
+                "anchor_agreement": (getattr(self.backend, "agreement", {})
+                                     or {}).get(market),
+                "withheld_as_uncertain": [
+                    getattr(self.backend, "label", lambda x: x)(e) for e in withheld],
                 "agreement_with_home": ranking.agreement_with(home),
                 "travels": [{"entity": e, "shift": round(s, 3)}
                             for e, s in ordered[:5]],

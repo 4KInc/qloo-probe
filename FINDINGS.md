@@ -94,3 +94,43 @@ the English edition track global anglophone attention, which is close to
 popularity, and the anchor method is deliberately built to ignore popularity.
 The home-market test is the sharper hypothesis and it passes decisively; the
 rank-correlation test is the blunter one and it does not. Both are reported.
+
+## Consensus scoring, and what it refuses
+
+Swapping each market's three anchors for three unrelated ones leaves the
+headline verdict intact (11 of 11 regional titles rank highest at home becomes
+10 of 11, p=0.0059) but moves the fine ranking a great deal. Agreement between
+the two readings:
+
+| Market | anchor tau | titles agreed | withheld |
+|---|---|---|---|
+| Mumbai | 0.97 | 25 | 0 |
+| Sao Paulo | 0.75 | 25 | 0 |
+| Berlin | 0.52 | 19 | 6 |
+| Tokyo | 0.42 | 19 | 6 |
+| New York | 0.13 | 11 | 14 |
+
+Stability tracks how coherent a market's anchors are. Mumbai's three are all
+Bollywood playback singers and point at one audience. New York's span
+Springsteen, Beyonce and Taylor Swift, which is three audiences wearing one
+city's name.
+
+So every market is now read twice and only titles the two readings place
+within 0.25 rank percentile of each other are reported. The rest are withheld
+and named. Averaging the two readings would have hidden the disagreement;
+reporting only the agreement does not.
+
+**A heterogeneous market cannot be a baseline.** With New York as home, every
+pairwise overlap fell below the floor and the agent refused every market. That
+is the correct answer rather than a bug: the thing everything was being
+measured against was itself unreliable. The loop now checks the home market's
+own anchor agreement first and aborts with that reason, instead of letting it
+surface later as an unexplained overlap failure.
+
+With Mumbai as home (anchor tau 0.97) the same run answers three markets and
+abstains only on New York. Good Bye Lenin! is the top traveller into Berlin;
+Elite Squad into Sao Paulo; 3 Idiots is the clearest non-traveller into Berlin.
+
+This is the strongest honesty feature in the build: a verdict that says these
+travel, these do not, and on these the evidence is unstable, is worth more
+than a confident ranking of all 25.

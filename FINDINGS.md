@@ -166,3 +166,58 @@ says so is worth more than one that always answers.
 The home-market result survives the change: 11 of 11 regional titles still
 rank highest with their own audience (p = 0.0005), 10 of 11 under the
 alternate anchors (p = 0.0059).
+
+## Cross-domain signal strength is measurable, and varies enormously
+
+Anchoring an audience in one domain to rank entities in another only works if
+that domain pair carries signal. Measured by taking two deliberately opposed
+tastes within a domain and asking how differently they rank the same 25 films
+(low tau = the domain discriminates):
+
+| Anchor domain | tau between opposed tastes | carries film taste |
+|---|---|---|
+| tv_show | 0.06 | strongly |
+| videogame | 0.08 | strongly |
+| artist | 0.11 | strongly |
+| brand | 0.39 | weakly |
+| book | 0.70 | barely |
+| podcast | 0.72 | barely |
+| place | 0.67 - 0.98 | no |
+
+## Neighbourhood geography does not work for film taste
+
+A reasonable-sounding idea that the data refused: define an audience by the
+places in a neighbourhood, then rank films against them. The place sets come
+back genuinely distinct -- `filter.location.query` **is** honoured for places,
+unlike for movies -- Red Rooster and Sylvia's for the Bronx, Katz's and Eataly
+for Manhattan, House of Yes and Baby's All Right for Brooklyn.
+
+The film rankings that result are nearly identical: Roma, Shoplifters and
+Parasite top all three, at tau 0.67 to 0.98. Restaurant affinity predicts a
+generic prestige cluster, not a neighbourhood's film taste. Music, television
+and games split the same city at 0.26.
+
+Also: `take` is capped at 50. A larger value returns a 400 that is easy to
+swallow and reads downstream as "no data".
+
+## Audiences discovered rather than assumed
+
+Clustering 73 anchor signatures over 65 films, average linkage, bootstrap over
+resamples of the film set:
+
+| threshold | groups | largest | pairings surviving 80% of resamples |
+|---|---|---|---|
+| 0.45 | 10 | 24 | 54% |
+| 0.60 | 14 | 18 | 36% |
+| 0.70 | 15 | 11 | 53% |
+| **0.75** | **18** | **8** | **67%** |
+| 0.80 | 18 | 6 | 72% |
+
+Loose clustering produces large regional blobs that dissolve under resampling;
+tight clustering produces small cross-domain communities that survive. The
+finding is that taste communities are **smaller and stranger than marketing
+segments** -- Racionais MC's with Snowfall and The Sopranos; Ben Klock with
+Fela Kuti, Journey and Breath of the Wild. No city, no genre, no postcode.
+
+Single linkage was tried first and is wrong here: one bridging anchor chains
+two unrelated groups, and the bootstrap then certifies the blob as stable.

@@ -1,0 +1,1683 @@
+{
+  "threshold": 0.75,
+  "stability_at_threshold": {
+    "trials": 120,
+    "within_cluster_pairs": 70,
+    "survived_80pct": 47
+  },
+  "built_from": {
+    "films": 65,
+    "anchors": 73
+  },
+  "nodes": [
+    {
+      "id": "a0",
+      "size": 8,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Aphex Twin"
+        },
+        {
+          "domain": "artist",
+          "name": "Johnny Cash"
+        },
+        {
+          "domain": "artist",
+          "name": "Kraftwerk"
+        },
+        {
+          "domain": "artist",
+          "name": "Lou Reed"
+        },
+        {
+          "domain": "artist",
+          "name": "Nick Cave"
+        },
+        {
+          "domain": "artist",
+          "name": "Radiohead"
+        },
+        {
+          "domain": "artist",
+          "name": "Sonic Youth"
+        },
+        {
+          "domain": "videogame",
+          "name": "The Last of Us"
+        }
+      ],
+      "label": "Aphex Twin + Johnny Cash + Kraftwerk",
+      "short": "Aphex Twin +7",
+      "loves": [
+        {
+          "title": "Lost in Translation",
+          "image": "https://images.qloo.com/i/603C7E42-C952-45CB-8B6F-3B803FEFB2F7-420x-auto.jpg",
+          "score": 0.998
+        },
+        {
+          "title": "There Will Be Blood",
+          "image": "https://images.qloo.com/i/09E2094A-E17B-4039-9C29-980A1C830024-420x-auto.jpg",
+          "score": 0.973
+        },
+        {
+          "title": "Y Tu Mama Tambien",
+          "image": "https://images.qloo.com/i/D7DC69EE-925B-4B0E-AF53-56524E075523-420x-auto.jpg",
+          "score": 0.932
+        },
+        {
+          "title": "Run Lola Run",
+          "image": "https://images.qloo.com/i/E3E4FCBA-4777-4697-A8B5-D07C46D2067F-420x-auto.jpg",
+          "score": 0.918
+        },
+        {
+          "title": "Oldboy",
+          "image": "https://images.qloo.com/i/D0908D6C-A912-40C6-B77D-77AE05B92CC8-420x-auto.jpg",
+          "score": 0.908
+        },
+        {
+          "title": "Good Bye Lenin!",
+          "image": "https://images.qloo.com/i/45D74714-6B4A-413F-8402-5DB729063CAF-420x-auto.jpg",
+          "score": 0.9
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Top Gun: Maverick",
+          "image": "https://images.qloo.com/i/63109D8F-F736-42BF-BF29-460BB2AE0D2F-420x-auto.jpg",
+          "score": 0.02
+        },
+        {
+          "title": "Sholay",
+          "image": "https://images.qloo.com/i/69BD6D00-3311-4F53-9FF7-506060C21427-420x-auto.jpg",
+          "score": 0.045
+        },
+        {
+          "title": "RRR",
+          "image": "https://images.qloo.com/i/6D0B28D4-12FB-4113-BFAC-910271EF2D69-420x-auto.jpg",
+          "score": 0.057
+        },
+        {
+          "title": "Gully Boy",
+          "image": "https://images.qloo.com/i/51A19BB0-E7C3-44AD-A740-22B0A05013BF-420x-auto.jpg",
+          "score": 0.082
+        },
+        {
+          "title": "Mission: Impossible",
+          "image": "https://images.qloo.com/i/2D0912F8-7C88-4240-A9FD-1A343CC00133-420x-auto.jpg",
+          "score": 0.1
+        },
+        {
+          "title": "Barbie",
+          "image": "https://images.qloo.com/i/BAF6FB9E-7E2E-4008-944B-97C0CF430D41-420x-auto.jpg",
+          "score": 0.121
+        }
+      ],
+      "x": 1.0,
+      "y": 0.3918
+    },
+    {
+      "id": "a1",
+      "size": 6,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Ben Klock"
+        },
+        {
+          "domain": "artist",
+          "name": "Fela Kuti"
+        },
+        {
+          "domain": "artist",
+          "name": "Ryuichi Sakamoto"
+        },
+        {
+          "domain": "videogame",
+          "name": "Journey"
+        },
+        {
+          "domain": "videogame",
+          "name": "Outer Wilds"
+        },
+        {
+          "domain": "videogame",
+          "name": "The Legend of Zelda: Breath of the Wild"
+        }
+      ],
+      "label": "Ben Klock + Fela Kuti + Journey",
+      "short": "Ben Klock +5",
+      "loves": [
+        {
+          "title": "Moonlight",
+          "image": "https://images.qloo.com/i/2955F3C4-36AB-49F3-A818-3597F35EF46C-420x-auto.jpg",
+          "score": 0.971
+        },
+        {
+          "title": "Y Tu Mama Tambien",
+          "image": "https://images.qloo.com/i/D7DC69EE-925B-4B0E-AF53-56524E075523-420x-auto.jpg",
+          "score": 0.971
+        },
+        {
+          "title": "Shoplifters",
+          "image": "https://images.qloo.com/i/9AABDCA0-BBC1-4A14-8071-FBF31EA488D6-420x-auto.jpg",
+          "score": 0.943
+        },
+        {
+          "title": "Roma",
+          "image": "https://images.qloo.com/i/FB052F84-01CF-48BB-A30A-51C45F183777-420x-auto.jpg",
+          "score": 0.938
+        },
+        {
+          "title": "La Haine",
+          "image": "https://images.qloo.com/i/BCA23199-6D1D-471C-A777-6D4A582D97B9-420x-auto.jpg",
+          "score": 0.919
+        },
+        {
+          "title": "Perfect Blue",
+          "image": "https://images.qloo.com/i/29C61902-A877-453A-AE65-E7B605C410B5-420x-auto.jpg",
+          "score": 0.87
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Mission: Impossible",
+          "image": "https://images.qloo.com/i/2D0912F8-7C88-4240-A9FD-1A343CC00133-420x-auto.jpg",
+          "score": 0.031
+        },
+        {
+          "title": "The Avengers",
+          "image": "https://images.qloo.com/i/EDA2A941-4746-40FF-A48D-66FA4EFE2D17-420x-auto.jpg",
+          "score": 0.039
+        },
+        {
+          "title": "Jurassic Park",
+          "image": "https://images.qloo.com/i/D3529AD8-9349-481E-8FCB-D107EFB75E68-420x-auto.jpg",
+          "score": 0.049
+        },
+        {
+          "title": "Die Hard",
+          "image": "https://images.qloo.com/i/8A3A76A2-B76D-49B8-BE69-F8DFBA3F52FC-420x-auto.jpg",
+          "score": 0.065
+        },
+        {
+          "title": "Top Gun: Maverick",
+          "image": "https://images.qloo.com/i/63109D8F-F736-42BF-BF29-460BB2AE0D2F-420x-auto.jpg",
+          "score": 0.099
+        },
+        {
+          "title": "Notting Hill",
+          "image": "https://images.qloo.com/i/CC874E7E-E438-40CB-B930-79E90504940B-420x-auto.jpg",
+          "score": 0.102
+        }
+      ],
+      "x": 0.8265,
+      "y": 0.3525
+    },
+    {
+      "id": "a2",
+      "size": 4,
+      "members": [
+        {
+          "domain": "tv_show",
+          "name": "Game of Thrones"
+        },
+        {
+          "domain": "videogame",
+          "name": "Call of Duty"
+        },
+        {
+          "domain": "videogame",
+          "name": "Dark Souls"
+        },
+        {
+          "domain": "videogame",
+          "name": "Minecraft"
+        }
+      ],
+      "label": "Call of Duty + Dark Souls + Game of Thrones",
+      "short": "Call of Duty +3",
+      "loves": [
+        {
+          "title": "John Wick",
+          "image": "https://images.qloo.com/i/0D3D9B8F-EA18-49CB-85EC-72DE3FD8F007-420x-auto.jpg",
+          "score": 0.957
+        },
+        {
+          "title": "The Avengers",
+          "image": "https://images.qloo.com/i/EDA2A941-4746-40FF-A48D-66FA4EFE2D17-420x-auto.jpg",
+          "score": 0.93
+        },
+        {
+          "title": "Mad Max: Fury Road",
+          "image": "https://images.qloo.com/i/4344F84A-69CE-46D1-B09C-02F31EC13117-420x-auto.jpg",
+          "score": 0.914
+        },
+        {
+          "title": "Parasite",
+          "image": "https://images.qloo.com/i/A499EC25-7FF6-46DE-9DA5-3E78E99B9E26-420x-auto.jpg",
+          "score": 0.91
+        },
+        {
+          "title": "Train to Busan",
+          "image": "https://images.qloo.com/i/B43CB3EC-05F6-4543-84A2-DB9BDB5E71E3-420x-auto.jpg",
+          "score": 0.887
+        },
+        {
+          "title": "La La Land",
+          "image": "https://images.qloo.com/i/73E550EF-654A-41EA-863C-E958002CF7BA-420x-auto.jpg",
+          "score": 0.867
+        }
+      ],
+      "leaves": [
+        {
+          "title": "The Lives of Others",
+          "image": "https://images.qloo.com/i/6F3E3A01-135B-4286-A1BA-C9AE4B07C39F-420x-auto.jpg",
+          "score": 0.074
+        },
+        {
+          "title": "Ringu",
+          "image": "https://images.qloo.com/i/FEE8211F-912D-439C-98A3-7A74651073C3-420x-auto.jpg",
+          "score": 0.078
+        },
+        {
+          "title": "Y Tu Mama Tambien",
+          "image": "https://images.qloo.com/i/D7DC69EE-925B-4B0E-AF53-56524E075523-420x-auto.jpg",
+          "score": 0.086
+        },
+        {
+          "title": "Run Lola Run",
+          "image": "https://images.qloo.com/i/E3E4FCBA-4777-4697-A8B5-D07C46D2067F-420x-auto.jpg",
+          "score": 0.121
+        },
+        {
+          "title": "Good Bye Lenin!",
+          "image": "https://images.qloo.com/i/45D74714-6B4A-413F-8402-5DB729063CAF-420x-auto.jpg",
+          "score": 0.121
+        },
+        {
+          "title": "Cinema Paradiso",
+          "image": "https://images.qloo.com/i/7CEAC44C-04CB-4B91-9356-01517F2E8DC6-420x-auto.jpg",
+          "score": 0.121
+        }
+      ],
+      "x": 0.0,
+      "y": 0.6525
+    },
+    {
+      "id": "a3",
+      "size": 3,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Edith Piaf"
+        },
+        {
+          "domain": "artist",
+          "name": "Patti Smith"
+        },
+        {
+          "domain": "artist",
+          "name": "Talking Heads"
+        }
+      ],
+      "label": "Edith Piaf + Patti Smith + Talking Heads",
+      "short": "Edith Piaf +2",
+      "loves": [
+        {
+          "title": "Lost in Translation",
+          "image": "https://images.qloo.com/i/603C7E42-C952-45CB-8B6F-3B803FEFB2F7-420x-auto.jpg",
+          "score": 1.0
+        },
+        {
+          "title": "Y Tu Mama Tambien",
+          "image": "https://images.qloo.com/i/D7DC69EE-925B-4B0E-AF53-56524E075523-420x-auto.jpg",
+          "score": 0.974
+        },
+        {
+          "title": "Good Bye Lenin!",
+          "image": "https://images.qloo.com/i/45D74714-6B4A-413F-8402-5DB729063CAF-420x-auto.jpg",
+          "score": 0.958
+        },
+        {
+          "title": "Lady Bird",
+          "image": "https://images.qloo.com/i/4BE414CF-375F-4566-AA66-9AC6150A6B7F-420x-auto.jpg",
+          "score": 0.917
+        },
+        {
+          "title": "Moonlight",
+          "image": "https://images.qloo.com/i/2955F3C4-36AB-49F3-A818-3597F35EF46C-420x-auto.jpg",
+          "score": 0.917
+        },
+        {
+          "title": "Amelie",
+          "image": "https://images.qloo.com/i/B7A0731F-EC92-496A-9C40-47D9770489B6-420x-auto.jpg",
+          "score": 0.911
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Mission: Impossible",
+          "image": "https://images.qloo.com/i/2D0912F8-7C88-4240-A9FD-1A343CC00133-420x-auto.jpg",
+          "score": 0.01
+        },
+        {
+          "title": "Top Gun: Maverick",
+          "image": "https://images.qloo.com/i/63109D8F-F736-42BF-BF29-460BB2AE0D2F-420x-auto.jpg",
+          "score": 0.042
+        },
+        {
+          "title": "Sholay",
+          "image": "https://images.qloo.com/i/69BD6D00-3311-4F53-9FF7-506060C21427-420x-auto.jpg",
+          "score": 0.047
+        },
+        {
+          "title": "Die Hard",
+          "image": "https://images.qloo.com/i/8A3A76A2-B76D-49B8-BE69-F8DFBA3F52FC-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "RRR",
+          "image": "https://images.qloo.com/i/6D0B28D4-12FB-4113-BFAC-910271EF2D69-420x-auto.jpg",
+          "score": 0.073
+        },
+        {
+          "title": "Jurassic Park",
+          "image": "https://images.qloo.com/i/D3529AD8-9349-481E-8FCB-D107EFB75E68-420x-auto.jpg",
+          "score": 0.078
+        }
+      ],
+      "x": 0.8622,
+      "y": 0.131
+    },
+    {
+      "id": "a4",
+      "size": 3,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "A. R. Rahman"
+        },
+        {
+          "domain": "artist",
+          "name": "Arijit Singh"
+        },
+        {
+          "domain": "artist",
+          "name": "Lata Mangeshkar"
+        }
+      ],
+      "label": "A. R. Rahman + Arijit Singh + Lata Mangeshkar",
+      "short": "A. R. Rahman +2",
+      "loves": [
+        {
+          "title": "Gully Boy",
+          "image": "https://images.qloo.com/i/51A19BB0-E7C3-44AD-A740-22B0A05013BF-420x-auto.jpg",
+          "score": 0.995
+        },
+        {
+          "title": "Dangal",
+          "image": "https://images.qloo.com/i/51413AE6-596D-4648-B0EF-A6BD3EE22590-420x-auto.jpg",
+          "score": 0.979
+        },
+        {
+          "title": "3 Idiots",
+          "image": "https://images.qloo.com/i/CE300FA0-0752-4DD3-B28F-FC4CFD2D8915-420x-auto.jpg",
+          "score": 0.969
+        },
+        {
+          "title": "Sholay",
+          "image": "https://images.qloo.com/i/69BD6D00-3311-4F53-9FF7-506060C21427-420x-auto.jpg",
+          "score": 0.964
+        },
+        {
+          "title": "RRR",
+          "image": "https://images.qloo.com/i/6D0B28D4-12FB-4113-BFAC-910271EF2D69-420x-auto.jpg",
+          "score": 0.932
+        },
+        {
+          "title": "Parasite",
+          "image": "https://images.qloo.com/i/A499EC25-7FF6-46DE-9DA5-3E78E99B9E26-420x-auto.jpg",
+          "score": 0.917
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Menace II Society",
+          "image": "https://images.qloo.com/i/48C726A6-E9A6-4196-9716-72FAC2C9A1E2-420x-auto.jpg",
+          "score": 0.005
+        },
+        {
+          "title": "Ringu",
+          "image": "https://images.qloo.com/i/FEE8211F-912D-439C-98A3-7A74651073C3-420x-auto.jpg",
+          "score": 0.01
+        },
+        {
+          "title": "Perfect Blue",
+          "image": "https://images.qloo.com/i/29C61902-A877-453A-AE65-E7B605C410B5-420x-auto.jpg",
+          "score": 0.042
+        },
+        {
+          "title": "Akira",
+          "image": "https://images.qloo.com/i/0E84F600-B861-4A93-AC5E-6E1DF4AC5826-420x-auto.jpg",
+          "score": 0.047
+        },
+        {
+          "title": "Run Lola Run",
+          "image": "https://images.qloo.com/i/E3E4FCBA-4777-4697-A8B5-D07C46D2067F-420x-auto.jpg",
+          "score": 0.089
+        },
+        {
+          "title": "Boyz n the Hood",
+          "image": "https://images.qloo.com/i/81BA1C12-24F9-4E87-BB07-15C0E23BD641-420x-auto.jpg",
+          "score": 0.109
+        }
+      ],
+      "x": 0.1685,
+      "y": 0.5973
+    },
+    {
+      "id": "a5",
+      "size": 3,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Racionais MC's"
+        },
+        {
+          "domain": "tv_show",
+          "name": "Snowfall"
+        },
+        {
+          "domain": "tv_show",
+          "name": "The Sopranos"
+        }
+      ],
+      "label": "Racionais MC's + Snowfall + The Sopranos",
+      "short": "Racionais MC's +2",
+      "loves": [
+        {
+          "title": "Elite Squad",
+          "image": "https://images.qloo.com/i/E1167AE0-0A32-4095-B94D-F4B322CFCE5D-420x-auto.jpg",
+          "score": 0.99
+        },
+        {
+          "title": "Boyz n the Hood",
+          "image": "https://images.qloo.com/i/81BA1C12-24F9-4E87-BB07-15C0E23BD641-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Menace II Society",
+          "image": "https://images.qloo.com/i/48C726A6-E9A6-4196-9716-72FAC2C9A1E2-420x-auto.jpg",
+          "score": 0.979
+        },
+        {
+          "title": "Scarface",
+          "image": "https://images.qloo.com/i/B6CAF8E7-5E34-4BBC-8870-0B3513F750AC-420x-auto.jpg",
+          "score": 0.917
+        },
+        {
+          "title": "Goodfellas",
+          "image": "https://images.qloo.com/i/7B808044-FAFA-4A21-A7E0-860D5857E10D-420x-auto.jpg",
+          "score": 0.911
+        },
+        {
+          "title": "La Haine",
+          "image": "https://images.qloo.com/i/BCA23199-6D1D-471C-A777-6D4A582D97B9-420x-auto.jpg",
+          "score": 0.911
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Jurassic Park",
+          "image": "https://images.qloo.com/i/D3529AD8-9349-481E-8FCB-D107EFB75E68-420x-auto.jpg",
+          "score": 0.042
+        },
+        {
+          "title": "3 Idiots",
+          "image": "https://images.qloo.com/i/CE300FA0-0752-4DD3-B28F-FC4CFD2D8915-420x-auto.jpg",
+          "score": 0.042
+        },
+        {
+          "title": "Spirited Away",
+          "image": "https://images.qloo.com/i/9B33A620-68CA-49B3-BFCF-F09CCF8AD595-420x-auto.jpg",
+          "score": 0.052
+        },
+        {
+          "title": "Notting Hill",
+          "image": "https://images.qloo.com/i/CC874E7E-E438-40CB-B930-79E90504940B-420x-auto.jpg",
+          "score": 0.083
+        },
+        {
+          "title": "Dangal",
+          "image": "https://images.qloo.com/i/51413AE6-596D-4648-B0EF-A6BD3EE22590-420x-auto.jpg",
+          "score": 0.094
+        },
+        {
+          "title": "Your Name",
+          "image": "https://images.qloo.com/i/68CD7C41-78BE-4765-B184-1F1988036C89-420x-auto.jpg",
+          "score": 0.099
+        }
+      ],
+      "x": 0.8517,
+      "y": 0.7983
+    },
+    {
+      "id": "a6",
+      "size": 2,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Nas"
+        },
+        {
+          "domain": "artist",
+          "name": "The Notorious B.I.G."
+        }
+      ],
+      "label": "Nas + The Notorious B.I.G.",
+      "short": "Nas +1",
+      "loves": [
+        {
+          "title": "Boyz n the Hood",
+          "image": "https://images.qloo.com/i/81BA1C12-24F9-4E87-BB07-15C0E23BD641-420x-auto.jpg",
+          "score": 1.0
+        },
+        {
+          "title": "Menace II Society",
+          "image": "https://images.qloo.com/i/48C726A6-E9A6-4196-9716-72FAC2C9A1E2-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Scarface",
+          "image": "https://images.qloo.com/i/B6CAF8E7-5E34-4BBC-8870-0B3513F750AC-420x-auto.jpg",
+          "score": 0.953
+        },
+        {
+          "title": "Coming to America",
+          "image": "https://images.qloo.com/i/C8A17F74-C8B0-4456-B2FD-0EDCDA196E7F-420x-auto.jpg",
+          "score": 0.945
+        },
+        {
+          "title": "Goodfellas",
+          "image": "https://images.qloo.com/i/7B808044-FAFA-4A21-A7E0-860D5857E10D-420x-auto.jpg",
+          "score": 0.938
+        },
+        {
+          "title": "Elite Squad",
+          "image": "https://images.qloo.com/i/E1167AE0-0A32-4095-B94D-F4B322CFCE5D-420x-auto.jpg",
+          "score": 0.898
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Notting Hill",
+          "image": "https://images.qloo.com/i/CC874E7E-E438-40CB-B930-79E90504940B-420x-auto.jpg",
+          "score": 0.0
+        },
+        {
+          "title": "Amelie",
+          "image": "https://images.qloo.com/i/B7A0731F-EC92-496A-9C40-47D9770489B6-420x-auto.jpg",
+          "score": 0.016
+        },
+        {
+          "title": "Good Bye Lenin!",
+          "image": "https://images.qloo.com/i/45D74714-6B4A-413F-8402-5DB729063CAF-420x-auto.jpg",
+          "score": 0.047
+        },
+        {
+          "title": "Pan's Labyrinth",
+          "image": "https://images.qloo.com/i/878B26C8-9C94-4A6B-B65A-5AAD2CC67D97-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "Cinema Paradiso",
+          "image": "https://images.qloo.com/i/7CEAC44C-04CB-4B91-9356-01517F2E8DC6-420x-auto.jpg",
+          "score": 0.07
+        },
+        {
+          "title": "Ringu",
+          "image": "https://images.qloo.com/i/FEE8211F-912D-439C-98A3-7A74651073C3-420x-auto.jpg",
+          "score": 0.109
+        }
+      ],
+      "x": 0.5408,
+      "y": 0.9227
+    },
+    {
+      "id": "a7",
+      "size": 2,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Kendrick Lamar"
+        },
+        {
+          "domain": "tv_show",
+          "name": "Atlanta"
+        }
+      ],
+      "label": "Atlanta + Kendrick Lamar",
+      "short": "Atlanta +1",
+      "loves": [
+        {
+          "title": "Lady Bird",
+          "image": "https://images.qloo.com/i/4BE414CF-375F-4566-AA66-9AC6150A6B7F-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Moonlight",
+          "image": "https://images.qloo.com/i/2955F3C4-36AB-49F3-A818-3597F35EF46C-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Boyz n the Hood",
+          "image": "https://images.qloo.com/i/81BA1C12-24F9-4E87-BB07-15C0E23BD641-420x-auto.jpg",
+          "score": 0.953
+        },
+        {
+          "title": "Get Out",
+          "image": "https://images.qloo.com/i/052B6BB1-EDFA-4C49-A6FE-712DBB296B09-420x-auto.jpg",
+          "score": 0.938
+        },
+        {
+          "title": "Roma",
+          "image": "https://images.qloo.com/i/FB052F84-01CF-48BB-A30A-51C45F183777-420x-auto.jpg",
+          "score": 0.93
+        },
+        {
+          "title": "Menace II Society",
+          "image": "https://images.qloo.com/i/48C726A6-E9A6-4196-9716-72FAC2C9A1E2-420x-auto.jpg",
+          "score": 0.906
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Das Boot",
+          "image": "https://images.qloo.com/i/89B0C1DC-8439-4723-B533-E6730D8C79ED-420x-auto.jpg",
+          "score": 0.023
+        },
+        {
+          "title": "The Exorcist",
+          "image": "https://images.qloo.com/i/A8B7E55D-47AC-41D4-9A4C-35585B938B4F-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "Pan's Labyrinth",
+          "image": "https://images.qloo.com/i/878B26C8-9C94-4A6B-B65A-5AAD2CC67D97-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "Avatar",
+          "image": "https://images.qloo.com/i/68BA87EE-E30D-427E-BBF6-621C7DF4543C-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "Ringu",
+          "image": "https://images.qloo.com/i/FEE8211F-912D-439C-98A3-7A74651073C3-420x-auto.jpg",
+          "score": 0.078
+        },
+        {
+          "title": "The Lives of Others",
+          "image": "https://images.qloo.com/i/6F3E3A01-135B-4286-A1BA-C9AE4B07C39F-420x-auto.jpg",
+          "score": 0.086
+        }
+      ],
+      "x": 0.3707,
+      "y": 0.5486
+    },
+    {
+      "id": "a8",
+      "size": 2,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Bob Marley"
+        },
+        {
+          "domain": "artist",
+          "name": "Tupac Shakur"
+        }
+      ],
+      "label": "Bob Marley + Tupac Shakur",
+      "short": "Bob Marley +1",
+      "loves": [
+        {
+          "title": "Boyz n the Hood",
+          "image": "https://images.qloo.com/i/81BA1C12-24F9-4E87-BB07-15C0E23BD641-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Lost in Translation",
+          "image": "https://images.qloo.com/i/603C7E42-C952-45CB-8B6F-3B803FEFB2F7-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Y Tu Mama Tambien",
+          "image": "https://images.qloo.com/i/D7DC69EE-925B-4B0E-AF53-56524E075523-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Menace II Society",
+          "image": "https://images.qloo.com/i/48C726A6-E9A6-4196-9716-72FAC2C9A1E2-420x-auto.jpg",
+          "score": 0.953
+        },
+        {
+          "title": "Good Bye Lenin!",
+          "image": "https://images.qloo.com/i/45D74714-6B4A-413F-8402-5DB729063CAF-420x-auto.jpg",
+          "score": 0.914
+        },
+        {
+          "title": "Moonlight",
+          "image": "https://images.qloo.com/i/2955F3C4-36AB-49F3-A818-3597F35EF46C-420x-auto.jpg",
+          "score": 0.891
+        }
+      ],
+      "leaves": [
+        {
+          "title": "RRR",
+          "image": "https://images.qloo.com/i/6D0B28D4-12FB-4113-BFAC-910271EF2D69-420x-auto.jpg",
+          "score": 0.008
+        },
+        {
+          "title": "Top Gun: Maverick",
+          "image": "https://images.qloo.com/i/63109D8F-F736-42BF-BF29-460BB2AE0D2F-420x-auto.jpg",
+          "score": 0.031
+        },
+        {
+          "title": "Sholay",
+          "image": "https://images.qloo.com/i/69BD6D00-3311-4F53-9FF7-506060C21427-420x-auto.jpg",
+          "score": 0.031
+        },
+        {
+          "title": "The Avengers",
+          "image": "https://images.qloo.com/i/EDA2A941-4746-40FF-A48D-66FA4EFE2D17-420x-auto.jpg",
+          "score": 0.047
+        },
+        {
+          "title": "Dangal",
+          "image": "https://images.qloo.com/i/51413AE6-596D-4648-B0EF-A6BD3EE22590-420x-auto.jpg",
+          "score": 0.086
+        },
+        {
+          "title": "Barbie",
+          "image": "https://images.qloo.com/i/BAF6FB9E-7E2E-4008-944B-97C0CF430D41-420x-auto.jpg",
+          "score": 0.086
+        }
+      ],
+      "x": 0.9702,
+      "y": 0.3447
+    },
+    {
+      "id": "a9",
+      "size": 2,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Tatsuro Yamashita"
+        },
+        {
+          "domain": "videogame",
+          "name": "Animal Crossing: New Horizons"
+        }
+      ],
+      "label": "Animal Crossing: New Horizons + Tatsuro Yamashita",
+      "short": "Animal Crossing: New Horizons +1",
+      "loves": [
+        {
+          "title": "Your Name",
+          "image": "https://images.qloo.com/i/68CD7C41-78BE-4765-B184-1F1988036C89-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Perfect Blue",
+          "image": "https://images.qloo.com/i/29C61902-A877-453A-AE65-E7B605C410B5-420x-auto.jpg",
+          "score": 0.977
+        },
+        {
+          "title": "Akira",
+          "image": "https://images.qloo.com/i/0E84F600-B861-4A93-AC5E-6E1DF4AC5826-420x-auto.jpg",
+          "score": 0.953
+        },
+        {
+          "title": "Spirited Away",
+          "image": "https://images.qloo.com/i/9B33A620-68CA-49B3-BFCF-F09CCF8AD595-420x-auto.jpg",
+          "score": 0.953
+        },
+        {
+          "title": "Barbie",
+          "image": "https://images.qloo.com/i/BAF6FB9E-7E2E-4008-944B-97C0CF430D41-420x-auto.jpg",
+          "score": 0.938
+        },
+        {
+          "title": "Drive My Car",
+          "image": "https://images.qloo.com/i/B062F1C0-FBCF-4AF2-B4D3-66FC093382AF-420x-auto.jpg",
+          "score": 0.914
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Mission: Impossible",
+          "image": "https://images.qloo.com/i/2D0912F8-7C88-4240-A9FD-1A343CC00133-420x-auto.jpg",
+          "score": 0.0
+        },
+        {
+          "title": "Die Hard",
+          "image": "https://images.qloo.com/i/8A3A76A2-B76D-49B8-BE69-F8DFBA3F52FC-420x-auto.jpg",
+          "score": 0.016
+        },
+        {
+          "title": "Das Boot",
+          "image": "https://images.qloo.com/i/89B0C1DC-8439-4723-B533-E6730D8C79ED-420x-auto.jpg",
+          "score": 0.078
+        },
+        {
+          "title": "The Godfather",
+          "image": "https://images.qloo.com/i/F99FB2EB-7253-4E9B-B982-D21D29BFB238-420x-auto.jpg",
+          "score": 0.109
+        },
+        {
+          "title": "Scarface",
+          "image": "https://images.qloo.com/i/B6CAF8E7-5E34-4BBC-8870-0B3513F750AC-420x-auto.jpg",
+          "score": 0.133
+        },
+        {
+          "title": "The Dark Knight",
+          "image": "https://images.qloo.com/i/3432C364-C883-4A0D-A76B-99A57E5361E5-420x-auto.jpg",
+          "score": 0.148
+        }
+      ],
+      "x": 0.2847,
+      "y": 0.1891
+    },
+    {
+      "id": "a10",
+      "size": 2,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Caetano Veloso"
+        },
+        {
+          "domain": "artist",
+          "name": "Gilberto Gil"
+        }
+      ],
+      "label": "Caetano Veloso + Gilberto Gil",
+      "short": "Caetano Veloso +1",
+      "loves": [
+        {
+          "title": "Central Station",
+          "image": "https://images.qloo.com/i/378A4B85-C157-453D-BC77-D4F45C664E58-420x-auto.jpg",
+          "score": 1.0
+        },
+        {
+          "title": "Elite Squad",
+          "image": "https://images.qloo.com/i/E1167AE0-0A32-4095-B94D-F4B322CFCE5D-420x-auto.jpg",
+          "score": 0.969
+        },
+        {
+          "title": "Y Tu Mama Tambien",
+          "image": "https://images.qloo.com/i/D7DC69EE-925B-4B0E-AF53-56524E075523-420x-auto.jpg",
+          "score": 0.969
+        },
+        {
+          "title": "Roma",
+          "image": "https://images.qloo.com/i/FB052F84-01CF-48BB-A30A-51C45F183777-420x-auto.jpg",
+          "score": 0.961
+        },
+        {
+          "title": "Moonlight",
+          "image": "https://images.qloo.com/i/2955F3C4-36AB-49F3-A818-3597F35EF46C-420x-auto.jpg",
+          "score": 0.938
+        },
+        {
+          "title": "Good Bye Lenin!",
+          "image": "https://images.qloo.com/i/45D74714-6B4A-413F-8402-5DB729063CAF-420x-auto.jpg",
+          "score": 0.922
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Mission: Impossible",
+          "image": "https://images.qloo.com/i/2D0912F8-7C88-4240-A9FD-1A343CC00133-420x-auto.jpg",
+          "score": 0.008
+        },
+        {
+          "title": "Die Hard",
+          "image": "https://images.qloo.com/i/8A3A76A2-B76D-49B8-BE69-F8DFBA3F52FC-420x-auto.jpg",
+          "score": 0.008
+        },
+        {
+          "title": "John Wick",
+          "image": "https://images.qloo.com/i/0D3D9B8F-EA18-49CB-85EC-72DE3FD8F007-420x-auto.jpg",
+          "score": 0.031
+        },
+        {
+          "title": "The Dark Knight",
+          "image": "https://images.qloo.com/i/3432C364-C883-4A0D-A76B-99A57E5361E5-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "The Avengers",
+          "image": "https://images.qloo.com/i/EDA2A941-4746-40FF-A48D-66FA4EFE2D17-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "Sholay",
+          "image": "https://images.qloo.com/i/69BD6D00-3311-4F53-9FF7-506060C21427-420x-auto.jpg",
+          "score": 0.062
+        }
+      ],
+      "x": 0.6491,
+      "y": 0.1593
+    },
+    {
+      "id": "a11",
+      "size": 2,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "BTS"
+        },
+        {
+          "domain": "artist",
+          "name": "Taylor Swift"
+        }
+      ],
+      "label": "BTS + Taylor Swift",
+      "short": "BTS + Taylor Swift",
+      "loves": [
+        {
+          "title": "La La Land",
+          "image": "https://images.qloo.com/i/73E550EF-654A-41EA-863C-E958002CF7BA-420x-auto.jpg",
+          "score": 0.992
+        },
+        {
+          "title": "Lady Bird",
+          "image": "https://images.qloo.com/i/4BE414CF-375F-4566-AA66-9AC6150A6B7F-420x-auto.jpg",
+          "score": 0.992
+        },
+        {
+          "title": "Moonlight",
+          "image": "https://images.qloo.com/i/2955F3C4-36AB-49F3-A818-3597F35EF46C-420x-auto.jpg",
+          "score": 0.961
+        },
+        {
+          "title": "Get Out",
+          "image": "https://images.qloo.com/i/052B6BB1-EDFA-4C49-A6FE-712DBB296B09-420x-auto.jpg",
+          "score": 0.914
+        },
+        {
+          "title": "Roma",
+          "image": "https://images.qloo.com/i/FB052F84-01CF-48BB-A30A-51C45F183777-420x-auto.jpg",
+          "score": 0.914
+        },
+        {
+          "title": "Your Name",
+          "image": "https://images.qloo.com/i/68CD7C41-78BE-4765-B184-1F1988036C89-420x-auto.jpg",
+          "score": 0.906
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Elite Squad",
+          "image": "https://images.qloo.com/i/E1167AE0-0A32-4095-B94D-F4B322CFCE5D-420x-auto.jpg",
+          "score": 0.008
+        },
+        {
+          "title": "Das Boot",
+          "image": "https://images.qloo.com/i/89B0C1DC-8439-4723-B533-E6730D8C79ED-420x-auto.jpg",
+          "score": 0.016
+        },
+        {
+          "title": "Die Hard",
+          "image": "https://images.qloo.com/i/8A3A76A2-B76D-49B8-BE69-F8DFBA3F52FC-420x-auto.jpg",
+          "score": 0.023
+        },
+        {
+          "title": "Scarface",
+          "image": "https://images.qloo.com/i/B6CAF8E7-5E34-4BBC-8870-0B3513F750AC-420x-auto.jpg",
+          "score": 0.07
+        },
+        {
+          "title": "Run Lola Run",
+          "image": "https://images.qloo.com/i/E3E4FCBA-4777-4697-A8B5-D07C46D2067F-420x-auto.jpg",
+          "score": 0.094
+        },
+        {
+          "title": "The Lives of Others",
+          "image": "https://images.qloo.com/i/6F3E3A01-135B-4286-A1BA-C9AE4B07C39F-420x-auto.jpg",
+          "score": 0.117
+        }
+      ],
+      "x": 0.0991,
+      "y": 0.179
+    },
+    {
+      "id": "a12",
+      "size": 2,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Dolly Parton"
+        },
+        {
+          "domain": "tv_show",
+          "name": "Friends"
+        }
+      ],
+      "label": "Dolly Parton + Friends",
+      "short": "Dolly Parton + Friends",
+      "loves": [
+        {
+          "title": "Bridesmaids",
+          "image": "https://images.qloo.com/i/873C2897-F74D-4915-B9E7-E968EB63710E-420x-auto.jpg",
+          "score": 0.992
+        },
+        {
+          "title": "Notting Hill",
+          "image": "https://images.qloo.com/i/CC874E7E-E438-40CB-B930-79E90504940B-420x-auto.jpg",
+          "score": 0.992
+        },
+        {
+          "title": "Lady Bird",
+          "image": "https://images.qloo.com/i/4BE414CF-375F-4566-AA66-9AC6150A6B7F-420x-auto.jpg",
+          "score": 0.961
+        },
+        {
+          "title": "Lost in Translation",
+          "image": "https://images.qloo.com/i/603C7E42-C952-45CB-8B6F-3B803FEFB2F7-420x-auto.jpg",
+          "score": 0.938
+        },
+        {
+          "title": "Coming to America",
+          "image": "https://images.qloo.com/i/C8A17F74-C8B0-4456-B2FD-0EDCDA196E7F-420x-auto.jpg",
+          "score": 0.914
+        },
+        {
+          "title": "La La Land",
+          "image": "https://images.qloo.com/i/73E550EF-654A-41EA-863C-E958002CF7BA-420x-auto.jpg",
+          "score": 0.914
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Ringu",
+          "image": "https://images.qloo.com/i/FEE8211F-912D-439C-98A3-7A74651073C3-420x-auto.jpg",
+          "score": 0.016
+        },
+        {
+          "title": "Das Boot",
+          "image": "https://images.qloo.com/i/89B0C1DC-8439-4723-B533-E6730D8C79ED-420x-auto.jpg",
+          "score": 0.047
+        },
+        {
+          "title": "Akira",
+          "image": "https://images.qloo.com/i/0E84F600-B861-4A93-AC5E-6E1DF4AC5826-420x-auto.jpg",
+          "score": 0.047
+        },
+        {
+          "title": "Seven Samurai",
+          "image": "https://images.qloo.com/i/7F1163D3-D842-4121-AA13-68FA930E0F09-420x-auto.jpg",
+          "score": 0.086
+        },
+        {
+          "title": "Oldboy",
+          "image": "https://images.qloo.com/i/D0908D6C-A912-40C6-B77D-77AE05B92CC8-420x-auto.jpg",
+          "score": 0.086
+        },
+        {
+          "title": "2001: A Space Odyssey",
+          "image": "https://images.qloo.com/i/87B9350E-ABFF-4A53-8565-49641858015C-420x-auto.jpg",
+          "score": 0.109
+        }
+      ],
+      "x": 0.3992,
+      "y": 0.1225
+    },
+    {
+      "id": "a13",
+      "size": 2,
+      "members": [
+        {
+          "domain": "artist",
+          "name": "Bad Bunny"
+        },
+        {
+          "domain": "artist",
+          "name": "Rosalia"
+        }
+      ],
+      "label": "Bad Bunny + Rosalia",
+      "short": "Bad Bunny + Rosalia",
+      "loves": [
+        {
+          "title": "Parasite",
+          "image": "https://images.qloo.com/i/A499EC25-7FF6-46DE-9DA5-3E78E99B9E26-420x-auto.jpg",
+          "score": 1.0
+        },
+        {
+          "title": "Hereditary",
+          "image": "https://images.qloo.com/i/17C8BCEF-2FF2-4A23-8F51-6C8CB9CD8114-420x-auto.jpg",
+          "score": 0.961
+        },
+        {
+          "title": "Train to Busan",
+          "image": "https://images.qloo.com/i/B43CB3EC-05F6-4543-84A2-DB9BDB5E71E3-420x-auto.jpg",
+          "score": 0.961
+        },
+        {
+          "title": "Get Out",
+          "image": "https://images.qloo.com/i/052B6BB1-EDFA-4C49-A6FE-712DBB296B09-420x-auto.jpg",
+          "score": 0.945
+        },
+        {
+          "title": "Lady Bird",
+          "image": "https://images.qloo.com/i/4BE414CF-375F-4566-AA66-9AC6150A6B7F-420x-auto.jpg",
+          "score": 0.914
+        },
+        {
+          "title": "Barbie",
+          "image": "https://images.qloo.com/i/BAF6FB9E-7E2E-4008-944B-97C0CF430D41-420x-auto.jpg",
+          "score": 0.906
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Das Boot",
+          "image": "https://images.qloo.com/i/89B0C1DC-8439-4723-B533-E6730D8C79ED-420x-auto.jpg",
+          "score": 0.0
+        },
+        {
+          "title": "There Will Be Blood",
+          "image": "https://images.qloo.com/i/09E2094A-E17B-4039-9C29-980A1C830024-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "Jurassic Park",
+          "image": "https://images.qloo.com/i/D3529AD8-9349-481E-8FCB-D107EFB75E68-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "Die Hard",
+          "image": "https://images.qloo.com/i/8A3A76A2-B76D-49B8-BE69-F8DFBA3F52FC-420x-auto.jpg",
+          "score": 0.062
+        },
+        {
+          "title": "Avatar",
+          "image": "https://images.qloo.com/i/68BA87EE-E30D-427E-BBF6-621C7DF4543C-420x-auto.jpg",
+          "score": 0.086
+        },
+        {
+          "title": "2001: A Space Odyssey",
+          "image": "https://images.qloo.com/i/87B9350E-ABFF-4A53-8565-49641858015C-420x-auto.jpg",
+          "score": 0.086
+        }
+      ],
+      "x": 0.2467,
+      "y": 0.4552
+    },
+    {
+      "id": "a14",
+      "size": 2,
+      "members": [
+        {
+          "domain": "tv_show",
+          "name": "The Wire"
+        },
+        {
+          "domain": "videogame",
+          "name": "Red Dead Redemption 2"
+        }
+      ],
+      "label": "Red Dead Redemption 2 + The Wire",
+      "short": "Red Dead Redemption 2 +1",
+      "loves": [
+        {
+          "title": "Goodfellas",
+          "image": "https://images.qloo.com/i/7B808044-FAFA-4A21-A7E0-860D5857E10D-420x-auto.jpg",
+          "score": 0.969
+        },
+        {
+          "title": "Elite Squad",
+          "image": "https://images.qloo.com/i/E1167AE0-0A32-4095-B94D-F4B322CFCE5D-420x-auto.jpg",
+          "score": 0.953
+        },
+        {
+          "title": "Scarface",
+          "image": "https://images.qloo.com/i/B6CAF8E7-5E34-4BBC-8870-0B3513F750AC-420x-auto.jpg",
+          "score": 0.945
+        },
+        {
+          "title": "Boyz n the Hood",
+          "image": "https://images.qloo.com/i/81BA1C12-24F9-4E87-BB07-15C0E23BD641-420x-auto.jpg",
+          "score": 0.938
+        },
+        {
+          "title": "John Wick",
+          "image": "https://images.qloo.com/i/0D3D9B8F-EA18-49CB-85EC-72DE3FD8F007-420x-auto.jpg",
+          "score": 0.938
+        },
+        {
+          "title": "There Will Be Blood",
+          "image": "https://images.qloo.com/i/09E2094A-E17B-4039-9C29-980A1C830024-420x-auto.jpg",
+          "score": 0.914
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Notting Hill",
+          "image": "https://images.qloo.com/i/CC874E7E-E438-40CB-B930-79E90504940B-420x-auto.jpg",
+          "score": 0.008
+        },
+        {
+          "title": "Ringu",
+          "image": "https://images.qloo.com/i/FEE8211F-912D-439C-98A3-7A74651073C3-420x-auto.jpg",
+          "score": 0.031
+        },
+        {
+          "title": "Barbie",
+          "image": "https://images.qloo.com/i/BAF6FB9E-7E2E-4008-944B-97C0CF430D41-420x-auto.jpg",
+          "score": 0.031
+        },
+        {
+          "title": "Central Station",
+          "image": "https://images.qloo.com/i/378A4B85-C157-453D-BC77-D4F45C664E58-420x-auto.jpg",
+          "score": 0.078
+        },
+        {
+          "title": "Bridesmaids",
+          "image": "https://images.qloo.com/i/873C2897-F74D-4915-B9E7-E968EB63710E-420x-auto.jpg",
+          "score": 0.086
+        },
+        {
+          "title": "The Exorcist",
+          "image": "https://images.qloo.com/i/A8B7E55D-47AC-41D4-9A4C-35585B938B4F-420x-auto.jpg",
+          "score": 0.102
+        }
+      ],
+      "x": 0.785,
+      "y": 1.0
+    },
+    {
+      "id": "a15",
+      "size": 2,
+      "members": [
+        {
+          "domain": "tv_show",
+          "name": "Breaking Bad"
+        },
+        {
+          "domain": "tv_show",
+          "name": "Money Heist"
+        }
+      ],
+      "label": "Breaking Bad + Money Heist",
+      "short": "Breaking Bad +1",
+      "loves": [
+        {
+          "title": "John Wick",
+          "image": "https://images.qloo.com/i/0D3D9B8F-EA18-49CB-85EC-72DE3FD8F007-420x-auto.jpg",
+          "score": 0.977
+        },
+        {
+          "title": "Parasite",
+          "image": "https://images.qloo.com/i/A499EC25-7FF6-46DE-9DA5-3E78E99B9E26-420x-auto.jpg",
+          "score": 0.977
+        },
+        {
+          "title": "Elite Squad",
+          "image": "https://images.qloo.com/i/E1167AE0-0A32-4095-B94D-F4B322CFCE5D-420x-auto.jpg",
+          "score": 0.969
+        },
+        {
+          "title": "Menace II Society",
+          "image": "https://images.qloo.com/i/48C726A6-E9A6-4196-9716-72FAC2C9A1E2-420x-auto.jpg",
+          "score": 0.93
+        },
+        {
+          "title": "Shoplifters",
+          "image": "https://images.qloo.com/i/9AABDCA0-BBC1-4A14-8071-FBF31EA488D6-420x-auto.jpg",
+          "score": 0.922
+        },
+        {
+          "title": "Top Gun: Maverick",
+          "image": "https://images.qloo.com/i/63109D8F-F736-42BF-BF29-460BB2AE0D2F-420x-auto.jpg",
+          "score": 0.898
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Amelie",
+          "image": "https://images.qloo.com/i/B7A0731F-EC92-496A-9C40-47D9770489B6-420x-auto.jpg",
+          "score": 0.016
+        },
+        {
+          "title": "Spirited Away",
+          "image": "https://images.qloo.com/i/9B33A620-68CA-49B3-BFCF-F09CCF8AD595-420x-auto.jpg",
+          "score": 0.039
+        },
+        {
+          "title": "Titanic",
+          "image": "https://images.qloo.com/i/E96915EB-E311-475E-91C8-C7C27A581FCF-420x-auto.jpg",
+          "score": 0.047
+        },
+        {
+          "title": "The Exorcist",
+          "image": "https://images.qloo.com/i/A8B7E55D-47AC-41D4-9A4C-35585B938B4F-420x-auto.jpg",
+          "score": 0.086
+        },
+        {
+          "title": "Pan's Labyrinth",
+          "image": "https://images.qloo.com/i/878B26C8-9C94-4A6B-B65A-5AAD2CC67D97-420x-auto.jpg",
+          "score": 0.094
+        },
+        {
+          "title": "Ringu",
+          "image": "https://images.qloo.com/i/FEE8211F-912D-439C-98A3-7A74651073C3-420x-auto.jpg",
+          "score": 0.117
+        }
+      ],
+      "x": 0.4619,
+      "y": 0.9718
+    },
+    {
+      "id": "a16",
+      "size": 2,
+      "members": [
+        {
+          "domain": "tv_show",
+          "name": "Fleabag"
+        },
+        {
+          "domain": "tv_show",
+          "name": "Terrace House"
+        }
+      ],
+      "label": "Fleabag + Terrace House",
+      "short": "Fleabag + Terrace House",
+      "loves": [
+        {
+          "title": "Lost in Translation",
+          "image": "https://images.qloo.com/i/603C7E42-C952-45CB-8B6F-3B803FEFB2F7-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Y Tu Mama Tambien",
+          "image": "https://images.qloo.com/i/D7DC69EE-925B-4B0E-AF53-56524E075523-420x-auto.jpg",
+          "score": 0.969
+        },
+        {
+          "title": "Bridesmaids",
+          "image": "https://images.qloo.com/i/873C2897-F74D-4915-B9E7-E968EB63710E-420x-auto.jpg",
+          "score": 0.961
+        },
+        {
+          "title": "Lady Bird",
+          "image": "https://images.qloo.com/i/4BE414CF-375F-4566-AA66-9AC6150A6B7F-420x-auto.jpg",
+          "score": 0.953
+        },
+        {
+          "title": "Notting Hill",
+          "image": "https://images.qloo.com/i/CC874E7E-E438-40CB-B930-79E90504940B-420x-auto.jpg",
+          "score": 0.945
+        },
+        {
+          "title": "Good Bye Lenin!",
+          "image": "https://images.qloo.com/i/45D74714-6B4A-413F-8402-5DB729063CAF-420x-auto.jpg",
+          "score": 0.938
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Jurassic Park",
+          "image": "https://images.qloo.com/i/D3529AD8-9349-481E-8FCB-D107EFB75E68-420x-auto.jpg",
+          "score": 0.008
+        },
+        {
+          "title": "Mission: Impossible",
+          "image": "https://images.qloo.com/i/2D0912F8-7C88-4240-A9FD-1A343CC00133-420x-auto.jpg",
+          "score": 0.039
+        },
+        {
+          "title": "Die Hard",
+          "image": "https://images.qloo.com/i/8A3A76A2-B76D-49B8-BE69-F8DFBA3F52FC-420x-auto.jpg",
+          "score": 0.039
+        },
+        {
+          "title": "Das Boot",
+          "image": "https://images.qloo.com/i/89B0C1DC-8439-4723-B533-E6730D8C79ED-420x-auto.jpg",
+          "score": 0.07
+        },
+        {
+          "title": "John Wick",
+          "image": "https://images.qloo.com/i/0D3D9B8F-EA18-49CB-85EC-72DE3FD8F007-420x-auto.jpg",
+          "score": 0.102
+        },
+        {
+          "title": "Seven Samurai",
+          "image": "https://images.qloo.com/i/7F1163D3-D842-4121-AA13-68FA930E0F09-420x-auto.jpg",
+          "score": 0.125
+        }
+      ],
+      "x": 0.599,
+      "y": 0.0
+    },
+    {
+      "id": "a17",
+      "size": 2,
+      "members": [
+        {
+          "domain": "videogame",
+          "name": "Celeste"
+        },
+        {
+          "domain": "videogame",
+          "name": "Disco Elysium"
+        }
+      ],
+      "label": "Celeste + Disco Elysium",
+      "short": "Celeste + Disco Elysium",
+      "loves": [
+        {
+          "title": "Barbie",
+          "image": "https://images.qloo.com/i/BAF6FB9E-7E2E-4008-944B-97C0CF430D41-420x-auto.jpg",
+          "score": 0.992
+        },
+        {
+          "title": "Parasite",
+          "image": "https://images.qloo.com/i/A499EC25-7FF6-46DE-9DA5-3E78E99B9E26-420x-auto.jpg",
+          "score": 0.984
+        },
+        {
+          "title": "Top Gun: Maverick",
+          "image": "https://images.qloo.com/i/63109D8F-F736-42BF-BF29-460BB2AE0D2F-420x-auto.jpg",
+          "score": 0.969
+        },
+        {
+          "title": "Shoplifters",
+          "image": "https://images.qloo.com/i/9AABDCA0-BBC1-4A14-8071-FBF31EA488D6-420x-auto.jpg",
+          "score": 0.93
+        },
+        {
+          "title": "Lady Bird",
+          "image": "https://images.qloo.com/i/4BE414CF-375F-4566-AA66-9AC6150A6B7F-420x-auto.jpg",
+          "score": 0.922
+        },
+        {
+          "title": "RRR",
+          "image": "https://images.qloo.com/i/6D0B28D4-12FB-4113-BFAC-910271EF2D69-420x-auto.jpg",
+          "score": 0.906
+        }
+      ],
+      "leaves": [
+        {
+          "title": "Das Boot",
+          "image": "https://images.qloo.com/i/89B0C1DC-8439-4723-B533-E6730D8C79ED-420x-auto.jpg",
+          "score": 0.023
+        },
+        {
+          "title": "Titanic",
+          "image": "https://images.qloo.com/i/E96915EB-E311-475E-91C8-C7C27A581FCF-420x-auto.jpg",
+          "score": 0.039
+        },
+        {
+          "title": "Scarface",
+          "image": "https://images.qloo.com/i/B6CAF8E7-5E34-4BBC-8870-0B3513F750AC-420x-auto.jpg",
+          "score": 0.07
+        },
+        {
+          "title": "Cinema Paradiso",
+          "image": "https://images.qloo.com/i/7CEAC44C-04CB-4B91-9356-01517F2E8DC6-420x-auto.jpg",
+          "score": 0.07
+        },
+        {
+          "title": "The Exorcist",
+          "image": "https://images.qloo.com/i/A8B7E55D-47AC-41D4-9A4C-35585B938B4F-420x-auto.jpg",
+          "score": 0.078
+        },
+        {
+          "title": "Die Hard",
+          "image": "https://images.qloo.com/i/8A3A76A2-B76D-49B8-BE69-F8DFBA3F52FC-420x-auto.jpg",
+          "score": 0.078
+        }
+      ],
+      "x": 0.1879,
+      "y": 0.4369
+    }
+  ],
+  "edges": [
+    {
+      "a": "a0",
+      "b": "a1",
+      "w": 0.76
+    },
+    {
+      "a": "a0",
+      "b": "a3",
+      "w": 0.821
+    },
+    {
+      "a": "a0",
+      "b": "a8",
+      "w": 0.638
+    },
+    {
+      "a": "a1",
+      "b": "a3",
+      "w": 0.801
+    },
+    {
+      "a": "a1",
+      "b": "a10",
+      "w": 0.66
+    },
+    {
+      "a": "a2",
+      "b": "a11",
+      "w": 0.55
+    },
+    {
+      "a": "a3",
+      "b": "a8",
+      "w": 0.662
+    },
+    {
+      "a": "a3",
+      "b": "a10",
+      "w": 0.679
+    },
+    {
+      "a": "a3",
+      "b": "a16",
+      "w": 0.74
+    },
+    {
+      "a": "a5",
+      "b": "a6",
+      "w": 0.751
+    },
+    {
+      "a": "a5",
+      "b": "a14",
+      "w": 0.748
+    },
+    {
+      "a": "a5",
+      "b": "a15",
+      "w": 0.69
+    },
+    {
+      "a": "a6",
+      "b": "a7",
+      "w": 0.684
+    },
+    {
+      "a": "a6",
+      "b": "a14",
+      "w": 0.67
+    },
+    {
+      "a": "a6",
+      "b": "a15",
+      "w": 0.77
+    },
+    {
+      "a": "a7",
+      "b": "a13",
+      "w": 0.768
+    },
+    {
+      "a": "a7",
+      "b": "a15",
+      "w": 0.565
+    },
+    {
+      "a": "a7",
+      "b": "a17",
+      "w": 0.756
+    },
+    {
+      "a": "a9",
+      "b": "a13",
+      "w": 0.659
+    },
+    {
+      "a": "a9",
+      "b": "a17",
+      "w": 0.755
+    },
+    {
+      "a": "a10",
+      "b": "a16",
+      "w": 0.772
+    },
+    {
+      "a": "a11",
+      "b": "a12",
+      "w": 0.681
+    },
+    {
+      "a": "a11",
+      "b": "a13",
+      "w": 0.558
+    },
+    {
+      "a": "a12",
+      "b": "a16",
+      "w": 0.777
+    },
+    {
+      "a": "a13",
+      "b": "a17",
+      "w": 0.795
+    },
+    {
+      "a": "a14",
+      "b": "a15",
+      "w": 0.716
+    }
+  ],
+  "note": "Distance on this map is taste distance: positions come from multidimensional scaling on the correlation between audience film-affinity signatures. The map is precomputed, so opening it costs no Qloo calls."
+}

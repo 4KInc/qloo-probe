@@ -147,6 +147,15 @@ class Handler(BaseHTTPRequestHandler):
             preset_id = (params.get("preset") or [""])[0]
             body, status = answer(preset_id, self.client_ip())
             return self._send(status, json.dumps(body, default=str))
+        if route.path == "/api/atlas":
+            path = HERE / "atlas_view.json"
+            if not path.exists():
+                return self._send(503, json.dumps(
+                    {"error": "atlas not built", "how": "run atlas_view.py"}))
+            return self._send(200, path.read_text())
+        if route.path in ("/atlas", "/atlas.html"):
+            return self._send(200, (HERE / "atlas.html").read_text(),
+                              "text/html; charset=utf-8")
         if route.path in ("/", "/index.html"):
             page = page_html().replace("__PRESETS__", json.dumps(PRESETS))
             return self._send(200, page, "text/html; charset=utf-8")

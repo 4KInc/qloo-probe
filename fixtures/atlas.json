@@ -1,0 +1,49 @@
+{
+  "note": "Reference set for audience discovery. The films are chosen for SPREAD, not quality: if the set is all arthouse, every signature correlates and the clustering finds one blob. Anchors are drawn only from the domains measured to carry film signal (tv_show 0.06, videogame 0.08, artist 0.11); books, podcasts and places were measured not to and are excluded.",
+  "films": [
+    "The Avengers", "Avatar", "Titanic", "The Dark Knight", "Jurassic Park",
+    "Top Gun: Maverick", "Barbie", "The Matrix", "Mad Max: Fury Road",
+    "John Wick", "Die Hard", "Mission: Impossible",
+    "The Godfather", "Goodfellas", "City of God", "Elite Squad", "La Haine",
+    "Boyz n the Hood", "Menace II Society", "Scarface",
+    "Get Out", "Hereditary", "The Exorcist", "Train to Busan", "Ringu",
+    "Spirited Away", "Your Name", "Akira", "Perfect Blue", "Seven Samurai",
+    "Shoplifters", "Drive My Car",
+    "Parasite", "Oldboy", "Memories of Murder",
+    "RRR", "3 Idiots", "Dangal", "Sholay", "Gully Boy",
+    "Amelie", "Good Bye Lenin!", "Das Boot", "Run Lola Run",
+    "The Lives of Others", "Cinema Paradiso", "Bicycle Thieves",
+    "Y Tu Mama Tambien", "Roma", "Pan's Labyrinth", "Central Station",
+    "Crouching Tiger, Hidden Dragon", "In the Mood for Love",
+    "Moonlight", "Lady Bird", "There Will Be Blood", "Lost in Translation",
+    "Superbad", "Bridesmaids", "Coming to America",
+    "La La Land", "Notting Hill", "Casablanca", "Psycho", "2001: A Space Odyssey"
+  ],
+  "anchors": {
+    "artist": [
+      "Jay-Z", "Nas", "The Notorious B.I.G.", "Wu-Tang Clan", "Kendrick Lamar",
+      "Tupac Shakur", "Lou Reed", "Talking Heads", "Patti Smith", "Sonic Youth",
+      "Radiohead", "Nick Cave", "Kraftwerk", "Ben Klock", "Aphex Twin",
+      "Daft Punk", "A. R. Rahman", "Arijit Singh", "Lata Mangeshkar",
+      "Tatsuro Yamashita", "Mariya Takeuchi", "Ryuichi Sakamoto",
+      "Caetano Veloso", "Gilberto Gil", "Racionais MC's",
+      "Taylor Swift", "Beyonce", "Bruce Springsteen", "Dolly Parton",
+      "Johnny Cash", "Metallica", "Black Sabbath", "Bob Marley", "Fela Kuti",
+      "Burna Boy", "BTS", "Rosalia", "Bad Bunny", "Edith Piaf", "Miles Davis"
+    ],
+    "tv_show": [
+      "The Wire", "Snowfall", "The Sopranos", "Breaking Bad", "Twin Peaks",
+      "Fleabag", "Atlanta", "Succession", "Terrace House", "Dark",
+      "Money Heist", "Sacred Games", "Squid Game", "Chernobyl",
+      "Seinfeld", "Friends", "The Office", "Game of Thrones",
+      "Stranger Things", "Black Mirror"
+    ],
+    "videogame": [
+      "Grand Theft Auto V", "Disco Elysium", "Journey", "NBA 2K24",
+      "The Last of Us", "Dark Souls", "Animal Crossing: New Horizons",
+      "Call of Duty", "Red Dead Redemption 2", "Minecraft",
+      "Final Fantasy VII", "Outer Wilds", "Celeste", "Street Fighter II",
+      "The Legend of Zelda: Breath of the Wild"
+    ]
+  }
+}

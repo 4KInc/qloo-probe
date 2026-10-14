@@ -1,0 +1,196 @@
+<!doctype html><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Taste Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;
+  --screen:#0a0a0c;--seat:#141419;--seat-2:#1c1c23;--ink:#f4f1ea;--ink-2:#a9a49a;
+  --ink-3:#6f6b64;--rule:#26262e;--bulb:#e8b84b;--pos:#3987e5;--neg:#e66767;
+  --display:"Bebas Neue",Impact,sans-serif;
+  --sans:Inter,ui-sans-serif,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;overflow-x:hidden;background:var(--screen);color:var(--ink);
+  font:400 15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(14px,3.5vw,32px) 80px}
+header{padding:clamp(26px,5vw,44px) 0 0;text-align:center}
+h1{font:400 clamp(44px,10vw,92px)/0.88 var(--display);letter-spacing:.012em;
+  margin:0;text-transform:uppercase}
+h1 span{color:var(--bulb)}
+.tagline{font:400 12px/1.6 var(--mono);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);margin:12px 0 0}
+.lede{max-width:66ch;margin:18px auto 0;color:var(--ink-2);font-size:15px;
+  line-height:1.65;text-align:center}
+.lede b{color:var(--ink);font-weight:500}
+.strip{height:14px;margin:24px 0 0;border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  background:repeating-linear-gradient(90deg,transparent 0 9px,var(--rule) 9px 15px)}
+.statline{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:18px 0 6px;
+  font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.mapwrap{position:relative;margin:14px 0 0;border:1px solid var(--rule);
+  border-radius:3px;background:radial-gradient(ellipse at 50% 45%,#121218,#0a0a0c 72%)}
+svg{display:block;width:100%;height:auto}
+.edge{stroke:var(--rule)}
+.node{cursor:pointer}
+.node circle{fill:var(--seat-2);stroke:var(--ink-3);stroke-width:1.2;
+  transition:fill .15s,stroke .15s}
+.node:hover circle,.node.sel circle{fill:var(--bulb);stroke:var(--bulb)}
+.node text{font:400 11px var(--mono);fill:var(--ink-2);pointer-events:none}
+.node:hover text,.node.sel text{fill:var(--ink)}
+.hint{font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);text-align:center;margin:12px 0 0}
+.panel{margin-top:26px;border-top:1px solid var(--rule);padding-top:22px}
+.panel h2{font:400 clamp(26px,4vw,38px)/1.05 var(--display);letter-spacing:.02em;
+  margin:0 0 6px;text-transform:uppercase}
+.members{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 4px}
+.m{font:400 11.5px/1 var(--mono);padding:5px 9px;border:1px solid var(--rule);
+  border-radius:2px;color:var(--ink-2)}
+.m i{color:var(--ink-3);font-style:normal}
+.slug{font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin:22px 0 10px}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(112px,15vw,150px);
+  gap:12px;overflow-x:auto;padding-bottom:6px}
+.poster{position:relative;aspect-ratio:2/3;background:var(--seat-2);
+  border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.poster img{width:100%;height:100%;object-fit:cover;display:block}
+.poster .fb{position:absolute;inset:0;display:grid;place-items:center;padding:8px;
+  text-align:center;font:400 15px/1.05 var(--display);color:var(--ink-3);
+  text-transform:uppercase}
+.cap{margin-top:7px;font-size:12px;color:var(--ink-2)}
+.dim .poster{filter:grayscale(1) brightness(.52)}
+.dim .cap{color:var(--ink-3)}
+footer{margin-top:40px;border-top:1px solid var(--rule);padding-top:18px;
+  color:var(--ink-3);font-size:12.5px;line-height:1.7;max-width:78ch}
+footer a{color:var(--ink-2)}
+@media (max-width:620px){.node text{font-size:9px}}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>The Taste <span>Atlas</span></h1>
+  <p class="tagline">Audiences, discovered &mdash; not assumed</p>
+  <p class="lede">We did not pick these groups. Each one is a set of artists,
+  shows and games whose <b>film-affinity signatures</b> correlate, found by
+  clustering the taste graph. Distance on this map is <b>taste distance</b>,
+  not geography.</p>
+  <div class="strip"></div>
+</header>
+
+<div class="statline" id="stats"></div>
+<div class="mapwrap"><svg id="map" viewBox="0 0 1000 620" role="img"
+  aria-label="Map of discovered audiences positioned by taste similarity"></svg></div>
+<p class="hint">Click an audience to see what it watches</p>
+
+<div class="panel" id="panel"></div>
+
+<footer>
+  Built from <span id="prov"></span>. Clusters are joined by average linkage at
+  correlation 0.75, the tightness measured to survive resampling of the film
+  set; looser grouping produced one large cluster that dissolved under the same
+  test. These are communities of film affinity as Qloo models it, not groups of
+  people, and anchors that joined no cluster are left off the map rather than
+  forced into one. The map is precomputed, so opening it spends no Qloo calls.
+  <br><a href="/">Travels Well</a> &middot;
+  <a href="https://github.com/4KInc/travels-well">Source and method</a>
+</footer>
+</div>
+
+<script>
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;
+  if(x!==undefined)e.textContent=x;return e};
+const svgEl=(t,attrs)=>{const e=document.createElementNS('http://www.w3.org/2000/svg',t);
+  for(const k in attrs)e.setAttribute(k,attrs[k]);return e};
+
+fetch('/api/atlas').then(r=>r.json()).then(draw);
+
+function draw(d){
+  const stats=document.getElementById('stats');
+  stats.appendChild(el('span',null,d.nodes.length+' audiences'));
+  stats.appendChild(el('span',null,d.built_from.anchors+' anchors'));
+  stats.appendChild(el('span',null,d.built_from.films+' films'));
+  const st=d.stability_at_threshold;
+  if(st) stats.appendChild(el('span',null,
+    Math.round(100*st.survived_80pct/st.within_cluster_pairs)+'% of pairings stable'));
+  document.getElementById('prov').textContent =
+    d.built_from.anchors+' anchors across music, television and games, scored against '+
+    d.built_from.films+' films';
+
+  const svg=document.getElementById('map');
+  const W=1000,H=620,PAD=78;
+  const px=n=>PAD+n.x*(W-2*PAD), py=n=>PAD+n.y*(H-2*PAD);
+  const by={}; d.nodes.forEach(n=>by[n.id]=n);
+
+  d.edges.forEach(e=>{
+    const a=by[e.a],b=by[e.b];
+    svg.appendChild(svgEl('line',{x1:px(a),y1:py(a),x2:px(b),y2:py(b),
+      class:'edge','stroke-width':Math.max(.4,(e.w-.5)*5),'stroke-opacity':.5}));
+  });
+
+  // Labels are placed after the nodes so collisions can be resolved: each
+  // label is pushed below the node, then nudged down while it overlaps one
+  // already placed. Anchoring flips near the edges so nothing is clipped.
+  const placed=[];
+  const blobs=d.nodes.map(n=>({x:px(n),y:py(n),r:11+n.size*2.1}));
+  d.nodes.forEach(n=>{
+    const g=svgEl('g',{class:'node',tabindex:0,role:'button'});
+    const r=11+n.size*2.1;
+    const cx=px(n), cy=py(n);
+    g.appendChild(svgEl('circle',{cx:cx,cy:cy,r:r}));
+    const label=n.short||n.label;
+    const halfW=label.length*3.3;
+    let anchor='middle', tx=cx;
+    if(cx-halfW<6){anchor='start';tx=Math.max(cx-r,6)}
+    else if(cx+halfW>W-6){anchor='end';tx=Math.min(cx+r,W-6)}
+    let ty=cy+r+14;
+    let guard=0;
+    const hitsLabel=()=>placed.some(p=>Math.abs(p.y-ty)<12 &&
+          Math.abs(p.x-tx)<(halfW+p.w));
+    const hitsNode=()=>blobs.some(b=>Math.abs(b.y-ty)<b.r+7 &&
+          Math.abs(b.x-tx)<halfW+b.r);
+    while(guard++<40 && (hitsLabel()||hitsNode())) ty+=13;
+    placed.push({x:tx,y:ty,w:halfW});
+    const t=svgEl('text',{x:tx,y:ty,'text-anchor':anchor});
+    t.textContent=label;
+    g.appendChild(t);
+    const act=()=>{[...svg.querySelectorAll('.node')].forEach(x=>x.classList.remove('sel'));
+      g.classList.add('sel');show(n)};
+    g.addEventListener('click',act);
+    g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();act()}});
+    svg.appendChild(g);
+  });
+  show(d.nodes[0]);
+  svg.querySelector('.node').classList.add('sel');
+}
+
+function rail(items,dim){
+  const r=el('div','rail'+(dim?' dim':''));
+  items.forEach(f=>{
+    const c=el('div');
+    const box=el('div','poster');
+    if(f.image){const im=new Image();im.src=f.image;im.alt=f.title;im.loading='lazy';
+      im.onerror=()=>{im.remove();box.appendChild(el('div','fb',f.title))};
+      box.appendChild(im);}
+    else box.appendChild(el('div','fb',f.title));
+    c.appendChild(box); c.appendChild(el('div','cap',f.title)); r.appendChild(c);
+  });
+  return r;
+}
+
+function show(n){
+  const p=document.getElementById('panel');
+  p.innerHTML='';
+  p.appendChild(el('h2',null,n.label));
+  const mem=el('div','members');
+  n.members.forEach(m=>{
+    const s=el('span','m'); const i=el('i',null,m.domain.replace('_',' ')+' · ');
+    s.appendChild(i); s.appendChild(document.createTextNode(m.name)); mem.appendChild(s);
+  });
+  p.appendChild(mem);
+  p.appendChild(el('p','slug','Films this audience is drawn to'));
+  p.appendChild(rail(n.loves,false));
+  p.appendChild(el('p','slug','Films it is not'));
+  p.appendChild(rail(n.leaves,true));
+}
+</script>

@@ -119,6 +119,33 @@ def main():
              for j in range(n)] for i in range(n)]
     coords = mds(corr, n)
 
+    # MDS can place two audiences on top of each other. Relax overlaps with a
+    # few gentle repulsion passes: positions stay faithful to taste distance,
+    # the circles simply stop colliding.
+    radii = [13 + len(g) * 2.3 for g in groups]
+    scale = 1.0
+    xs0 = [c[0] for c in coords]; ys0 = [c[1] for c in coords]
+    spread = max(max(xs0) - min(xs0), max(ys0) - min(ys0), 1e-9)
+    scale = 820.0 / spread            # work in roughly the on-screen units
+    pts = [[c[0] * scale, c[1] * scale] for c in coords]
+    for _ in range(140):
+        moved = False
+        for i in range(n):
+            for j in range(i + 1, n):
+                dx = pts[j][0] - pts[i][0]
+                dy = pts[j][1] - pts[i][1]
+                dist = math.hypot(dx, dy) or 1e-6
+                want = radii[i] + radii[j] + 26
+                if dist < want:
+                    push = (want - dist) / 2.0 * 0.5
+                    ux, uy = dx / dist, dy / dist
+                    pts[i][0] -= ux * push; pts[i][1] -= uy * push
+                    pts[j][0] += ux * push; pts[j][1] += uy * push
+                    moved = True
+        if not moved:
+            break
+    coords = pts
+
     xs = [c[0] for c in coords]
     ys = [c[1] for c in coords]
     spanx = max(max(xs) - min(xs), 1e-9)

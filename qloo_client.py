@@ -176,20 +176,40 @@ def entities_of(body):
 
 
 def affinity_of(item):
-    """Affinity lives in different places depending on query shape."""
+    """Taste affinity for the signal in THIS query. Never popularity.
+
+    A response carries both: `popularity` at the top level, which is a global
+    property of the entity, and `query.affinity`, which is its affinity for the
+    signal that was asked about. An earlier version of this function checked
+    top-level keys first, found `popularity`, and returned that -- which would
+    have ranked every market by global fame and made them all look identical.
+    Confusing the two is the exact error this project exists to catch, so there
+    is deliberately no fallback from one to the other: if affinity is absent,
+    this returns None and the caller abstains.
+    """
     if not isinstance(item, dict):
         return None
-    for key in ("affinity", "score", "popularity"):
-        if key in item and isinstance(item[key], (int, float)):
-            return float(item[key])
     q = item.get("query")
     if isinstance(q, dict):
-        for key in ("affinity", "score", "measurements"):
+        for key in ("affinity", "affinity_score", "score"):
             v = q.get(key)
-            if isinstance(v, (int, float)):
+            if isinstance(v, (int, float)) and not isinstance(v, bool):
                 return float(v)
-            if isinstance(v, dict) and isinstance(v.get("affinity"), (int, float)):
-                return float(v["affinity"])
+        m = q.get("measurements")
+        if isinstance(m, dict) and isinstance(m.get("affinity"), (int, float)):
+            return float(m["affinity"])
+    v = item.get("affinity")
+    if isinstance(v, (int, float)) and not isinstance(v, bool):
+        return float(v)
+    return None
+
+
+def popularity_of(item):
+    """Global popularity, kept strictly separate from affinity."""
+    if isinstance(item, dict):
+        v = item.get("popularity")
+        if isinstance(v, (int, float)) and not isinstance(v, bool):
+            return float(v)
     return None
 
 

@@ -153,6 +153,9 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(503, json.dumps(
                     {"error": "atlas not built", "how": "run atlas_view.py"}))
             return self._send(200, path.read_text())
+        if route.path in ("/pitch", "/pitch.html"):
+            return self._send(200, (HERE / "pitch.html").read_text(),
+                              "text/html; charset=utf-8")
         if route.path in ("/atlas", "/atlas.html"):
             return self._send(200, (HERE / "atlas.html").read_text(),
                               "text/html; charset=utf-8")
@@ -160,6 +163,44 @@ class Handler(BaseHTTPRequestHandler):
             page = page_html().replace("__PRESETS__", json.dumps(PRESETS))
             return self._send(200, page, "text/html; charset=utf-8")
         return self._send(404, json.dumps({"error": "not found"}))
+
+    def do_POST(self):
+        route = urlparse(self.path)
+        if route.path != "/api/pitch":
+            return self._send(404, json.dumps({"error": "not found"}))
+        allowed, reason = BUDGET.allow_live(self.client_ip())
+        if not allowed:
+            return self._send(429, json.dumps({"error":
+                "Rate limit reached (%s). This is a shared demo key; try again "
+                "shortly, or explore the precomputed Atlas, which costs nothing."
+                % reason}))
+        try:
+            length = int(self.headers.get("Content-Length") or 0)
+            payload = json.loads(self.rfile.read(length) or b"{}")
+        except (ValueError, TypeError):
+            return self._send(400, json.dumps({"error": "could not read request"}))
+        if not has_key():
+            return self._send(503, json.dumps({"error":
+                "No Qloo key configured on this server."}))
+        try:
+            from qloo_client import QlooClient
+            from taste.evidence import Trace
+            from taste.pitch import PitchError, run as run_pitch
+            client = QlooClient(log_name="pitch_calls.jsonl")
+            trace = Trace()
+            result = run_pitch(client,
+                               payload.get("slate") or [],
+                               payload.get("buyer") or [],
+                               payload.get("home") or None,
+                               trace=trace)
+            BUDGET.record_live(self.client_ip(), client.quota_remaining)
+            result["calls"] = trace.summary()["calls"]
+            return self._send(200, json.dumps(result, default=str))
+        except PitchError as exc:
+            return self._send(200, json.dumps({"error": str(exc)}))
+        except Exception as exc:               # never leak a traceback
+            return self._send(500, json.dumps({"error":
+                "The ranking failed (%s)." % type(exc).__name__}))
 
     def log_message(self, fmt, *args):   # keep container logs readable
         sys.stderr.write("%s %s\n" % (self.client_ip(), fmt % args))

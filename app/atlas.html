@@ -27,6 +27,23 @@ h1 span{color:var(--bulb)}
 .strip{height:14px;margin:24px 0 0;border-top:1px solid var(--rule);
   border-bottom:1px solid var(--rule);
   background:repeating-linear-gradient(90deg,transparent 0 9px,var(--rule) 9px 15px)}
+.homebar{display:flex;justify-content:center;align-items:center;gap:10px;
+  flex-wrap:wrap;margin:22px 0 2px}
+.homebar label{font:400 11px/1 var(--mono);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3)}
+.homebar select{font:400 13px/1 var(--sans);padding:9px 12px;background:var(--seat);
+  color:var(--ink);border:1px solid var(--rule);border-radius:3px;max-width:min(92vw,380px)}
+.homebar select:focus-visible{outline:2px solid var(--bulb);outline-offset:2px}
+.routed{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline;margin:6px 0 0;
+  font:400 11.5px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink-3)}
+.routed b{color:var(--ink);font-weight:500}
+.shift{position:absolute;top:6px;right:6px;padding:3px 6px;border-radius:2px;
+  font:500 11px/1 var(--mono);background:rgba(6,6,9,.82);border:1px solid currentColor}
+.shift.up{color:var(--pos)} .shift.down{color:var(--neg)}
+.caveat{margin-top:12px;border-left:2px solid var(--bulb);padding:9px 13px;
+  color:var(--ink-2);font-size:13px;max-width:72ch}
+.home-mark{font:400 10px/1 var(--mono);fill:var(--bulb)}
 .statline{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:18px 0 6px;
   font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .mapwrap{position:relative;margin:14px 0 0;border:1px solid var(--rule);
@@ -96,6 +113,10 @@ footer a{color:var(--ink-2)}
   <div class="strip"></div>
 </header>
 
+<div class="homebar">
+  <label for="home">Your slate already plays to</label>
+  <select id="home"><option value="">nobody yet &mdash; just show me each audience</option></select>
+</div>
 <div class="statline" id="stats"></div>
 <div class="mapwrap">
   <svg id="map" viewBox="0 0 1000 620" role="img"
@@ -134,7 +155,7 @@ const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;
 const svgEl=(t,attrs)=>{const e=document.createElementNS('http://www.w3.org/2000/svg',t);
   for(const k in attrs)e.setAttribute(k,attrs[k]);return e};
 
-fetch('/api/atlas').then(r=>r.json()).then(draw);
+fetch('/api/atlas').then(r=>r.json()).then(d=>{ART=d.art||{};draw(d)});
 
 const DOMAIN_COLOR={artist:'#3987e5',tv_show:'#e8b84b',videogame:'#39c08a',mixed:'#b98ae0'};
 const W=1000,H=620,PAD=84;
@@ -287,8 +308,38 @@ function draw(d){
   document.getElementById('zout').onclick=()=>zoomAt(W/2,H/2,1/1.25);
   document.getElementById('zfit').onclick=()=>{view={k:1,x:0,y:0};applyView()};
 
+  const sel=document.getElementById('home');
+  NODES.forEach(n=>{
+    const o=document.createElement('option');
+    o.value=n.id; o.textContent=n.label;
+    sel.appendChild(o);
+  });
+  sel.addEventListener('change',()=>{
+    HOME=byId[sel.value]||null;
+    NODES.forEach(n=>n.parts.ring.setAttribute('stroke-dasharray',
+      HOME && n.id===HOME.id ? '5 4' : ''));
+    if(CURRENT) show(CURRENT);
+  });
+
   NODES[0].g.classList.add('sel');
   show(NODES[0]);
+}
+
+let HOME=null, CURRENT=null, ART={};
+
+function route(home,target){
+  // Both signatures are already on the page, so routing an audience against
+  // another costs nothing: the shift is the difference in rank position, over
+  // the films both audiences actually rank.
+  const withheld=new Set([...(home.uncertain||[]),...(target.uncertain||[])]);
+  const rows=[];
+  for(const f in target.ranks){
+    if(!(f in home.ranks)) continue;
+    if(withheld.has(f)) continue;
+    rows.push({title:f,image:ART[f],shift:target.ranks[f]-home.ranks[f]});
+  }
+  rows.sort((a,b)=>b.shift-a.shift);
+  return {rows,withheld:[...withheld]};
 }
 
 function reposition(n){
@@ -319,11 +370,16 @@ function highlight(n){
   });
 }
 
-function rail(items,dim){
+function rail(items,dim,withShift){
   const r=el('div','rail'+(dim?' dim':''));
   items.forEach(f=>{
     const c=el('div');
     const box=el('div','poster');
+    if(withShift && typeof f.shift==='number'){
+      const s=el('div','shift '+(f.shift>=0?'up':'down'),
+        (f.shift>=0?'+':'\u2212')+Math.abs(f.shift).toFixed(2));
+      box.appendChild(s);
+    }
     if(f.image){const im=new Image();im.src=f.image;im.alt=f.title;im.loading='lazy';
       im.onerror=()=>{im.remove();box.appendChild(el('div','fb',f.title))};
       box.appendChild(im);}
@@ -334,6 +390,7 @@ function rail(items,dim){
 }
 
 function show(n){
+  CURRENT=n;
   const p=document.getElementById('panel');
   p.innerHTML='';
   p.appendChild(el('h2',null,n.label));
@@ -343,9 +400,31 @@ function show(n){
     s.appendChild(i); s.appendChild(document.createTextNode(m.name)); mem.appendChild(s);
   });
   p.appendChild(mem);
-  p.appendChild(el('p','slug','Films this audience is drawn to'));
-  p.appendChild(rail(n.loves,false));
-  p.appendChild(el('p','slug','Films it is not'));
-  p.appendChild(rail(n.leaves,true));
+
+  if(HOME && HOME.id!==n.id){
+    const {rows,withheld}=route(HOME,n);
+    const meta=el('div','routed');
+    const a=el('span'); a.appendChild(document.createTextNode('routing from '));
+    a.appendChild(el('b',null,HOME.label)); meta.appendChild(a);
+    meta.appendChild(el('span',null,rows.length+' films compared'));
+    if(withheld.length) meta.appendChild(el('span',null,withheld.length+' withheld'));
+    p.appendChild(meta);
+    p.appendChild(el('p','slug','Travels here'));
+    p.appendChild(rail(rows.slice(0,8),false,true));
+    p.appendChild(el('p','slug','Stays behind'));
+    p.appendChild(rail(rows.slice(-8).reverse(),true,true));
+    const single=[HOME,n].filter(x=>x.halves_agree===null).map(x=>x.label);
+    if(single.length) p.appendChild(el('p','caveat',
+      'Single reading, not cross-checked: '+single.join(' and ')+
+      '. Audiences of two or three anchors cannot be split into halves that '+
+      'independently agree, so nothing here was withheld on their account.'));
+  } else {
+    if(HOME && HOME.id===n.id)
+      p.appendChild(el('p','routed','This is the audience your slate already plays to. Pick another to route it.'));
+    p.appendChild(el('p','slug','Films this audience is drawn to'));
+    p.appendChild(rail(n.loves,false));
+    p.appendChild(el('p','slug','Films it is not'));
+    p.appendChild(rail(n.leaves,true));
+  }
 }
 </script>

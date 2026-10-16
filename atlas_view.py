@@ -20,6 +20,7 @@ HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE))
 
 import atlas_build as AB  # noqa: E402
+from stats import rank_percentiles  # noqa: E402
 
 THRESHOLD = 0.75          # the level measured to survive resampling
 TOP_N = 6                 # films shown per audience
@@ -96,6 +97,22 @@ def main():
         cent = centroid(sigs, members, films)
         cents.append(cent)
         ranked = sorted(cent.items(), key=lambda kv: -kv[1])
+
+        # Split-half consensus, the same discipline the hand-built audiences
+        # get from two anchor sets: halve the members, build a centroid from
+        # each, and withhold any film the halves place far apart. A cluster of
+        # two or three cannot be halved meaningfully and is marked as a single
+        # uncrosschecked reading rather than pretending otherwise.
+        ordered = sorted(members)
+        half_a, half_b = ordered[0::2], ordered[1::2]
+        if len(ordered) >= 4:
+            ca, cb = centroid(sigs, half_a, films), centroid(sigs, half_b, films)
+            ra, rb = rank_percentiles(ca), rank_percentiles(cb)
+            shared = [f for f in films if f in ra and f in rb]
+            uncertain = sorted(f for f in shared if abs(ra[f] - rb[f]) > 0.25)
+            halves_agree = pearson(ca, cb, films)
+        else:
+            uncertain, halves_agree = [], None
         nodes.append({
             "id": "a%d" % idx,
             "size": len(members),
@@ -112,6 +129,12 @@ def main():
                       for t, s in ranked[:TOP_N]],
             "leaves": [{"title": t, "image": art(t), "score": round(s, 3)}
                        for t, s in ranked[-TOP_N:]][::-1],
+            # The full ranking, so the browser can route a slate between any
+            # two audiences without spending a single Qloo call.
+            "ranks": {t: round(v, 4) for t, v in rank_percentiles(cent).items()},
+            "uncertain": uncertain,
+            "halves_agree": (round(halves_agree, 3)
+                             if halves_agree is not None else None),
         })
 
     n = len(nodes)
@@ -191,8 +214,10 @@ def main():
     print("  stability at %.2f: %d/%d pairings survive 80%% of resamples (%.0f%%)"
           % (THRESHOLD, survived, len(inside), 100 * survived / max(1, len(inside))))
 
+    art_by_title = {t: art(t) for t in films}
     out = {
         "threshold": THRESHOLD,
+        "art": art_by_title,
         "stability_at_threshold": {"trials": trials,
                                    "within_cluster_pairs": len(inside),
                                    "survived_80pct": survived},

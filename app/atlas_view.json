@@ -79,6 +79,12 @@
   "nodes": [
     {
       "id": "a0",
+      "name": "Experimental Rock \u00b7 Alternative Rock \u00b7 Experimental",
+      "tags": [
+        "Experimental Rock",
+        "Alternative Rock",
+        "Experimental"
+      ],
       "size": 8,
       "members": [
         {
@@ -254,6 +260,12 @@
     },
     {
       "id": "a1",
+      "name": "Puzzle \u00b7 Minimal Techno \u00b7 Afrobeat",
+      "tags": [
+        "Puzzle",
+        "Minimal Techno",
+        "Afrobeat"
+      ],
       "size": 6,
       "members": [
         {
@@ -421,6 +433,12 @@
     },
     {
       "id": "a2",
+      "name": "Dark fantasy \u00b7 Realistic \u00b7 War",
+      "tags": [
+        "Dark fantasy",
+        "Realistic",
+        "War"
+      ],
       "size": 4,
       "members": [
         {
@@ -586,6 +604,12 @@
     },
     {
       "id": "a3",
+      "name": "New Wave \u00b7 Art Rock \u00b7 Alternative Rock",
+      "tags": [
+        "New Wave",
+        "Art Rock",
+        "Alternative Rock"
+      ],
       "size": 3,
       "members": [
         {
@@ -741,6 +765,12 @@
     },
     {
       "id": "a4",
+      "name": "Bollywood \u00b7 Indian Classical \u00b7 Hindi",
+      "tags": [
+        "Bollywood",
+        "Indian Classical",
+        "Hindi"
+      ],
       "size": 3,
       "members": [
         {
@@ -896,6 +926,12 @@
     },
     {
       "id": "a5",
+      "name": "Period drama \u00b7 Crime \u00b7 United states of america",
+      "tags": [
+        "Period drama",
+        "Crime",
+        "United states of america"
+      ],
       "size": 3,
       "members": [
         {
@@ -1051,6 +1087,12 @@
     },
     {
       "id": "a6",
+      "name": "East Coast Hip Hop \u00b7 Gangsta Rap \u00b7 Rap",
+      "tags": [
+        "East Coast Hip Hop",
+        "Gangsta Rap",
+        "Rap"
+      ],
       "size": 2,
       "members": [
         {
@@ -1202,6 +1244,11 @@
     },
     {
       "id": "a7",
+      "name": "Rap \u00b7 Comedy",
+      "tags": [
+        "Rap",
+        "Comedy"
+      ],
       "size": 2,
       "members": [
         {
@@ -1353,6 +1400,12 @@
     },
     {
       "id": "a8",
+      "name": "Roots Reggae \u00b7 Ska \u00b7 Reggae",
+      "tags": [
+        "Roots Reggae",
+        "Ska",
+        "Reggae"
+      ],
       "size": 2,
       "members": [
         {
@@ -1504,6 +1557,10 @@
     },
     {
       "id": "a9",
+      "name": "Social",
+      "tags": [
+        "Social"
+      ],
       "size": 2,
       "members": [
         {
@@ -1655,6 +1712,12 @@
     },
     {
       "id": "a10",
+      "name": "Tropicalia \u00b7 Bossa Nova \u00b7 Mpb",
+      "tags": [
+        "Tropicalia",
+        "Bossa Nova",
+        "Mpb"
+      ],
       "size": 2,
       "members": [
         {
@@ -1806,6 +1869,12 @@
     },
     {
       "id": "a11",
+      "name": "K-Pop \u00b7 Indie Folk \u00b7 Dance Pop",
+      "tags": [
+        "K-Pop",
+        "Indie Folk",
+        "Dance Pop"
+      ],
       "size": 2,
       "members": [
         {
@@ -1957,6 +2026,12 @@
     },
     {
       "id": "a12",
+      "name": "Warm \u00b7 Romantic comedy \u00b7 Romance",
+      "tags": [
+        "Warm",
+        "Romantic comedy",
+        "Romance"
+      ],
       "size": 2,
       "members": [
         {
@@ -2108,6 +2183,12 @@
     },
     {
       "id": "a13",
+      "name": "Reggaeton \u00b7 Trap Latino \u00b7 Latin Trap",
+      "tags": [
+        "Reggaeton",
+        "Trap Latino",
+        "Latin Trap"
+      ],
       "size": 2,
       "members": [
         {
@@ -2259,6 +2340,12 @@
     },
     {
       "id": "a14",
+      "name": "Thriller \u00b7 Open World \u00b7 Crime",
+      "tags": [
+        "Thriller",
+        "Open World",
+        "Crime"
+      ],
       "size": 2,
       "members": [
         {
@@ -2410,6 +2497,12 @@
     },
     {
       "id": "a15",
+      "name": "Thriller \u00b7 Crime \u00b7 Psychological thriller",
+      "tags": [
+        "Thriller",
+        "Crime",
+        "Psychological thriller"
+      ],
       "size": 2,
       "members": [
         {
@@ -2561,6 +2654,12 @@
     },
     {
       "id": "a16",
+      "name": "Dark comedy \u00b7 Comedy drama \u00b7 Comedy",
+      "tags": [
+        "Dark comedy",
+        "Comedy drama",
+        "Comedy"
+      ],
       "size": 2,
       "members": [
         {
@@ -2712,6 +2811,11 @@
     },
     {
       "id": "a17",
+      "name": "Indie \u00b7 Story Rich",
+      "tags": [
+        "Indie",
+        "Story Rich"
+      ],
       "size": 2,
       "members": [
         {

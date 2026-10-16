@@ -79,6 +79,7 @@ svg.panning{cursor:grabbing}
 .panel{margin-top:26px;border-top:1px solid var(--rule);padding-top:22px}
 .panel h2{font:400 clamp(26px,4vw,38px)/1.05 var(--display);letter-spacing:.02em;
   margin:0 0 6px;text-transform:uppercase}
+.namenote{font:400 12px/1.5 var(--sans);color:var(--ink-3);margin:8px 0 0}
 .members{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 4px}
 .m{font:400 11.5px/1 var(--mono);padding:5px 9px;border:1px solid var(--rule);
   border-radius:2px;color:var(--ink-2)}
@@ -238,7 +239,10 @@ function draw(d){
     const ring=svgEl('circle',{cx:n.px,cy:n.py,r:n.r,class:'ring',stroke:colour});
     g.appendChild(disc); g.appendChild(veil); g.appendChild(ring);
 
-    const label=n.short||n.label;
+    // Two tags on the map, three in the panel: the third rarely adds meaning
+    // and pushes neighbouring labels into each other.
+    const label=(n.tags&&n.tags.length? n.tags.slice(0,2).join(' \u00b7 ')
+                 : (n.short||n.label));
     const halfW=label.length*3.3;
     let anchor='middle', tx=n.px;
     if(n.px-halfW<6){anchor='start';tx=Math.max(n.px-n.r,6)}
@@ -311,7 +315,7 @@ function draw(d){
   const sel=document.getElementById('home');
   NODES.forEach(n=>{
     const o=document.createElement('option');
-    o.value=n.id; o.textContent=n.label;
+    o.value=n.id; o.textContent=(n.name? n.name+'  \u2014  ' : '')+n.label;
     sel.appendChild(o);
   });
   sel.addEventListener('change',()=>{
@@ -393,7 +397,9 @@ function show(n){
   CURRENT=n;
   const p=document.getElementById('panel');
   p.innerHTML='';
-  p.appendChild(el('h2',null,n.label));
+  p.appendChild(el('h2',null,n.name||n.label));
+  if(n.name) p.appendChild(el('p','namenote',
+    'Named from the tags its members share, not by us. Members:'));
   const mem=el('div','members');
   n.members.forEach(m=>{
     const s=el('span','m'); const i=el('i',null,m.domain.replace('_',' ')+' · ');
@@ -405,7 +411,7 @@ function show(n){
     const {rows,withheld}=route(HOME,n);
     const meta=el('div','routed');
     const a=el('span'); a.appendChild(document.createTextNode('routing from '));
-    a.appendChild(el('b',null,HOME.label)); meta.appendChild(a);
+    a.appendChild(el('b',null,HOME.name||HOME.label)); meta.appendChild(a);
     meta.appendChild(el('span',null,rows.length+' films compared'));
     if(withheld.length) meta.appendChild(el('span',null,withheld.length+' withheld'));
     p.appendChild(meta);

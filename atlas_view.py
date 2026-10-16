@@ -87,6 +87,12 @@ def main():
     groups.sort(key=len, reverse=True)
     print("%d audiences at threshold %.2f" % (len(groups), THRESHOLD))
 
+    # Names come from the members' shared Qloo tags (see name_clusters.py), so
+    # the label is derived from the same graph as the grouping rather than
+    # being supplied by me.
+    tag_path = HERE / "fixtures" / "cluster_tags.json"
+    cluster_tags = json.loads(tag_path.read_text()) if tag_path.exists() else {}
+
     def art(title):
         rec = resolved.get("urn:entity:movie/%s" % title) or {}
         return rec.get("image")
@@ -113,8 +119,11 @@ def main():
             halves_agree = pearson(ca, cb, films)
         else:
             uncertain, halves_agree = [], None
+        tags = cluster_tags.get("a%d" % idx) or []
         nodes.append({
             "id": "a%d" % idx,
+            "name": " \u00b7 ".join(tags[:3]) if tags else None,
+            "tags": tags,
             "size": len(members),
             "members": [{"domain": m.split("/")[0], "name": m.split("/")[1]}
                         for m in sorted(members)],

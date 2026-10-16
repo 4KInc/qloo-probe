@@ -1,66 +1,53 @@
-# Travels Well
+# The Taste Atlas
 
-**Which titles in a slate travel to another market, which do not, and which
-the evidence cannot settle.**
+**Audiences discovered from Qloo's taste graph, mapped by taste rather than
+geography, and used to rank a film slate for any buyer you can describe.**
 
-A studio with twenty-five films that work at home, selling into Brazil, has to
-guess which ones will land. The instinct is to pick whatever is famous there,
-but fame and fit are different variables, and confusing them is the expensive
-mistake. Travels Well answers the question from measured taste affinity
-instead, and refuses to answer where the evidence will not support one.
-
+Live: https://travels-well-722527905604.us-central1.run.app
 Built for the Qloo Agentic Hackathon. MIT licensed.
 
 ---
 
-## What it does
+## The finding
 
-Give it a slate and a home market. For each target market it returns:
+Two audiences in the same city agree less than audiences six thousand
+kilometres apart:
 
-- **Travels** — titles that rise against the home ordering, with the size of the shift.
-- **Does not travel** — titles that fall. This is the output no recommender gives, and usually the more costly mistake.
-- **Evidence unstable** — titles withheld because two independent readings of the market disagree about them.
+```
+New York downtown  <->  Berlin techno       0.78
+New York downtown  <->  New York hip-hop    0.26
+```
 
-Every market is read **twice**, through unrelated sets of taste anchors, and
-only what both readings agree on is reported.
+So the agent stops assuming who an audience is and discovers it instead. The
+groups that come out are smaller and stranger than marketing segments --
+Racionais MC's with Snowfall and The Sopranos; Ben Klock with Fela Kuti,
+Journey and Breath of the Wild.
 
-## Why it needs Qloo
+## Three surfaces
 
-The question is which entities a particular audience actually prefers, and by
-how much relative to another audience. That quantity lives in a taste graph
-and nowhere else. A language model asked the same question answers fluently
-from how much a title is *written about*, which is popularity wearing a
-different hat — the exact error the product exists to catch.
+| Page | What it does | Cost |
+|---|---|---|
+| `/` **The Atlas** | 18 audiences clustered from 73 anchors over 65 films, laid out by MDS so distance is taste distance. Each names itself from its members' Qloo tags. | precomputed, no API calls |
+| `/pitch` **Pitch Desk** | Your slate, and a buyer described by what they have already licensed. Ranks your titles for them against your home audience. | ~32 calls |
+| `/slate` **Travels Well** | The same engine on a fixed catalogue, including a preset the agent refuses. | ~10 calls |
 
-## Endpoints used, and what each one does here
+## Evidence
 
-| Qloo surface | Where it appears |
-|---|---|
-| `/search` | Resolves every slate title and every market anchor to a real entity. An unresolvable name is reported, never guessed. |
-| `/v2/insights` with `filter.results.entities` | Scores the pinned slate inside **one** query, so rank positions are comparable by construction. |
-| `/v2/insights` with `signal.interests.entities` | Carries the market: each market is modelled as the taste anchors native to it. |
-| `/v2/insights` affinity vs `popularity` | Ranking uses `query.affinity` only. There is deliberately no fallback to `popularity`. |
-| `/v2/tags`, `/v2/analysis/compare` | Used by the verification harness to characterise the graph. |
-| `feature.explainability` | Available per result for the evidence drawer. |
+- 11 of 11 regionally-skewed films rank highest with their home audience, p = 0.0005
+- 10 of 11 survive replacing every anchor artist (p = 0.0059)
+- 67% of within-cluster pairings survive bootstrap resampling at the shipped threshold
+- Backtest ground truth collected from Wikipedia **before** any Qloo call, pre-registered and committed
+
+Full record, including the negative results, in **[FINDINGS.md](FINDINGS.md)**.
 
 ## What we measured about the API
 
-Several widely-repeated claims about this API are wrong, and one of them would
-have killed this project. The full record is in **[FINDINGS.md](FINDINGS.md)**;
-the short version:
-
-- **`filter.location.query` is silently ignored for movies.** Affinities come
-  back identical to four decimals across five markets. An entry that pins a
-  candidate set and varies location is reading a parameter the API never
-  applied.
-- **`signal.location.query` on a pinned set is a filter, not a signal** — it
-  collapses eight titles to one.
-- **Affinity is not normalised per candidate set.** The same entity scored
-  inside two different pinned sets with the same signal returns an identical
-  value. It varies with the *signal*, not the set.
-- **A market modelled as taste anchors works.** Eleven of eleven
-  regionally-skewed titles rank highest in their home market, p = 0.0005, and
-  ten of eleven survive swapping every anchor for a different artist.
+`filter.location.query` is **silently ignored for movies** (honoured for
+places). `affinity` and `popularity` sit side by side and confusing them makes
+every audience look identical. Affinity is **not** normalised per candidate
+set. Cross-domain signal strength varies enormously: TV 0.06, games 0.08,
+music 0.11, brands 0.39, books 0.70, podcasts 0.72, places none. `take` caps
+at 50.
 
 ## Where it refuses
 
@@ -85,30 +72,36 @@ python3 app/server.py         # http://localhost:8080
 Stdlib only: no dependencies, no build step. Also:
 
 ```bash
-python3 run_agent.py --home "Mumbai, India"   # the agent, in the terminal
-python3 warm_cache.py                         # record presets for offline demo
-python3 test_taste.py && python3 test_loop.py # 27 tests
+python3 run_agent.py --home "Mumbai · Bollywood playback"   # agent in the terminal
+python3 atlas_build.py      # discover audiences: cluster + bootstrap
+python3 atlas_view.py       # lay them out by MDS, write the map
+python3 name_clusters.py    # let each audience name itself from its tags
+python3 warm_cache.py       # record presets so the demo survives the quota
+python3 test_taste.py && python3 test_loop.py   # 27 tests
 ```
 
 ## How it is built
 
 ```
 taste/loop.py           the agent: chooses, retries, abstains, records why
-taste/qloo_backend.py   consensus scoring over two anchor sets per market
+taste/qloo_backend.py   consensus scoring over two anchor sets per audience
+taste/pitch.py          your slate against a buyer's own catalogue
 taste/rank.py           within-query ranks only; nothing divides across calls
 taste/abstain.py        the refusal thresholds
 taste/evidence.py       a claim with no supporting call cannot be rendered
-engine.py               what the server calls
+atlas_build.py          discover audiences: signatures, average linkage, bootstrap
+atlas_view.py           classical MDS layout, split-half consensus per cluster
+name_clusters.py        names derived from members' shared tags, TF-IDF scored
+engine.py               what the server calls for the fixed-catalogue view
 app/server.py           public demo, stdlib HTTP, LIVE/CACHED labelled
 run_all.py              the verification harness (see docs/HARNESS.md)
 ```
 
 ## Honest limits
 
-- Qloo knows brands, not products: this works for films, artists, places,
-  brands, books, shows, podcasts and games — not arbitrary retail SKUs.
-- Market anchors are hand-picked. They are shown to be swappable
-  without changing the verdict, but deriving them from the graph would be better.
-- The external backtest against Wikipedia pageview ranks agrees in Mumbai
-  (tau 0.39) and Berlin (0.20) and not elsewhere. Reported either way;
-  see FINDINGS.md for why the two measure different things.
+Qloo knows brands, not products: films, artists, places, brands, books, shows,
+podcasts and games, not arbitrary retail SKUs. Fifteen of the eighteen
+clusters have too few members to split into halves that independently agree
+and are labelled single-reading rather than implying a check that did not
+happen. The external backtest agrees in Mumbai (tau 0.39) and Berlin (0.20)
+and not elsewhere; reported either way, with the reasons.

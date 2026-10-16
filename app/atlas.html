@@ -101,7 +101,31 @@ footer{margin-top:40px;border-top:1px solid var(--rule);padding-top:18px;
   color:var(--ink-3);font-size:12.5px;line-height:1.7;max-width:78ch}
 footer a{color:var(--ink-2)}
 @media (max-width:620px){.node text{font-size:9px}}
+
+/* ---------- shared nav ---------- */
+.topnav{position:sticky;top:0;z-index:20;display:flex;align-items:center;
+  justify-content:center;gap:clamp(10px,2.5vw,26px);flex-wrap:wrap;
+  padding:11px clamp(14px,3.5vw,32px);background:rgba(10,10,12,.86);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.topnav .mark{font:400 19px/1 var(--display);letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink);margin-right:4px}
+.topnav .mark b{color:var(--bulb);font-weight:400}
+.topnav a{font:400 11px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);text-decoration:none;padding:6px 2px;border-bottom:1px solid transparent}
+.topnav a:hover{color:var(--ink)}
+.topnav a[aria-current=page]{color:var(--ink);border-bottom-color:var(--bulb)}
+.topnav .spacer{flex:1 1 0;min-width:0}
+@media (max-width:620px){.topnav{gap:12px}.topnav .spacer{display:none}}
 </style>
+
+<nav class="topnav">
+    <span class="mark">Taste <b>Atlas</b></span>
+    <a href="/" aria-current="page">The map</a>
+    <a href="/pitch">Pitch desk</a>
+    <a href="/slate">Travels well</a>
+    <span class="spacer"></span>
+    <a href="https://github.com/4KInc/travels-well">Source</a>
+</nav>
 
 <div class="wrap">
 <header>
@@ -146,7 +170,7 @@ footer a{color:var(--ink-2)}
   people, and anchors that joined no cluster are left off the map rather than
   forced into one. The map is precomputed, so opening it spends no Qloo calls.
   <br><a href="/pitch">Pitch Desk &mdash; bring your own slate and buyer</a>
-  &middot; <a href="/">Travels Well</a> &middot;
+  &middot; <a href="/slate">Travels Well</a> &middot;
   <a href="https://github.com/4KInc/travels-well">Source and method</a>
 </footer>
 </div>

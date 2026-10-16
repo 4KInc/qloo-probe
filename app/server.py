@@ -153,15 +153,17 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(503, json.dumps(
                     {"error": "atlas not built", "how": "run atlas_view.py"}))
             return self._send(200, path.read_text())
+        if route.path in ("/slate", "/index.html", "/travels"):
+            page = page_html().replace("__PRESETS__", json.dumps(PRESETS))
+            return self._send(200, page, "text/html; charset=utf-8")
         if route.path in ("/pitch", "/pitch.html"):
             return self._send(200, (HERE / "pitch.html").read_text(),
                               "text/html; charset=utf-8")
-        if route.path in ("/atlas", "/atlas.html"):
+        # The atlas is the front door: it is the surface that explains the
+        # whole project in one screen. Travels Well moved to /slate.
+        if route.path in ("/", "/atlas", "/atlas.html"):
             return self._send(200, (HERE / "atlas.html").read_text(),
                               "text/html; charset=utf-8")
-        if route.path in ("/", "/index.html"):
-            page = page_html().replace("__PRESETS__", json.dumps(PRESETS))
-            return self._send(200, page, "text/html; charset=utf-8")
         return self._send(404, json.dumps({"error": "not found"}))
 
     def do_POST(self):

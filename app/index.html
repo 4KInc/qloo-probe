@@ -150,7 +150,31 @@ td.num,th.num{text-align:right;padding-right:0}
 footer{margin-top:40px;color:var(--ink-3);font-size:12.5px;line-height:1.7;
   max-width:76ch}
 footer a{color:var(--ink-2)}
+
+/* ---------- shared nav ---------- */
+.topnav{position:sticky;top:0;z-index:20;display:flex;align-items:center;
+  justify-content:center;gap:clamp(10px,2.5vw,26px);flex-wrap:wrap;
+  padding:11px clamp(14px,3.5vw,32px);background:rgba(10,10,12,.86);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.topnav .mark{font:400 19px/1 var(--display);letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink);margin-right:4px}
+.topnav .mark b{color:var(--bulb);font-weight:400}
+.topnav a{font:400 11px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);text-decoration:none;padding:6px 2px;border-bottom:1px solid transparent}
+.topnav a:hover{color:var(--ink)}
+.topnav a[aria-current=page]{color:var(--ink);border-bottom-color:var(--bulb)}
+.topnav .spacer{flex:1 1 0;min-width:0}
+@media (max-width:620px){.topnav{gap:12px}.topnav .spacer{display:none}}
 </style>
+
+<nav class="topnav">
+    <span class="mark">Taste <b>Atlas</b></span>
+    <a href="/">The map</a>
+    <a href="/pitch">Pitch desk</a>
+    <a href="/slate" aria-current="page">Travels well</a>
+    <span class="spacer"></span>
+    <a href="https://github.com/4KInc/travels-well">Source</a>
+</nav>
 
 <div class="wrap">
   <header class="marquee">
@@ -180,7 +204,7 @@ footer a{color:var(--ink-2)}
     covered, or a baseline too unstable to measure against, the agent says so
     instead of guessing.
     <br><a href="/pitch">Pitch Desk &mdash; rank your own slate for a named buyer</a>
-    &middot; <a href="/atlas">Open the Taste Atlas &mdash; 18 audiences discovered by clustering
+    &middot; <a href="/">Open the Taste Atlas &mdash; 18 audiences discovered by clustering
     the graph, and route a slate between any two</a>
     &middot; <a href="https://github.com/4KInc/travels-well">Source and method</a>
   </footer>
